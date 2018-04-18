@@ -8,7 +8,7 @@ With Beekee, you will:
 * Make your learners interactive by allowing them to react to their peers contributions by commenting, modifying or biulding upon them;
 * Distribute your course materials, documents or instructions to learners.
 
-Beekee has been also conceived to run on a Raspberry Pi 3, we call this the Beekee box.
+Beekee is developed with the [Meteor framework](https://www.meteor.com). It has been also conceived to run on a Raspberry Pi 3, we call this the Beekee box.
 
 See more at [www.beekee.ch](http://www.beekee.ch)
 
