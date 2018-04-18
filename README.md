@@ -3,7 +3,7 @@
 
 Beekee is a simple open-source platform to support face-to-face collaboration.
 
-With Beekee, you will:
+With Beekee, you can:
 * Make your learners active by allowing them to express themselves answering short questions, posting potos or sharing files;
 * Make your learners interactive by allowing them to react to their peers contributions by commenting, modifying or biulding upon them;
 * Distribute your course materials, documents or instructions to learners.
@@ -14,13 +14,13 @@ See more at [www.beekee.ch](http://www.beekee.ch)
 
 
 ## Installation on a Raspberry Pi 3
-Beekee is developed with the [Meteor framework](https://www.meteor.com) and run on nodeJS and MongoDB.
+Beekee was developed using the [Meteor framework](https://www.meteor.com) and runs on nodeJS and MongoDB.
 
 ### Install Raspbian Jessie Lite on a SD card
 Download it at: http://downloads.raspberrypi.org/raspbian_lite/images/  
-Find sd card:  
+Find SD card:  
 ```diskutil list```  
-Unmount sd card:  
+Unmount SD card:  
 ```diskutil unmountDisk /dev/diskX```  
 Copy data:  
 ```dd bs=1m if=raspbian_image.img of=/dev/rdiskX conv=sync```  
@@ -39,7 +39,7 @@ if errors:
 ```sudo service mongodb start```  
 
 ### Install nodeJS  
--> you have to check the node version needed by the Meteor project (meteor node --version) and get the right version for ARM (here v0.10.40)  
+-> you have to check the node version required by the Meteor project (meteor node --version) and get the right version for ARM (here v0.10.40)  
 ```mkdir nodetemp```  
 ```cd nodetemp```  
 ```wget https://s3-eu-west-1.amazonaws.com/conoroneill.net/wp-content/uploads/2015/07/node-v0.10.40-linux-arm-v7.tar.gz```  
