@@ -8,13 +8,13 @@ With Beekee, you will:
 * Make your learners interactive by allowing them to react to their peers contributions by commenting, modifying or biulding upon them;
 * Distribute your course materials, documents or instructions to learners.
 
-Beekee is developed with the [Meteor framework](https://www.meteor.com). It has been also conceived to run on a Raspberry Pi 3, we call this the Beekee box.
+It has been also conceived to run on a Raspberry Pi 3, we call this the Beekee box.
 
 See more at [www.beekee.ch](http://www.beekee.ch)
 
 
-## Installation on a Raspberry Pi 3 B
-From Linux or macOS  
+## Installation on a Raspberry Pi 3
+Beekee is developed with the [Meteor framework](https://www.meteor.com) and run on nodeJS and MongoDB.
 
 ### Install Raspbian Jessie Lite on a SD card
 Download it at: http://downloads.raspberrypi.org/raspbian_lite/images/  
