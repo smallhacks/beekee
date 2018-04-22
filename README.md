@@ -133,7 +133,7 @@ Clone Meteor universal
 ```cd $HOME  
 git clone https://github.com/4commerce-technologies-AG/meteor.git
 ```  
-Switch the branch  
+Switch to the 1.2.1 branch  
 ```
 cd $HOME/meteor/meteor  
 git checkout release-1.2.1-universal
@@ -142,7 +142,7 @@ Check installed version (must be 1.2.1)
 ```
 $HOME/meteor/meteor --version
 ```  
-Set an alias (for your comfort)  
+Set an alias (edit .bashrc to make it permanent)  
 ```
 alias meteor="$HOME/meteor/meteor"
 ```  
