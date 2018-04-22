@@ -14,7 +14,7 @@ The Beekee box doesn’t need an internet connection to operate. It generates it
 See more at [www.beekee.ch](http://www.beekee.ch)  
 
 # Who we are
-Beekee is a project helded by [...]
+We are a team of makers and researchers with skills in pedagogy, educational technology, software development, UX, and 3D printing. Beekee is a project held by the TECFA unit from the University of Geneva.
 
 # Make your own Beekee box
 
@@ -45,7 +45,7 @@ touch ssh (in the boot partition)
 ```  
 ***  
 ##### Raspberry Pi 3
-Connect the Raspberry with Ethernet and boot it  
+Connect the Raspberry with Ethernet and boot it.  
 ***
 ##### Raspberry Pi Zero W
 Create the file wpa_supplicant.conf in the boot partition to connect to your WIFI:
@@ -164,7 +164,10 @@ meteor build ../new_package
 ### Start Node package at boot
 Move the package on the Raspberry Pi, untar it and install npm dependencies  
 ```
-tar xzf beekee.tar  
+cd $HOME  
+mkdir beekee  
+cd beekee  
+tar xzf beekee-XXX.tar  
 cd bundle/programs/server  
 npm install --production  
 npm prune --production
