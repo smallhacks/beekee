@@ -94,7 +94,6 @@ tar -zxvf node-v0.10.40-linux-arm-v6.tar.gz
 ```  
 ***
 ```
-cd node-0.10.40  
 cd usr/local  
 sudo cp -R * /usr/local
 ```  
@@ -130,12 +129,13 @@ Install git
 sudo apt-get install git-core
 ``` 
 Clone Meteor universal  
-```cd $HOME  
+```
+cd $HOME  
 git clone https://github.com/4commerce-technologies-AG/meteor.git
 ```  
 Switch to the 1.2.1 branch  
 ```
-cd $HOME/meteor/meteor  
+cd $HOME/meteor  
 git checkout release-1.2.1-universal
 ```  
 Check installed version (must be 1.2.1)  
