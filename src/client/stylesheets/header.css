@@ -1,0 +1,188 @@
+/*
+header.css
+*/
+
+
+.header {
+	line-height: 48px;
+	position: fixed;
+	height: 52px;
+	width: 100%;
+	border-bottom: solid 1px rgba(46, 56, 66, 0.54);
+/*	background-color: rgb(255, 234, 5);
+	background-color: #FFFF66;*/
+	background-color: #2E3842;
+	color:white;
+}
+
+.header a {
+	color:white;
+}
+
+.header a:hover {
+	color:#6a829a;
+}
+
+.header--wrapper {
+	width: 760px;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.header--left {
+	float: left;
+}
+
+.header--right {
+	float: right;
+}
+
+.header--logo {
+	display: inline-block;
+	cursor: pointer;
+}
+
+.header--logo img {
+	width:32px;
+	vertical-align: middle;
+}
+
+/*.header--logo {
+	float: left;
+	margin-top: 11px;
+	width: 20px;
+	margin-right: 1px;
+	vertical-align: middle;
+}*/
+
+.header--exit-button {
+	padding: 5px 0px 5px 5px;
+}
+
+.header--settings-button {
+	padding: 5px 0px 5px 5px;
+/*	margin-left: 6px;*/
+}
+
+.header--user-icon {
+	font-size: 24px;
+	vertical-align: middle;
+	display: inline-block;
+	padding-right: 2px;
+}
+
+.header--login-icon {
+	font-size: 22px;
+	vertical-align: middle;
+	display: inline-block;
+	padding-right: 2px;
+}
+
+.header--logout-icon {
+	font-size: 22px;
+	vertical-align: middle;
+	display: inline-block;
+	padding-left: 2px;
+}
+
+.header--user {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.header--user-name {
+	display: inline-block;
+	vertical-align: middle;
+	padding-right: 25px;
+}
+
+.header--user-name i, span {
+	vertical-align: middle;
+}
+
+.header--button-back-wrapper {
+	float: left;
+	vertical-align: middle;
+	width: 40px;
+}
+
+.header--button-back-wrapper i {
+	vertical-align: middle;
+}
+
+.header--button-back {
+	font-size: 40px;
+	vertical-align: middle;
+	display: inline-block;
+	padding-right: 10px;
+/*	color: #3b75d9;
+	cursor: pointer;*/
+}
+
+.header--button-back:hover {
+	color: #185373;
+}
+
+.header--button-back:active {
+	color: #353535;
+}
+
+.header--button-login {
+	float: right;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.header--button-menu {
+	font-size: 40px;
+	vertical-align: middle;
+	display: none;
+	padding-right: 10px;
+	color: #3b75d9;
+	cursor: pointer;
+}
+
+.header--button-menu:hover {
+	color: #185373;
+}
+
+.header--button-menu:active {
+	color: #353535;
+}
+
+.header--space-title {
+	display: inline;
+	vertical-align: middle;
+	padding-left: 10px;
+	width: 450px;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+
+.header--space-code {
+	display: inline;
+	font-size: 0.7em;
+	padding: 2px;
+	border: solid 1px grey;
+	margin-left:3px;
+}
+
+.posts-header--button-submit {
+	font-size: 34px;
+	vertical-align: middle;
+	display: inline-block;
+	padding-left: 25px;
+/*	color: #3b75d9;
+*/	
+/*	cursor: pointer;
+*/}
+
+.posts-header--button-submit:hover {
+		color: #185373;
+}
+
+.posts-header--button-submit:active {
+		color: #353535;
+}

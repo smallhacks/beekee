@@ -1,0 +1,25 @@
+<template name="spaceEditCategories">
+	<div class="space-edit-categories">
+		<div class="page-title">{{_ 'space-edit-categories--page-title'}}</div>
+		<div class="page-description">{{{_ 'space-edit-categories--page-description'}}}</div>
+		<div class="list-group">
+			{{#each categories}}
+				<a class="list-group-item" data-category="{{name}}">
+					<span class="space-edit-categories--item-name">{{name}}</span>
+					<a class="space-edit-categories--button-delete-category"  href="#">
+						<i class="fa fa-lg fa-trash-o" data-delete-name="{{name}}"></i>
+					</a>
+					<a class="space-edit-categories--button-edit-category"  href="#">
+						<i class="fa fa-lg fa-pencil" data-edit-category="{{name}}"></i>
+					</a>
+				</a>
+			{{/each}}
+		</div>
+		<div class="space-edit-authors--form-wrapper">
+			<form id="space-edit--form-add-category" class="space-edit--form-add-category">
+				<input id="categoryName" class="space-edit-categories--input-add-category" placeholder="Ajouter une catégorie..." />
+				<button type="submit" class="button button-primary space-edit--button-submit-add-category"><i class="fa fa-plus"></i> {{_ 'space-edit--button-submit-add-category'}}</button>
+			</form>
+		</div>
+	</div>
+</template>

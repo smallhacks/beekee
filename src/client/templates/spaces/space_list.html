@@ -1,0 +1,84 @@
+<template name="spaceList">
+	<div class="space-list">
+		<div class="space-list--logo"><img src="/img/logo.png" /></div>
+		{{#if currentUser}}
+			{{#if ownSpaces.count}}
+				<div class="list-group">
+					<div class="space-list--spaces-title">
+						<span>{{_ 'space-list--spaces-title'}}</span>
+					</div>
+					{{#each ownSpaces}}
+						<a class="list-group-item" href="{{pathFor 'spacePage'}}">
+							<span class="list-group-item-left">{{title}}</span>
+								 <a class="space-list--button-edit" href="{{pathFor 'spaceEdit'}}">
+									 <i class="fa fa-lg fa-cog"></i>
+								</a>
+							<span class="space-list--list-item-code">
+								<b>{{spaceCode}}</b>
+							</span>
+						</a>
+					{{/each}}
+				</div>
+			{{else}}
+				<div class="space-list--no-space">{{_ 'space-list--no-space'}}</div>
+			{{/if}}
+		{{else}}
+			<div class="space-list--wrapper-text">{{{_ 'space-list--wrapper-text'}}}</div>
+			<form class="space-list--code-link-form">
+				<div class="space-list--code-wrapper">
+					<span>{{_ 'space-list--code-wrapper'}}</span><br /><br />
+					<input class="space-list--code-input" id="code" type="text" placeholder="{{_ 'space-list--code-input-placeholder'}}"/><br />
+					<button type="submit" class="button button-primary space-list--button-code-link">{{_ 'space-list--button-code-link'}}</button>
+				</div>
+			</form>     
+			<div class="space-list--new-space-wrapper">
+				<span>- {{_ 'space-list--new-space-wrapper'}} -</span><br><br><br>
+				<a href="{{pathFor 'login'}}"><button class="button button-primary">{{_ 'space-list--new-space-button'}}</button></a>
+			</div>
+<!-- 			<div class="space-list-2-example">
+				{{_ "space-list-2-example-1"}} <a href="{{pathFor 'spacePage' _id='oYFmo4WHSt5RqGGPP'}}">{{_ "space-list-2-example-2"}}</a> {{_ "space-list-2-example-3"}}
+			</div> -->
+			{{#if spacesVisited.count}}
+				<div class="list-group space-list--visited-spaces">
+					<div class="space-list--visited-title">
+						<span>{{_ 'space-list--visited-title'}}</span><br />
+						<a class="space-list--delete-recent" href="#">{{_ 'space-list--delete-recent'}}</a>
+					</div> 
+					{{#each spacesVisited}}
+						<a class="list-group-item" href="{{pathFor 'spacePage'}}">
+							<span class="list-group-item-left">{{title}}</span>
+							<span class="space-list--list-item-code">
+								<b>{{spaceCode}}</b>
+							</span>
+						</a>
+					{{/each}}
+					<br /><br />
+				</div>
+			{{/if}}
+		{{/if}}
+	</div>
+	<div class="space-list--wrapper">
+		{{#if currentUser}}
+			<a href="{{pathFor 'spaceSubmit'}}">
+				<button class="button button-primary space-list--button-submit-space"><i class="fa fa-plus"></i> {{_ 'space-list--button-submit-space'}}</button>
+			</a>
+		{{else}}
+		{{/if}}
+<!-- 		{{#unless isBox}}
+ 			<div class="space-list-2-footer-wrapper">
+				<a class="space-list-2-footer-about" href="http://infos.beekee.ch">{{_ 'space-list-2-footer-about'}}</a>
+				<a class="space-list-2-footer-privacy" href="{{pathFor 'privacy'}}">{{_ 'space-list-2-footer-privacy'}}</a>
+				<a class="space-list-2-footer-contact" href="mailto:vincent.widmer@beekee.ch">{{_ 'space-list-2-footer-contact'}}</a>
+			</div>
+		{{/unless}} -->
+		<div class="space-list--lang-wrapper">
+			<a href="#" class="space-list--select-lang {{isLangSelected 'en'}}" data-lang="en">EN</a>
+			<a href="#" class="space-list--select-lang {{isLangSelected 'fr'}}" data-lang="fr">FR</a>
+		</div>
+		{{#if isBox}}
+			{{#if currentUser}}
+				<div class="space-list--shutdown"><i class="fa fa-power-off"></i><br><span>Shutdown</span></div>
+			{{/if}}
+		{{/if}}
+	</div>
+</template>

@@ -1,0 +1,56 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+underscore
+iron:router
+sacha:spin
+accounts-password
+cfs:graphicsmagick
+jquery
+copleykj:livestamp
+rzymek:moment-locale-fr
+gabrielengel:konecty-magnific-popup
+mrt:jquery-imagesloaded
+accounts-ui-unstyled
+alanning:roles
+msavin:mongol
+sergeyt:typeahead
+chriswessels:slideout
+copleykj:jquery-autosize
+froatsnook:request
+matb33:collection-hooks
+ryanswapp:fabricjs
+softwarerero:accounts-t9n
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
+themeteorchef:jquery-validation
+chuangbo:cookie
+email
+meteorhacks:fast-render
+smallhacks:bootstrap-tagsinput-custom
+u2622:persistent-session
+ls3271:meteor-linkify
+mizzao:user-status
+luisalmeida:unveil
+http
+meteorhacks:inject-initial
+reactive-var
+tap:i18n
+smallhacks:jquery-contextmenu
+ecmascript
+tomi:upload-server@=1.3.3
+tomi:upload-jquery@=2.2.1

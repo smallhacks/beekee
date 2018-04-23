@@ -1,0 +1,27 @@
+<template name="spaceEditAuthors">
+	<div class="space-edit-authors">
+		<div class="page-title">{{_ 'space-edit-authors---page-title'}}</div>
+		<div class="page-description">{{{_ 'space-edit-authors---page-description'}}}</div>
+		<div class="list-group">
+			{{#each authors}}
+				<a class="list-group-item" data-author="{{name}}">
+						<span class="space-edit-authors--name">{{name}}</span>
+						{{#unless guest}}
+						<a class="space-edit-authors--button-delete-author" href="#">
+							<i class="fa fa-lg fa-trash-o" data-delete-author="{{name}}"></i>
+						</a>
+						<a class="space-edit-authors--button-edit-author"  href="#">
+							<i class="fa fa-lg fa-pencil" data-edit-author="{{name}}"></i>
+						</a>
+					{{/unless}}
+				</a>
+			{{/each}}
+		</div>
+		<div class="space-edit-authors--form-wrapper">
+			<form id="space-edit--form-add-author" class="space-edit--form-add-author">
+				<input id="authorName" class="space-edit-authors--input-add-author" placeholder="Ajouter un auteur..." />
+				<button type="submit" class="button button-primary space-edit--button-submit-add-author"><i class="fa fa-plus"></i> {{_ 'space-edit-authors---submit-button'}}</button>
+			</form>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,43 @@
+<template name="postSubmit">
+	<div class="post-submit">
+<!-- 		<div class="page-title">Ajouter une publication</div>
+ -->		<div class="post-submit--wrapper">
+			<div class="files post-submit--image-wrapper">
+				{{#if fileUploaded}}
+					{{#if image}}
+	 					<img src="../../upload/{{fileUploaded.fileId}}" id="img" alt="" class="post-submit--image"/><br>
+	 					<a href="#" class="post-submit--button-delete-image"><i class="fa fa-trash" aria-hidden="true"></i> {{_ 'post-submit--delete-image'}}</a><br>
+	 				{{/if}}
+				{{/if}}
+			</div>        
+			<form name="post-submit--form" id="post-submit--form">
+				<textarea name="body" id="body" class="post-submit--textarea" placeholder="{{_ 'post-submit--body-placeholder'}}"></textarea>
+				<div class="post-submit--attach-buttons">
+					{{#unless fileUploaded}}
+						{{>postUpload autoStart=true}}
+					{{/unless}}
+				</div>
+				{{#if fileUploaded}}
+					{{#unless image}}
+						<div class="post-submit--file-uploaded">
+							<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileId}}<a href="#" class="post-submit--button-delete-file"><i class="fa fa-trash" aria-hidden="true"></i></a>
+						</div>
+					{{/unless}}
+				{{/if}}
+<!-- 				<input name="tags" type="text" data-role="tagsinput" class="post-submit-2-tags suggest" placeholder="{{_ 'post-submit-2-tags-placeholder'}}"/><br /><br />
+ -->				<select name="category" class="post-submit--select-categories">
+					<option value="" disabled selected >{{_ 'post-submit--select-category'}}</option>
+					<option value="" >{{_ 'post-submit--no-category'}}</option>
+					{{#each categories}}
+						<option>{{name}}</option>
+					{{/each}}
+				</select>
+			</form>
+		</div>
+		<button href="{{pathFor 'postSubmit'}}" class="button button-primary post-submit--button-submit">
+			<i class="post-submit--button-spinner fa fa-spinner fa-pulse" style="display:none;"></i>
+			<i class="post-submit--button-icon fa fa-paper-plane"></i>
+			<span class="post-submit--button-text"> {{_ 'post-submit--submit-button'}}</span>
+		</button>
+	</div>
+</template>

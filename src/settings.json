@@ -1,0 +1,14 @@
+{
+	"syncServerIP": "",
+	"adminPassword": "admin",
+	"mailAddress": "",
+	"mailPassword": "",
+	"mailServer": "",
+	"public" : {
+		"isBox": "true",
+		 "prefix": "XX",
+		 "ga": {
+			"id": ""
+		}
+	}
+}

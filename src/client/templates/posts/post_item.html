@@ -1,0 +1,102 @@
+<template name="postItem">
+	<div class="post-item">
+		<div class="post-item--button post-item--button-contextualmenu context-menu-{{this._id}}" data-ispinned="{{this.pinned}}" data-isfavorite="{{favorite}}" data-postid="{{this._id}}"><i class="fa fa-lg fa-ellipsis-h"></i></div>
+		<!-- {{#if editAllowed}}
+			<a href="{{pathFor 'postEdit'}}">
+				<div class="post-item-2-button post-item-2-button-edit"><i class="fa fa-lg fa-pencil"></i></div>
+			</a>  
+			<div class="post-item-2-button post-item-2-button-delete"><i class="fa fa-lg fa-trash-o"></i></div>
+		{{/if}}
+		{{#if favorite}}
+			<div class="post-item-2-button post-item-2-button-remove-favorite"><i class="fa fa-lg fa-star"></i></div>
+		{{else}}
+			<div class="post-item-2-button post-item-2-button-add-favorite"><i class="fa fa-lg fa-star-o"></i></div>
+		{{/if}}
+		-->
+<!-- 		{{#if pinned}}
+			<div class="post-item-2-button post-item-2-button-remove-pinned"><i class="fa fa-lg fa-thumb-tack"></i></div>
+		{{else}}
+			<div class="post-item-2-button post-item-2-button-add-pinned"><i class="fa fa-lg fa-thumb-tack"></i></div>
+		{{/if}}  -->
+
+
+		<a class="post-item--author filter-author {{selectedAuthorClass}}" data-author="{{author}}" href="#">{{author}}</a>
+		<div class="post-item--date">• {{livestamp submitted}}</div>
+		{{#if image}}
+			<div class="post-item--image-wrapper">
+				<a class="post-item--image-link" href="../../upload/{{this.fileId}}" target="_blank">
+					<img id="img-{{this.imageId}}" src="../../upload/{{this.fileId}}" alt="" class="post-item--image" />
+				</a>
+			</div>
+		{{/if}}
+		{{#if body}}
+			<div class="post-item--text">{{body}}</div>
+		{{/if}}
+		{{#if this.fileId}}
+			{{#unless image}}
+				<div class="post-item--file-wrapper">
+					<i class="fa fa-file-o" aria-hidden="true"></i><a class="" href="../../upload/{{this.fileId}}" target="_blank">{{this.fileId}}</a>
+				</div>
+			{{/unless}}
+		{{/if}}
+		{{#if category}}
+			<a class="post-item--category filter-category {{selectedCategoryClass}}" data-category="{{this.category}}" href="{{pathFor 'spacePage' _id=spaceId}}"><i class="fa fa-tag" aria-hidden="true"></i> {{category}}</a>
+		{{/if}}
+<!-- 		{{#if tags}}
+			<div class="post-item-2-tags-wrapper">
+				{{#each tags}}
+					<a class="post-item-2-tag filter-tag {{selectedTagClass}}" data-tag="{{this}}" href="#">{{this}}</a>
+				{{/each}}
+			</div>
+		{{/if}} -->
+		<div class="post-item--likes-wrapper">
+			{{#if likeAlready}}
+				<i class="post-item--already-like post-item--remove-like fa fa-lg fa-thumbs-up" style="color:grey"></i>
+				{{#if othersLikes}}
+					<span>{{_ 'post-item--nb-likes-with-me' likesWithoutMe}}</span>
+				{{else}}
+					<span>{{_ 'post-item--like'}}</span>
+				{{/if}}
+			{{else}}
+				<i class="post-item--add-like fa fa-lg fa-thumbs-up"></i>
+				{{#if likes}}
+					<span>{{likes}} {{_ 'post-item--nb-likes'}}</span>
+				{{/if}}
+			{{/if}}
+		</div>
+		{{#if commentsAllowed}}
+			<div class="post-item--comment-wrapper">
+				{{#each comments}}
+					<div class="post-item--comment">
+						<span class="post-item--comment-author">{{this.author}} </span>
+						<span class="post-item--comment-livestamp">• {{livestamp this.submitted}} </span>
+						{{#if commentEditAllowed}}
+							<div class="post-item--comment-delete" data-postid="{{../_id}}">x</div>
+						{{/if}}
+						<p class="post-item--comment-text"> {{this.text}}</p>
+						<div class="post-item--comment-likes">
+							{{#if likeAlreadyComment}}
+								<i class="post-item--comment-already-like post-item--comment-remove-like fa fa-lg fa-thumbs-up" style="color:grey" data-postid="{{../_id}}"></i>
+								{{#if othersLikesComment}}
+									<span>{{_ 'post-item--nb-likes-with-me' likesWithoutMeComment}}</span>
+								{{else}}
+									<span>{{_ 'post-item--like'}}</span>
+								{{/if}}
+							{{else}}
+								<i class="post-item--comment-add-like fa fa-lg fa-thumbs-up" data-postid="{{../_id}}"></i>
+								{{#if likesComment}}
+									<span>{{likesComment}}</span>
+								{{/if}}
+							{{/if}}
+						</div>
+					</div>
+				{{/each}}
+				<div class="post-item--add-comment">
+				    <span class="post-item--show-comment-input">{{_ 'post-item--add-comment'}}</span>
+					<textarea id="comment" class="post-item--add-comment-textarea" name="comment" type="text" data-role="commentinput" placeholder="{{_ 'post-item--add-comment'}}"></textarea>
+				</div>
+			</div>
+		{{/if}}
+	</div>
+	<div id="space-page--post-edit-{{this._id}}" class="space-page--post-edit white-popup mfp-hide"></div>
+</template>

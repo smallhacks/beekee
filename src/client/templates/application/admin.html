@@ -1,0 +1,36 @@
+<template name="admin">
+	<div class="admin">
+		<div class="page-title">{{_ 'admin--page-title'}}</div>
+		<h1>{{_ 'admin--spaces-list'}}</h1>
+				<div class="list-group">
+					{{#each spaces}}
+						<a class="list-group-item" href="{{pathFor 'spacePage'}}">
+							<span class="list-group-item-left">{{title}}</span>
+								 <a class="space-list--button-edit" href="{{pathFor 'spaceEdit'}}">
+									 <i class="fa fa-lg fa-cog"></i>
+								</a>
+							<span class="space-list--list-item-code">
+								<b>{{spaceCode}}</b>
+							</span>
+						</a>
+					{{/each}}
+				</div><br><br>
+		<h1>{{_ 'admin--users-list'}}</h1>
+		<table>
+			<tr>
+				<th>{{_ 'admin--users-logins'}}</th>
+				<th>{{_ 'admin--users-creation'}}</th>
+				<th>{{_ 'admin--users-last-connexion'}}</th>
+				<th>{{_ 'admin--users-state'}}</th>
+			</tr>
+			{{#each user}}
+				<tr>
+					<td>{{emails.[0].address}}</td>
+					<td>{{userCreatedAt}}</td>
+					<td>{{#if this.status.lastLogin.date}}{{livestamp this.status.lastLogin.date}}{{/if}}</td>
+					<td>{{#if isOnline}}<span class="admin--is-connected">{{_ 'admin--is-connected'}}</span>{{else}}<span class="admin--is-disconnected">{{_ 'admin--is-disconnected'}}</span>{{/if}}</td>
+				</tr>
+			{{/each}}
+		</table>
+	</div>
+</template>

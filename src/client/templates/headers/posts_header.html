@@ -1,0 +1,35 @@
+<template name="postsHeader">
+	<div class="posts-header">
+		<div class="header">
+			<div class="header--wrapper">
+				<div class="header--left">
+					<a class="header--logo"><img src="/img/logo_header.png" /></a>
+					<i class="ion-navicon header--button-menu"></i>
+					<span class="header--space-title">{{space.title}} 
+						<div class="header--space-code">{{space.spaceCode}}</div>
+						<a href="#" class="header--exit-button">
+							<i class="fa fa-sign-out" aria-hidden="true"></i>
+						</a>
+						{{# if ownSpace}}
+							<a href="{{pathFor 'spaceEdit' _id=this.space._id}}">
+								<i class="header--settings-button fa fa-cog"></i>
+							</a>
+						{{/if}}
+					</span>
+
+				</div>			
+				<div class="header--right">
+					<a href="{{pathFor 'spaceUsers' _id=this.space._id}}" class="header--user-name">
+						<i class="ion-ios-person header--user-icon"></i>
+						<span>{{authorName}}</span>
+					</a>
+					{{#if submitAllowed}}
+						<a href="#space-page--post-submit" class="posts-header--button-submit open-popup-link">
+							<i class="ion-android-add"></i>
+						</a> 
+					{{/if}}
+				</div>							
+			</div>
+		</div>
+	</div>
+</template>
