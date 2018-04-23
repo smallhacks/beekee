@@ -4,8 +4,8 @@
 Beekee is a simple open-source platform to support face-to-face collaboration.
 
 With Beekee, you can:
-* Make your learners active by allowing them to express themselves answering short questions, posting potos or sharing files;
-* Make your learners interactive by allowing them to react to their peers contributions by commenting, modifying or biulding upon them;
+* Make your learners active by allowing them to express themselves answering short questions, posting photos or sharing files;
+* Make your learners interactive by allowing them to react to their peers contributions by commenting, modifying or building upon them;
 * Distribute your course materials, documents or instructions to learners.
 
 It has been also conceived to run on a Raspberry Pi that can be used in remote locations, we call this the **Beekee box**.  
