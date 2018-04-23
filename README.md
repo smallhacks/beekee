@@ -19,7 +19,7 @@ We are a team of makers and researchers with skills in pedagogy, educational tec
 # Make your own Beekee box
 
 ## Print your box
-You got a 3D printer ? Print the Beekee box model for Raspberry Pi 3 B we put on Thingiverse!
+Got a 3D printer ? Print your own Beekee box for Raspberry Pi 3 B, we have put the model on Thingiverse (https://www.thingiverse.com/thing:2874892)!
 
 ## Beekee installation on a Raspberry Pi
 Beekee was developed using the [Meteor framework](https://www.meteor.com). You will need to get a package of Beekee for your architecture or build one yourself. Since Meteor package have to run with specific versions of NodeJS and MongoDB, you will need to be careful to install the correct versions of NodeJS and MongoDB.
@@ -172,7 +172,7 @@ cd bundle/programs/server
 npm install --production  
 npm prune --production
 ```  
-Install forever
+Install Forever
 ```
 sudo -i npm install forever -g
 ```  
