@@ -30,8 +30,17 @@ Meteor.startup(function () {
 
 			// Set a new random file name
 			var extension = fileInfo.name.substr(fileInfo.name.lastIndexOf('.')+1).toLowerCase();
-			var newName = Random.id() + '.' + extension;
-			return newName;
+
+			if (extension == "jpg" || extension == "jpeg" || extension == "png") {
+				var newName = Random.id() + '.' + extension;
+				return newName;
+			}
+			else {
+				var fileName = fileInfo.name;				
+				//fileName = fileName.replace(/ /g,"_"); // Remove spaces
+				fileName = latinize(fileName); // Remove accents
+				return fileName;
+			}
 		},
 		cacheTime: 0,
   	});
