@@ -102,8 +102,8 @@ sudo service mongodb start
 ```
 if errors:<br>
 ```
-sudo rm /var/lib/mongodb/mongod.lock<br>
-mongod --repair<br>
+sudo rm /var/lib/mongodb/mongod.lock
+mongod --repair
 sudo service mongodb start
 ```
 
