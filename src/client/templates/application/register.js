@@ -34,12 +34,14 @@ Template.register.events({
                 Accounts.createUser({email:email.toLowerCase().trim(),password:password,profile:{lastAlert:1}},function(err){
                     if(!err) {
                         Router.go('spaceList');
-                        Meteor.call('sendEmail', // Send an e-mail to user
-                            Meteor.user().emails[0].address,
-                            'vincent.widmer@beekee.ch',
-                            TAPi18n.__("register--mail-subject"),
-                            TAPi18n.__("register--mail-content")
-                        );
+                        if (Meteor.settings.public.isBox === "false") {
+                            Meteor.call('sendEmail', // Send an e-mail to user
+                                Meteor.user().emails[0].address,
+                                'vincent.widmer@beekee.ch',
+                                TAPi18n.__("register--mail-subject"),
+                                TAPi18n.__("register--mail-content")
+                            );
+                        }
                     }
                     else {
                         Session.set('errorMessage', err.reason);
