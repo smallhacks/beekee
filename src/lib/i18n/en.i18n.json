@@ -35,6 +35,8 @@
 	"register--page-title":"Create an account",
 	"register--mail":"E-mail",
 	"register--password":"Password",
+	"register--password-confirm":"Confirm password",
+	"register--password-dont-match":"Confirm password doesn't match.",
 	"register--terms":"By registering, you accept our <a href=\"{{pathFor 'privacy'}}\" target=\"_blank\">terms and conditions</a>.<br>Your e-mail address will not be disclosed to third parties.",
 	"register--button-submit":"Sign up",
 	"register--mail-exist":"There already exists a user account with this email address.",

@@ -35,6 +35,8 @@
 	"register--page-title":"Créer un compte",
 	"register--mail":"E-mail",
 	"register--password":"Mot de passe",
+	"register--password-confirm":"Confirmez le mot de passe",
+	"register--password-dont-match":"Les mots de passe de sont pas identiques.",
 	"register--terms":"En vous enregistrant, vous acceptez notre <a href=\"{{pathFor 'privacy'}}\" target=\"_blank\">politique de confidentialité</a>.<br>Votre adresse e-mail ne sera pas transmise à des tiers.",
 	"register--button-submit":"S'enregistrer",
 	"register--mail-exist":"Un compte lié à cet e-mail existe déjà.",

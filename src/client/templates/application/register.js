@@ -10,13 +10,7 @@ Template.register.onRendered(function () {
             },
             'en', {
                 'Email already exists.': TAPi18n.__('register--mail-exist')
-            },
-            'es', {
-                'Email already exists.': TAPi18n.__('register--mail-exist')
-            },
-            'de', {
-                'Email already exists.': TAPi18n.__('register--mail-exist')
-            }         
+            }       
         );
     }
 
@@ -33,22 +27,28 @@ Template.register.events({
  
         var email = event.target.email.value; // E-mail is used as username
         var password = event.target.password.value;
+        var passwordConfirm = event.target.passwordConfirm.value;
   
         if (email && password) {
-            Accounts.createUser({email:email.toLowerCase().trim(),password:password,profile:{lastAlert:1}},function(err){
-                if(!err) {
-                    Router.go('spaceList');
-                    Meteor.call('sendEmail', // Send an e-mail to user
-                        Meteor.user().emails[0].address,
-                        'vincent.widmer@beekee.ch',
-                        TAPi18n.__("register--mail-subject"),
-                        TAPi18n.__("register--mail-content")
-                    );
-                }
-                else {
-                    Session.set('errorMessage', err.reason);
-                }
-            });
+            if (password === passwordConfirm) {
+                Accounts.createUser({email:email.toLowerCase().trim(),password:password,profile:{lastAlert:1}},function(err){
+                    if(!err) {
+                        Router.go('spaceList');
+                        Meteor.call('sendEmail', // Send an e-mail to user
+                            Meteor.user().emails[0].address,
+                            'vincent.widmer@beekee.ch',
+                            TAPi18n.__("register--mail-subject"),
+                            TAPi18n.__("register--mail-content")
+                        );
+                    }
+                    else {
+                        Session.set('errorMessage', err.reason);
+                    }
+                });
+            }
+            else {
+                Session.set('errorMessage', TAPi18n.__('register--password-dont-match'));
+            }
         }
     },
     'click .register--button-submit': function(e) {
