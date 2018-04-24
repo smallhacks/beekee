@@ -77,7 +77,7 @@ tar -zxvf node-v0.10.40-linux-arm-v7.tar.gz
 ***
 ##### Raspberry Pi Zero W 
 ```
-wget https://s3-eu-west-1.amazonaws.com/conoroneill.net/wp-content/uploads/2015/07/node-v0.10.40-linux-arm-v6.tar.gz<br>
+wget https://s3-eu-west-1.amazonaws.com/conoroneill.net/wp-content/uploads/2015/07/node-v0.10.40-linux-arm-v6.tar.gz
 tar -zxvf node-v0.10.40-linux-arm-v6.tar.gz
 ```
 ***
@@ -123,7 +123,7 @@ git clone https://github.com/4commerce-technologies-AG/meteor.git
 ```
 Switch to the 1.2.1 branch<br>
 ```
-cd $HOME/meteor<br>
+cd $HOME/meteor
 git checkout release-1.2.1-universal
 ```
 Check installed version (must be 1.2.1)<br>
@@ -139,13 +139,13 @@ alias meteor="$HOME/meteor/meteor"
 This has to be done one the same architecture (on ARMv7 for ARMv7).<br>
 Clone this repository and switch to the box's branch<br><br>
 ```
-cd $HOME<br>
-mkdir beekee-repo<br>
-cd beekee-repo<br>
-git clone https://github.com/smallhacks/beekee.git<br>
-cd beekee/src<br>
+cd $HOME
+mkdir beekee-repo
+cd beekee-repo
+git clone https://github.com/smallhacks/beekee.git
+cd beekee/src
 ```
-Build the package<br><br><br>
+Build the package<br>
 ```
 meteor build ../../../beekee
 ``` 
@@ -153,11 +153,11 @@ meteor build ../../../beekee
 ### Start Node package at boot
 Move the package on the Raspberry Pi, untar it and install npm dependencies<br>
 ```
-cd $HOME<br>
-cd beekee<br>
-tar xzf **XXX**.tar<br>
-cd bundle/programs/server<br>
-npm install --production<br>
+cd $HOME
+cd beekee
+tar xzf **XXX**.tar
+cd bundle/programs/server
+npm install --production
 npm prune --production
 ```
 Install Forever
@@ -167,12 +167,12 @@ sudo -i npm install forever -g
 Edit /etc/rc.local and add before exit:
 **rc.local must be executable**<br>
 ```
-sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000<br>
-sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 3000<br>
-export MONGO_URL='mongodb://localhost'<br>
-export ROOT_URL='http://localhost'<br>
-export PORT=3000<br>
-export METEOR_SETTINGS='{"syncServerIP": "","adminPassword": "admin","public" : {"isBox": "true","prefix": "XX"}}'<br>
+sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
+sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 3000
+export MONGO_URL='mongodb://localhost'
+export ROOT_URL='http://localhost'
+export PORT=3000
+export METEOR_SETTINGS='{"syncServerIP": "","adminPassword": "admin","public" : {"isBox": "true","prefix": "XX"}}'
 forever start /home/pi/beekee/bundle/main.js
 ``` 
 
@@ -185,21 +185,21 @@ Replace dnsmasq configuration file /etc/dnsmasq.conf by:<br>
 **Be sure not to include double spaces in config files**<br>
 
 ```
-# Beekee hotspot configuration<br>
-strict-order<br>
-address=/box.beekee.ch/192.168.40.1<br>
-no-hosts<br>
+# Beekee hotspot configuration
+strict-order
+address=/box.beekee.ch/192.168.40.1
+no-hosts
 dhcp-range=192.168.40.3,192.168.40.50,255.255.255.0
 ```
 Create the hostapd configuration file /etc/hostapd/hostapd.conf and add:<br>
 ```
-interface=wlan0<br>
-driver=nl80211<br>
-ssid=beekee<br>
-hw_mode=g<br>
-channel=11<br>
-macaddr_acl=0<br>
-auth_algs=1<br>
+interface=wlan0
+driver=nl80211
+ssid=beekee
+hw_mode=g
+channel=11
+macaddr_acl=0
+auth_algs=1
 ignore_broadcast_ssid=0
 ```
 Edit the file /etc/default/hostapd and add:<br>
@@ -208,16 +208,16 @@ DAEMON_CONF="/etc/hostapd/hostapd.conf"
 ```
 Edit the file /etc/network/interfaces and add:<br>
 ```
-auto lo<br>
-iface lo inet loopback<br>
-iface eth0 inet dhcp<br>
-auto wlan0<br>
-allow-hotplug wlan0<br>
-iface wlan0 inet static<br>
-  ddress 192.168.40.1<br>
-  netmask 255.255.255.0<br>
-  network 192.168.40.0<br>
-  broadcast 255.255.255.255<br>
+auto lo
+iface lo inet loopback
+iface eth0 inet dhcp
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet static
+  ddress 192.168.40.1
+  netmask 255.255.255.0
+  network 192.168.40.0
+  broadcast 255.255.255.255
   gateway 192.168.40.0
 ```
 
