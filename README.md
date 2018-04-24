@@ -110,7 +110,7 @@ sudo service mongodb start
 ### Build or get the right package
 *If you want to build the package yourself, you will need to install Meteor first. Otherwise, get the package for your architecture in the "build" folder of this repository and skip this steps.*<br>
 
-#### Install Meteor for ARM to build the package<br>
+#### Install Meteor for ARM to build the package
 More info : [Meteor universal](https://github.com/4commerce-technologies-AG/meteor/)<br>
 Install git<br>
 ```
@@ -118,7 +118,7 @@ sudo apt-get install -y git-core
 ``` 
 Clone Meteor universal<br>
 ```
-cd $HOME<br>
+cd $HOME
 git clone https://github.com/4commerce-technologies-AG/meteor.git
 ```
 Switch to the 1.2.1 branch<br>
