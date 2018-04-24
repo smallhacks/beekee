@@ -43,23 +43,11 @@ Activate SSH:
 ```
 touch ssh (in the boot partition)
 ```  
-***  
-##### Raspberry Pi 3
-Connect the Raspberry with Ethernet and boot it.  
-***
-##### Raspberry Pi Zero W
-Create the file wpa_supplicant.conf in the boot partition to connect to your WIFI:
-```
-country=us
-update_config=1
-ctrl_interface=/var/run/wpa_supplicant
-network={
- scan_ssid=1
- ssid="WIFI_SSID"
- psk="WIFI_KEY"
-}
-```  
-***
+
+### Connect to the Raspberry
+Connect your Raspberry to Internet and connect to it with SSH.  
+** If you use a Raspberry Pi Zero W and wpa_supplicant.conf, it may cause problem during hotspot setup. **
+
 Find the IP address and connect with SSH:    
 ```
 ssh pi@ip_address
@@ -100,12 +88,12 @@ sudo cp -R * /usr/local
 
 ### Install ImageMagick  
 ```
-sudo apt-get install imagemagick
+sudo apt-get install -y imagemagick
 ```  
 
 ### Install MongoDB  
 ```
-sudo apt-get install mongodb-server
+sudo apt-get install -y mongodb-server
 ```  
 
 ### Launch MongoDB as a service  
@@ -126,7 +114,7 @@ sudo service mongodb start
 More info : [Meteor universal](https://github.com/4commerce-technologies-AG/meteor/)  
 Install git  
 ```
-sudo apt-get install git-core
+sudo apt-get install -y git-core
 ``` 
 Clone Meteor universal  
 ```
@@ -148,26 +136,26 @@ alias meteor="$HOME/meteor/meteor"
 ```  
 
 #### Build the package
-This has to be done one the same architecture (on ARMv7 for ARMv7). 
-Firstly, you need to install Meteor for ARM  
+This has to be done one the same architecture (on ARMv7 for ARMv7).  
 Clone this repository and switch to the box's branch    
 ```
+cd $HOME  
+mkdir beekee-repo  
+cd beekee-repo  
 git clone https://github.com/smallhacks/beekee.git  
-cd beekee  
-git checkout box
+cd beekee/src  
 ```
 Build the package      
 ```
-meteor build ../new_package
+meteor build ../../../beekee
 ``` 
 
 ### Start Node package at boot
 Move the package on the Raspberry Pi, untar it and install npm dependencies  
 ```
 cd $HOME  
-mkdir beekee  
 cd beekee  
-tar xzf beekee-XXX.tar  
+tar xzf **XXX**.tar  
 cd bundle/programs/server  
 npm install --production  
 npm prune --production
