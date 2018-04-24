@@ -165,6 +165,7 @@ Install Forever
 sudo -i npm install forever -g
 ```  
 Edit /etc/rc.local and add before exit:
+**rc.local must be executable**  
 ```
 sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000  
 sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 3000  
@@ -181,6 +182,8 @@ Install hostapd and dnsmasq
 sudo apt-get -y install hostapd dnsmasq
 ```  
 Replace dnsmasq configuration file /etc/dnsmasq.conf by:  
+**Be sure not to include double spaces in config files**  
+
 ```
 # Beekee hotspot configuration  
 strict-order  
