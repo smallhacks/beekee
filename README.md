@@ -56,7 +56,7 @@ Extend the Filesystem with:<br>
 ```
 sudo raspi-config
 ```
-It is strongly recommended to change the user password:<br><br>
+It is strongly recommended to change the user password:<br>
 ```
 passwd
 ```
@@ -64,16 +64,16 @@ passwd
 ### Install NodeJS<br>
 *You need to check the node version required by the Meteor project (meteor node --version) and get the right version for ARM (here: v0.10.40)*<br>
 ```
-sudo apt-get update<br>
-mkdir nodetemp<br>
-cd nodetemp<br>
+sudo apt-get update
+mkdir nodetemp
+cd nodetemp
 ```
 ***
 ##### Raspberry Pi 3
 ```
-wget https://s3-eu-west-1.amazonaws.com/conoroneill.net/wp-content/uploads/2015/07/node-v0.10.40-linux-arm-v7.tar.gz<br>
+wget https://s3-eu-west-1.amazonaws.com/conoroneill.net/wp-content/uploads/2015/07/node-v0.10.40-linux-arm-v7.tar.gz
 tar -zxvf node-v0.10.40-linux-arm-v7.tar.gz
-```<br>
+```
 ***
 ##### Raspberry Pi Zero W 
 ```
@@ -105,7 +105,7 @@ if errors:<br>
 sudo rm /var/lib/mongodb/mongod.lock<br>
 mongod --repair<br>
 sudo service mongodb start
-```<br>
+```
 
 ### Build or get the right package
 *If you want to build the package yourself, you will need to install Meteor first. Otherwise, get the package for your architecture in the "build" folder of this repository and skip this steps.*<br>
@@ -120,20 +120,20 @@ Clone Meteor universal<br>
 ```
 cd $HOME<br>
 git clone https://github.com/4commerce-technologies-AG/meteor.git
-```<br>
+```
 Switch to the 1.2.1 branch<br>
 ```
 cd $HOME/meteor<br>
 git checkout release-1.2.1-universal
-```<br>
+```
 Check installed version (must be 1.2.1)<br>
 ```
 $HOME/meteor/meteor --version
-```<br>
+```
 Set an alias (edit .bashrc to make it permanent)<br>
 ```
 alias meteor="$HOME/meteor/meteor"
-```<br>
+```
 
 #### Build the package
 This has to be done one the same architecture (on ARMv7 for ARMv7).<br>
@@ -159,11 +159,11 @@ tar xzf **XXX**.tar<br>
 cd bundle/programs/server<br>
 npm install --production<br>
 npm prune --production
-```<br>
+```
 Install Forever
 ```
 sudo -i npm install forever -g
-```<br>
+```
 Edit /etc/rc.local and add before exit:
 **rc.local must be executable**<br>
 ```
@@ -180,7 +180,7 @@ forever start /home/pi/beekee/bundle/main.js
 Install hostapd and dnsmasq<br>
 ```
 sudo apt-get -y install hostapd dnsmasq
-```<br>
+```
 Replace dnsmasq configuration file /etc/dnsmasq.conf by:<br>
 **Be sure not to include double spaces in config files**<br>
 
@@ -190,7 +190,7 @@ strict-order<br>
 address=/box.beekee.ch/192.168.40.1<br>
 no-hosts<br>
 dhcp-range=192.168.40.3,192.168.40.50,255.255.255.0
-```<br>
+```
 Create the hostapd configuration file /etc/hostapd/hostapd.conf and add:<br>
 ```
 interface=wlan0<br>
@@ -201,11 +201,11 @@ channel=11<br>
 macaddr_acl=0<br>
 auth_algs=1<br>
 ignore_broadcast_ssid=0
-```<br>
+```
 Edit the file /etc/default/hostapd and add:<br>
 ```
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
-```<br>
+```
 Edit the file /etc/network/interfaces and add:<br>
 ```
 auto lo<br>
@@ -219,7 +219,7 @@ iface wlan0 inet static<br>
   network 192.168.40.0<br>
   broadcast 255.255.255.255<br>
   gateway 192.168.40.0
-```<br>
+```
 
 
 Voilà!
