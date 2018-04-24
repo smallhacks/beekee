@@ -46,7 +46,7 @@ touch ssh (in the boot partition)
 
 ### Connect to the Raspberry
 Connect your Raspberry to Internet and connect to it with SSH.  
-** If you use a Raspberry Pi Zero W and wpa_supplicant.conf, it may cause problem during hotspot setup. **
+**If you use a Raspberry Pi Zero W and wpa_supplicant.conf, it may cause problem during hotspot setup.**
 
 Find the IP address and connect with SSH:    
 ```
@@ -176,7 +176,7 @@ forever start /home/pi/beekee/bundle/main.js
 ``` 
 
 ### Configure the Hotspot  
-Instal hostapd and dnsmasq  
+Install hostapd and dnsmasq  
 ```
 sudo apt-get -y install hostapd dnsmasq
 ```  
