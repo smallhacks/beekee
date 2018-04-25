@@ -55,13 +55,13 @@ iron:middleware-stack@1.1.0
 iron:router@1.0.12
 iron:url@1.0.11
 jquery@1.11.4
+konecty:autolinker@1.0.3
 lai:collection-extensions@0.1.4
 launch-screen@1.0.4
 less@2.5.1
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
-ls3271:meteor-linkify@0.0.5
 luisalmeida:unveil@0.0.1
 matb33:collection-hooks@0.8.1
 meteor@1.1.10
