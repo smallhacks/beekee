@@ -167,13 +167,16 @@ sudo -i npm install forever -g
 Edit /etc/rc.local and add before exit:
 **rc.local must be executable**<br>
 ```
-sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
-sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 3000
 export MONGO_URL='mongodb://localhost'
 export ROOT_URL='http://localhost'
-export PORT=3000
+export PORT=80
 export METEOR_SETTINGS='{"syncServerIP": "","adminPassword": "admin","public" : {"isBox": "true","prefix": "XX"}}'
 forever start /home/pi/beekee/bundle/main.js
+``` 
+Allow Node to run on port 80 without sudo privileges
+``` 
+sudo apt-get install libcap2-bin
+sudo setcap cap_net_bind_service=+ep /path/to/node
 ``` 
 
 ### Configure the Hotspot<br>
