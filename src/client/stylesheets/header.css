@@ -163,10 +163,12 @@ header.css
 
 .header--space-code {
 	display: inline;
-	font-size: 0.7em;
-	padding: 2px;
+	font-size: 0.8em;
+	padding: 3px;
 	border: solid 1px grey;
+	border-radius:2px;
 	margin-left:3px;
+	color:yellow;
 }
 
 .posts-header--button-submit {

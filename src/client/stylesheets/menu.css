@@ -110,6 +110,7 @@ menu.css
 	display: table-cell;
 	width: 10%;
 	font-family: Helvetica, Arial, Sans-Serif;
+	color:yellow;
 }
 
 .slideout-menu--list-settings li {
