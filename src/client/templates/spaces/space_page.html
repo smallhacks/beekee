@@ -18,10 +18,10 @@
 				{{#if codePanelState}}
 					{{#if ownSpace}}
 						<div id="codePanel" class="space-page--code-panel">
-							<span class="space-page--code-panel-title">{{_ 'space-page--code-panel-description'}} 
-								<div class="space-page--code-panel-code"><b>{{space.spaceCode}}</b></div><br />
+							<div class="space-page--code-panel-close button-hide-code-panel"><i class="fa fa-x fa-times-circle"></i></div>
+							<span class="space-page--code-panel-title">{{_ 'space-page--code-panel-description'}}<br>
+								<div class="space-page--code-panel-code"><b>{{space.spaceCode}}</b></div>
 							</span>
-							<button class="button button-primary button-hide-code-panel">{{_ 'space-page--hide-panel'}}</button>
 						</div>
 					{{/if}}
 				{{/if}}

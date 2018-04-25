@@ -508,6 +508,15 @@ spaces.css
 	padding: 15px;
 }
 
+.space-page--code-panel-close {
+	float:right;
+	cursor: pointer;
+}
+
+.space-page--code-panel-close:hover {
+	color:grey;
+}
+
 .space-page--code-panel-own-space {
 	margin-top:20px;
 	text-align: center;
@@ -523,13 +532,15 @@ spaces.css
 }
 
 .space-page--code-panel-code {
-	border-radius: 20px;
+	border-radius: 5px;
 	display: inline-block;
 	padding: 10px;
-	background-color: #2A8BBF;
-	color: white;
+	background-color: black;
 	letter-spacing: 0.1em;
 	font-family: Helvetica, Arial, Sans-Serif;
+	font-size: 1.3em;
+	margin-top: 10px;
+	color: yellow;
 }
 
 .space-page--code-panel-code span {
