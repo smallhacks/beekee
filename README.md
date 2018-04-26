@@ -164,8 +164,8 @@ Install Forever
 ```
 sudo -i npm install forever -g
 ```
-Edit /etc/rc.local and add before exit:
-**rc.local must be executable**<br>
+Edit /etc/rc.local and add before exit:<br>
+*rc.local must be executable*<br>
 ```
 export MONGO_URL='mongodb://localhost'
 export ROOT_URL='http://localhost'
@@ -185,7 +185,7 @@ Install hostapd and dnsmasq<br>
 sudo apt-get -y install hostapd dnsmasq
 ```
 Replace dnsmasq configuration file /etc/dnsmasq.conf by:<br>
-**Be sure not to include double spaces in config files**<br>
+*Be sure not to include double spaces in config files*<br>
 
 ```
 # Beekee hotspot configuration
