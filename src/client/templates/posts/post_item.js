@@ -34,8 +34,6 @@ Template.postItem.onRendered(function() {
 		});
 	});
 
-	$('.post-item--text').linkify(); // Detect URLs and create links
-	$('.post-item--comment-text').linkify();
 
 		
     // $.contextMenu({
