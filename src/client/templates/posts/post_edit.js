@@ -105,6 +105,8 @@ Template.postEdit.events({
 				alert(TAPi18n.__('error-message')+error.message);
 			} else {
 				$.magnificPopup.close();
+				resetPostsServerNonReactive();
+
 				 		//Router.go('spacePage', {_id: currentPost.spaceId});  
 
 

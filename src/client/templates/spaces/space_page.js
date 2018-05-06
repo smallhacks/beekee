@@ -13,8 +13,6 @@ Template.spacePage.onCreated(function() {
 
 		var postsToSkip = Session.get('postsToSkip');
 		var postsLimit = Session.get('postsLimit');
-				var postsLimit2 = Session.get('postsLimit2');
-
 
 		var filters = {spaceId:Session.get('spaceId')};
 		if (Session.get('author') != "")
@@ -35,17 +33,18 @@ Template.spacePage.onCreated(function() {
 				filters = {_id:{$in: favorites}}
 		}
 
-
  		// Interval of posts subscription : load every posts from "postsToSkip" (skip) to "postsLimit" (limit)
  		// By default, load the 10 last posts (skip : total posts - 10 / limit : 10)
  		// postsLimit (limit) is used to disable reactivity
 
- 		if (!Session.get('isReactive')) 
-			subscription = Meteor.subscribe('posts', filters, postsToSkip, 0);
-			//subscription = Meteor.subscribe('posts', filters, postsToSkip, postsLimit2);
-
+ 	// 	if (!Session.get('isReactive')) 
+		// 	subscription = Meteor.subscribe('posts', filters, postsToSkip, postsLimit);
+		// 	//subscription = Meteor.subscribe('posts', filters, postsToSkip, postsLimit2);
+		// else
+		if (Session.get('last') == true)
+			subscription = Meteor.subscribe('posts', filters, postsToSkip, postsLimit);
 		else
-			subscription = Meteor.subscribe('posts', filters, postsToSkip, 0);
+			subscription = Meteor.subscribe('posts', filters, 0, postsLimit);
 	});
 });
 
@@ -78,24 +77,64 @@ Template.spacePage.events({
 	// 	e.preventDefault();
 	// 	Session.set('last', !Session.get('last'));
 	// },
-	'click .space-page--load-more': function(e) { // If user want to load more posts, it moves the interval (skip : -10 / limit : +10)
+	'click .space-page--load-more': function(e) {
 		e.preventDefault();
 		
-		// if (Session.get('postsToSkip') <= 10)
-		// 	Session.set('postsToSkip', 0);
-		// else
-		// 	Session.set('postsToSkip',Session.get('postsToSkip')-10);
+		// If user want to load more posts, it moves the interval (skip : -10 / limit : +10)
+		if (Session.get("last") == true) {
+			if (Session.get('postsToSkip') <= 10) {
+				Session.set('postsLimit',Session.get('postsLimit')+Session.get('postsToSkip'));
+				Session.set('postsToSkip', 0);
+			}
+			else {
+				Session.set('postsLimit',Session.get('postsLimit')+10);
+				Session.set('postsToSkip',Session.get('postsToSkip')-10);
+			}
+		}
+		else {
+			var serverPosts = 0;
 
-		// Session.set('postsLimit',Session.get('postsLimit')+10);
+			if (Session.get('author') !== "") {
+				var author = Session.get('author');
+				serverPosts = Authors.findOne({name:author}).nRefs;
+			}
+			else if (Session.get('category') !== "") {
+				var category = Session.get('category');
+				serverPosts = Categories.findOne({name:category}).nRefs;
+			}
+			else if (Session.get('tag') !== "") {
+				var tag = Session.get('tag');
+				serverPosts = Tags.findOne({name:tag}).nRefs;
+			}
+			else if (Session.get('pinned')) {
+				serverPosts = PinnedCounts.findOne().count;
+			}
+			else if (Session.get('files')) {
+				serverPosts = FilesCounts.findOne().count;
+			}		
+			else if (Session.get('images')) {
+				serverPosts = ImagesCounts.findOne().count;
+			}
+			else if (Session.get('favorites')) {
+				var favorites = Session.get(Template.parentData(1).space._id).favorites;
+				serverPosts = favorites.length;
+			}
+			else
+				serverPosts = Counts.findOne().count;
 
-
-		if (Session.get('postsServerNonReactive') - Session.get('postsLimit2') >= 10)
-			Session.set('postsLimit2',Session.get('postsLimit2')+10);
-		else
-			Session.set('postsLimit2',Session.get('postsLimit2')+Counts.findOne().count - Session.get('postsLimit2'));
+			var serverPostsDiff = serverPosts - Session.get('postsLimit');
+			if (serverPostsDiff >= 10)
+				Session.set('postsLimit',Session.get('postsLimit')+10);
+			else
+				Session.set('postsLimit',Session.get('postsLimit')+serverPostsDiff); // Increases the limit by taking into account the number of remaining posts
+		}
 	},
 	'click .space-page--refresh': function(e) { // Refresh posts when user click on new messages button
 		e.preventDefault();
+
+		console.log("postLimit : "+ Session.get('postsLimit'));
+		console.log("postsToSkip : "+ Session.get('postsToSkip'));
+		console.log("postsServerNonReactive : "+Session.get('postsServerNonReactive'));
 
 		if (Session.get('author') !== "") {
 			var author = Session.get('author');
@@ -109,28 +148,34 @@ Template.spacePage.events({
 			var tag = Session.get('tag');
 			Session.set('postsServerNonReactive', Tags.findOne({name:tag}).nRefs);
 		}
-		else if (Session.get('pinned') !== "") {
+		else if (Session.get('pinned') == true) {
 			Session.set('postsServerNonReactive', PinnedCounts.findOne().count);
 		}
-		else if (Session.get('files') !== "") {
+		else if (Session.get('files') == true) {
 			Session.set('postsServerNonReactive', FilesCounts.findOne().count);
 		}		
-		else if (Session.get('images') !== "") {
+		else if (Session.get('images') == true) {
 			Session.set('postsServerNonReactive', ImagesCounts.findOne().count);
 		}
-		else
+		else {
 			Session.set('postsServerNonReactive', Counts.findOne().count);
+		}
 
-		resetPostInterval();
+
+		resetPostsServerNonReactive();
+
+
+
+		//resetPostInterval();
 	}  
 });
 
 
 Template.spacePage.helpers({
 
-	initialLoadCompleted: function() { 
-  		return subscription.ready();
-  	},
+	// initialLoadCompleted: function() { 
+ //  		return subscription.ready();
+ //  	},
 	posts: function() {
 		if (this.space !== undefined && Session.get('last') == "")
 			//return Posts.find({},{sort: {pinned: -1, submitted: 1}});
@@ -148,34 +193,49 @@ Template.spacePage.helpers({
 		else return null
 	},
 	loadMore: function() { // Check if user can load more posts
-		//return (Session.get('postsToSkip') > 0)
-		// var serverPosts = 0;
 
-		// if (Session.get('author') !== "") {
-		// 	var author = Session.get('author');
-		// 	serverPosts = Authors.findOne({name:author}).nRefs;
-		// }
-		// else if (Session.get('category') !== "") {
-		// 	var category = Session.get('category');
-		// 	serverPosts = Categories.findOne({name:category}).nRefs;
-		// }
-		// else if (Session.get('tag') !== "") {
-		// 	var tag = Session.get('tag');
-		// 	serverPosts = Tags.findOne({name:tag}).nRefs;
-		// }
-		// else if (Session.get('pinned')) {
-		// 	serverPosts = PinnedCounts.findOne().count;
-		// }
-		// else if (Session.get('files')) {
-		// 	serverPosts = FilesCounts.findOne().count;
-		// }		
-		// else if (Session.get('images')) {
-		// 	serverPosts = ImagesCounts.findOne().count;
-		// }
-		// else
-		// 	serverPosts = Counts.findOne().count;
+		var serverPosts = 0;
 
-		// return (serverPosts > Session.get('postsLimit2'))
+		if (Session.get('author') !== "") {
+			var author = Session.get('author');
+			serverPosts = Authors.findOne({name:author}).nRefs;
+		}
+		else if (Session.get('category') !== "") {
+			var category = Session.get('category');
+			serverPosts = Categories.findOne({name:category}).nRefs;
+		}
+		else if (Session.get('tag') !== "") {
+			var tag = Session.get('tag');
+			serverPosts = Tags.findOne({name:tag}).nRefs;
+		}
+		else if (Session.get('pinned')) {
+			serverPosts = PinnedCounts.findOne().count;
+		}
+		else if (Session.get('files')) {
+			serverPosts = FilesCounts.findOne().count;
+		}		
+		else if (Session.get('images')) {
+			serverPosts = ImagesCounts.findOne().count;
+		}
+		else if (Session.get('favorites')) {
+			var favorites = Session.get(Template.parentData(1).space._id).favorites;
+			serverPosts = favorites.length;
+		}
+		else
+			serverPosts = Counts.findOne().count;
+
+		if (Session.get("last") == true) {
+			var serverPostsDiff = serverPosts - Session.get('postsServerNonReactive'); // Check if there are new posts
+			if (serverPostsDiff == 0 && serverPosts > Session.get('postsLimit')) // No new post & posts to load
+				return true
+			else if (serverPostsDiff > 0) {
+				return (serverPosts - serverPostsDiff > Session.get('postsLimit')) // There are new posts, so we remove them from the count
+			}
+		}
+		else {
+			if (serverPosts > Session.get('postsLimit'))
+				return true;
+		}
 	},
 	ascendant: function() {
 		if (Session.get('last'))
@@ -209,7 +269,7 @@ Template.spacePage.helpers({
 		// var nbPosts = Session.get('postsServerNonReactive');
 		// console.log("nbPosts : "+nbPosts);
 		// var postsReactiveCount = Counts.findOne().count;
-		// var postLoaded = Session.get('postsLimit2');
+		// var postLoaded = Session.get('postsLimit');
 		// console.log("postLoaded : "+postLoaded);
 
 
@@ -217,47 +277,54 @@ Template.spacePage.helpers({
 		// 	return (postLoaded - nbPosts);
 		// else
 		// 	return false;
+		if (Session.get("last") == true) {
 
-		// if (!Session.get('isReactive'))
-		// {
-		// 	var nbPosts = Session.get('postsServerNonReactive');
-		// 	var postsReactiveCount;
+			var nbPosts = Session.get('postsServerNonReactive');
+			var postsReactiveCount;
 
-		// 	if (Session.get('author') !== "") {
-		// 		var author = Session.get('author');
-		// 		postsReactiveCount = Authors.findOne({name:author}).nRefs;  
-		// 	}
-		// 	else if (Session.get('category') !== "") {
-		// 		var category = Session.get('category');
-		// 		postsReactiveCount = Categories.findOne({name:category}).nRefs;  
-		// 	}
-		// 	else if (Session.get('tag') !== "") {
-		// 		var tag = Session.get('tag');
-		// 		postsReactiveCount = Tags.findOne({name:tag}).nRefs;  
-		// 	}
-		// 	else if (Session.get('pinned') == true) {
-		// 		postsReactiveCount = PinnedCounts.findOne().count;  
-		// 	}
-		// 	else if (Session.get('files') == true) {
-		// 		postsReactiveCount = FilesCounts.findOne().count;  
-		// 	}
-		// 	else if (Session.get('images') == true) {
-		// 		postsReactiveCount = ImagesCounts.findOne().count;  
-		// 	}
-		// 	else if (Session.get('favorites') == true) {
-		// 		postsReactiveCount = CountsFavorites.findOne().count;  
-		// 	}
-		// 	else {
-		// 		postsReactiveCount = Counts.findOne().count;
-		// 	}
+			if (Session.get('author') !== "") {
+				var author = Session.get('author');
+				postsReactiveCount = Authors.findOne({name:author}).nRefs;  
+			}
+			else if (Session.get('category') !== "") {
+				var category = Session.get('category');
+				postsReactiveCount = Categories.findOne({name:category}).nRefs;  
+			}
+			else if (Session.get('tag') !== "") {
+				var tag = Session.get('tag');
+				postsReactiveCount = Tags.findOne({name:tag}).nRefs;  
+			}
+			else if (Session.get('pinned') == true) {
+				postsReactiveCount = PinnedCounts.findOne().count;  
+			}
+			else if (Session.get('files') == true) {
+				postsReactiveCount = FilesCounts.findOne().count;  
+			}
+			else if (Session.get('images') == true) {
+				postsReactiveCount = ImagesCounts.findOne().count;  
+			}
+			else if (Session.get('favorites') == true) {
+				var favorites = Session.get(Template.parentData(1).space._id).favorites;
+				postsReactiveCount = favorites.length;  
+			}
+			else {
+				postsReactiveCount = Counts.findOne().count;
+			}
 
-		// 	if (nbPosts < postsReactiveCount && nbPosts != 0)
-		// 		return (postsReactiveCount - nbPosts);
-		// 	else
-		// 		return false;
-		// }
-		// else
-		// 	return false;
+			if (nbPosts < postsReactiveCount) {
+				// If there is no post on the client and one is published, the client will load it reactively.
+				// postsServerNonReactive stays at 0 because there is no refresh, so we have to update it manually.
+				if (nbPosts == 0) { 
+					Session.set('postsServerNonReactive', postsReactiveCount);
+				}
+				else
+					return (postsReactiveCount - nbPosts);
+			}
+			else
+				return false;
+		}
+		else
+			return false;
 	},
 	isReactive: function() {
 		return Session.get('isReactive');

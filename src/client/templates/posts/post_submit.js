@@ -88,6 +88,7 @@ Template.postSubmit.events({
 				$(".post-submit--button-spinner").hide(); // Show a spiner while sending
 				$(".post-submit--button-icon").show();
 				$(".post-submit--button-text").show();
+				resetPostsServerNonReactive();
 
 				// if (tags)
 				// 	Meteor.call('tagsInsert', {spaceId: spaceId, tags: tags});
