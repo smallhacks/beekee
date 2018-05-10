@@ -18,7 +18,7 @@ Meteor.startup(function() {
 	};
 
 	Accounts.urls.resetPassword = function(token) {
-		return 'http://beekee.ch/reset-password/' + token;
+		return 'http://web.beekee.ch/reset-password/' + token;
 	};
 });
 
