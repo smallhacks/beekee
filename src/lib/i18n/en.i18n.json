@@ -11,6 +11,8 @@
 	"admin--users-state":"Status",
 	"admin--is-connected":"Connected",
 	"admin--is-disconnected":"Disconnected",
+	"admin--change-password-message":"Enter a new password for the user:",
+	"admin--change-password-confirm-message":"The password has been changed.",
 	"layout--connection-status":"Disconnected",
 	"login--page-title":"Do you already have an account ?",
 	"login--mail":"E-mail",

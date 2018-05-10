@@ -1,3 +1,21 @@
+Template.admin.events({
+	
+	'click .admin--change-password': function(e) {
+		e.preventDefault();
+
+		var newPassword = prompt(TAPi18n.__('admin--change-password-message')); // need to be a modal for hiding password
+		if (newPassword) {
+			Meteor.call('adminSetNewPassword', Meteor.user(), $(e.currentTarget).data('userid'), newPassword, function(error) {
+				if (error)
+					alert(TAPi18n.__('error-message')+error.message);
+				else
+					alert(TAPi18n.__('admin--change-password-confirm-message'));
+			});
+		}
+	}
+});
+
+
 Template.admin.helpers({
 
 	spaces: function() {

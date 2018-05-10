@@ -18,7 +18,7 @@ Meteor.startup(function() {
 	};
 
 	Accounts.urls.resetPassword = function(token) {
-		return 'http://beekee.ch/reset-password/' + token;
+		return 'http://web.beekee.ch/reset-password/' + token;
 	};
 });
 
@@ -40,6 +40,12 @@ Meteor.methods({
 			subject: subject,
 			text: text
 		});
+	},
+	'adminSetNewPassword': function(adminId, userId, newPassword) { // Admin can forcibly change the password for a user
+		if (Roles.userIsInRole(adminId, 'admin')) {
+			console.log("bien admin");
+			Accounts.setPassword(userId, newPassword);
+		}
 	},
 	'getIP': function() { // Get IP of box
 			var res;

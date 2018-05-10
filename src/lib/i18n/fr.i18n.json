@@ -11,6 +11,8 @@
 	"admin--users-state":"État",
 	"admin--is-connected":"Connecté",
 	"admin--is-disconnected":"Déconnecté",
+	"admin--change-password-message":"Entrez un nouveau mot de passe pour l'utilisateur :",
+	"admin--change-password-confirm-message":"Le mot de passe a bien été changé.",
 	"layout--connection-status":"Déconnecté",
 	"login--page-title":"Vous avez déjà un compte ?",
 	"login--mail":"E-mail",

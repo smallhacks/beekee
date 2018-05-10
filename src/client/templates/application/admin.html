@@ -25,7 +25,7 @@
 			</tr>
 			{{#each user}}
 				<tr>
-					<td>{{emails.[0].address}}</td>
+					<td>{{emails.[0].address}} <a href="#" class="admin--change-password" data-userid="{{_id}}"><i class="fa fa-lg fa-key"></i></a></td>
 					<td>{{userCreatedAt}}</td>
 					<td>{{#if this.status.lastLogin.date}}{{livestamp this.status.lastLogin.date}}{{/if}}</td>
 					<td>{{#if isOnline}}<span class="admin--is-connected">{{_ 'admin--is-connected'}}</span>{{else}}<span class="admin--is-disconnected">{{_ 'admin--is-disconnected'}}</span>{{/if}}</td>
