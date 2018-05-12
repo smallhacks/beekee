@@ -41,8 +41,12 @@ Template.postsHeader.events({
   	},
   	'click .header--exit-button': function(e) {
 		e.preventDefault();
-		if (confirm(TAPi18n.__('header--exit-message')))
-			Router.go('spaceList');
+		if (confirm(TAPi18n.__('header--exit-message'))) {
+			if (Meteor.user())
+				Router.go('indexTeacher');
+			else
+				Router.go('indexStudent');
+		}
   	}
 });
 
