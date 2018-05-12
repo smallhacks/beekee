@@ -49,7 +49,7 @@ Template.indexStudent.events({
 		e.preventDefault();
 
 		Cookie.remove('spacesVisited');
-		$('.index-teacher--visited-spaces').hide();
+		$('.index-student--visited-spaces').hide();
 	},
 	'click .index--select-lang': function(e) {
 		e.preventDefault();
