@@ -137,11 +137,19 @@ Router.route('/space/:_id/edit', {
 });
 
 Router.route('/', {
-	name: 'spaceList',
+	name: 'indexStudent',
 	yieldTemplates: {
-		'spaceList': {to: 'layout--main'}
+		'indexStudent': {to: 'layout--main'}
 	},
-	controller: 'SpaceListController'
+	controller: 'IndexStudentController'
+});
+
+Router.route('/teacher', {
+	name: 'indexTeacher',
+	yieldTemplates: {
+		'indexTeacher': {to: 'layout--main'}
+	},
+	controller: 'IndexTeacherController'
 });
 
 Router.route('/space/:_id', {
@@ -150,6 +158,14 @@ Router.route('/space/:_id', {
 		'spacePage': {to: 'layout--main'}
 	},
 	controller: 'SpacePageController'
+});
+
+Router.route('/space/:_id/first-connection', {
+	name: 'firstConnection',
+	yieldTemplates: {
+		'spaceUsers': {to: 'layout--main'}
+	},
+	controller: 'SpaceFirstConnectionController'
 });
 
 Router.route('/space/:_id/users', {

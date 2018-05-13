@@ -1,4 +1,4 @@
-SpaceUsersController = RouteController.extend({
+SpaceFirstConnectionController = RouteController.extend({
 
 	waitOn: function () {
 		if (Meteor.isClient) {
@@ -21,8 +21,8 @@ SpaceUsersController = RouteController.extend({
 	},
 
 	action: function () {
-		this.render('headerBackButton', {to: 'layout--header'});
-		this.render();
+		this.render('headerBackButtonHome', {to: 'layout--header'});
+		this.render('spaceUsers');
 	},
 	
 	fastRender: true

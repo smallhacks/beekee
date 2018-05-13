@@ -2,7 +2,7 @@ SpacePageController = RouteController.extend({
 
 	onBeforeAction: function () {
 		if (!Session.get(this.params._id)) {
-			Router.go('spaceUsers', {_id: this.params._id});
+			Router.go('firstConnection', {_id: this.params._id});
 		}
 		
 		this.next();
