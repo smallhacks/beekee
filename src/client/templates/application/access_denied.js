@@ -38,7 +38,6 @@ Template.accessDenied.events({
 			Meteor.loginWithPassword(email.trim(), password, function(err) {
 				if(!err)
 					this.next();
-					//Router.go('spaceList');
 				else    
 					Session.set('errorMessage', err.reason);
 			});

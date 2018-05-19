@@ -1,0 +1,36 @@
+<template name="indexStudent">
+	<div class="index-student">
+		<div class="index--logo"><img src="/img/logo.png" /></div>
+			<div class="index-student--wrapper-text">{{{_ 'index-student--wrapper-text'}}}</div>
+			<form class="index-student--code-link-form">
+				<div class="index-student--code-wrapper">
+					<span>{{_ 'index-student--code-wrapper'}}</span><br /><br />
+					<input class="index-student--code-input" id="code" type="text" placeholder="{{_ 'index-student--code-input-placeholder'}}"/><br />
+					<button type="submit" class="button button-primary index-student--button-code-link">{{_ 'index-student--button-code-link'}}</button>
+				</div>
+			</form>     
+			{{#if spacesVisited.count}}
+				<div class="list-group index-student--visited-spaces">
+					<div class="index-student--visited-title">
+						<span>{{_ 'index-student--visited-title'}}</span><br />
+						<a class="index-student--delete-recent" href="#">{{_ 'index-student--delete-recent'}}</a>
+					</div> 
+					{{#each spacesVisited}}
+						<a class="list-group-item" href="{{pathFor 'spacePage'}}">
+							<span class="list-group-item-left">{{title}}</span>
+							<span class="index--list-item-code">
+								<b>{{spaceCode}}</b>
+							</span>
+						</a>
+					{{/each}}
+					<br /><br />
+				</div>
+			{{/if}}
+	</div>
+	<div class="index--wrapper">
+		<div class="index--lang-wrapper">
+			<a href="#" class="index--select-lang {{isLangSelected 'en'}}" data-lang="en">EN</a>
+			<a href="#" class="index--select-lang {{isLangSelected 'fr'}}" data-lang="fr">FR</a>
+		</div>
+	</div>
+</template>

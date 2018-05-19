@@ -46,7 +46,7 @@ touch ssh (in the boot partition)
 
 ### Connect to the Raspberry
 Connect your Raspberry to Internet and connect to it with SSH.<br>
-**If you use a Raspberry Pi Zero W and wpa_supplicant.conf, it may cause problem during hotspot setup.**
+*If you use a Raspberry Pi Zero W and wpa_supplicant.conf, it may cause problem during hotspot setup.*
 
 Find the IP address and connect with SSH:<br>
 ```
@@ -57,9 +57,6 @@ Extend the Filesystem with:<br>
 sudo raspi-config
 ```
 It is strongly recommended to change the user password:<br>
-```
-passwd
-```
 
 ### Install NodeJS<br>
 *You need to check the node version required by the Meteor project (meteor node --version) and get the right version for ARM (here: v0.10.40)*<br>
@@ -82,8 +79,10 @@ tar -zxvf node-v0.10.40-linux-arm-v6.tar.gz
 ```
 ***
 ```
-cd usr/local<br>
+cd usr/local
 sudo cp -R * /usr/local
+cd $HOME
+sudo rm -rf nodetemp
 ```
 
 ### Install ImageMagick<br>
@@ -176,7 +175,7 @@ forever start /home/pi/beekee/bundle/main.js
 Allow Node to run on port 80 without sudo privileges
 ``` 
 sudo apt-get install libcap2-bin
-sudo setcap cap_net_bind_service=+ep /path/to/node
+sudo setcap cap_net_bind_service=+ep /usr/local/bin/node
 ``` 
 
 ### Configure the Hotspot<br>
@@ -184,8 +183,8 @@ Install hostapd and dnsmasq<br>
 ```
 sudo apt-get -y install hostapd dnsmasq
 ```
-Replace dnsmasq configuration file /etc/dnsmasq.conf by:<br>
-*Be sure not to include double spaces in config files*<br>
+Replace /etc/dnsmasq.conf by:<br>
+*Be sure not to include double spaces in config files.*<br>
 
 ```
 # Beekee hotspot configuration
@@ -209,7 +208,7 @@ Edit the file /etc/default/hostapd and add:<br>
 ```
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 ```
-Edit the file /etc/network/interfaces and add:<br>
+Replace the file /etc/network/interfaces by:<br>
 ```
 auto lo
 iface lo inet loopback
@@ -217,7 +216,7 @@ iface eth0 inet dhcp
 auto wlan0
 allow-hotplug wlan0
 iface wlan0 inet static
-  ddress 192.168.40.1
+  address 192.168.40.1
   netmask 255.255.255.0
   network 192.168.40.0
   broadcast 255.255.255.255

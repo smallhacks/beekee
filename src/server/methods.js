@@ -2,19 +2,19 @@ Meteor.startup(function() {
 
 
 	// ###  Mail configuration  ###
-
-	//process.env.MAIL_URL = 'smtp://vincent.widmer@beekee.ch:1234512345@mail.infomaniak.com:587/';          
 	process.env.MAIL_URL = 'smtp://'+Meteor.settings.mailAddress+':'+Meteor.settings.mailPassword+'@'+Meteor.settings.mailServer;          
 	Accounts.emailTemplates.from = "beekee.ch <vincent.widmer@beekee.ch>";
 
 	// Reset Password mail configuration
 	Accounts.emailTemplates.resetPassword.text = function (user, url) {
- 		return "Bonjour, \n\n Vous avez demandé à réinitialiser votre mot de passe.\n\n Si c'est bien le cas, cliquez sur le lien suivant : \n"
+ 		return "Hi, \n\n You recently requested to reset your password for your Beekee account.\n\n Click the link below to reset it. : \n"
 		+ url
-		+ "\n\n L'équipe beekee.ch";
+		+ "\n\n If you did not requested a password reset, please ignore this email."
+		+ "\n\n Thanks,"
+		+ "\n\n Beekee Team";
 	};
 	Accounts.emailTemplates.resetPassword.subject = function () {
- 		return "Réinitialisation de votre mot de passe";
+ 		return "Reset your Beekee password";
 	};
 
 	Accounts.urls.resetPassword = function(token) {

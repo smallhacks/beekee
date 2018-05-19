@@ -1,4 +1,4 @@
-Template.spaceList.onCreated(function() {
+Template.indexStudent.onCreated(function() {
 
 	Deps.autorun(function() { // Autorun to reactively update space visited subscription
 		if (typeof Cookie.get('spacesVisited') != "undefined") {
@@ -9,9 +9,9 @@ Template.spaceList.onCreated(function() {
 });
 
 
-Template.spaceList.events({
+Template.indexStudent.events({
 
-	'submit form.space-list--code-link-form': function(e) {
+	'submit form.index-student--code-link-form': function(e) {
 		e.preventDefault();
 
 		var code = $(e.target).find('[id=code]').val();
@@ -35,50 +35,32 @@ Template.spaceList.events({
 					Router.go('spacePage', {_id: spaceId});
 				}
 				else if (result == null) {
-					alert(TAPi18n.__('space-list--space-doesnt-exist-message'));
+					alert(TAPi18n.__('index-student--space-doesnt-exist-message'));
 				}
 			});
 		}
 	},
-    'click .space-list--button-code-link': function(e) {
+    'click .index-student--button-code-link': function(e) {
     	e.preventDefault();
 
-    	$('.space-list--code-link-form').submit();
+    	$('.index-student--code-link-form').submit();
   	},
-    'click .space-list--delete-recent': function(e) {
+    'click .index-student--delete-recent': function(e) {
 		e.preventDefault();
 
 		Cookie.remove('spacesVisited');
-		$('.space-list--visited-spaces').hide();
+		$('.index-student--visited-spaces').hide();
 	},
-	'click .space-list--select-lang': function(e) {
+	'click .index--select-lang': function(e) {
 		e.preventDefault();
 
 		Session.setPersistent('lang',$(e.currentTarget).data('lang'));
-	},
-	'click .space-list--shutdown': function(e, template) {
-		e.preventDefault();
-
-		var alert = confirm(TAPi18n.__('space-list--shutdown-message'));
-		if (alert) {
-			Meteor.call('shutdownBox', function(error, result){
-				if (error) {
-					alert(TAPi18n.__('error-message')+error.message);
-				}
-				else {
-					alert(TAPi18n.__('space-list--shutdown-confirm'));
-				}
-			});
-		}
-	}  
+	}
 });
 
 
-Template.spaceList.helpers({
+Template.indexStudent.helpers({
 	
-	ownSpaces: function() {
-		return Spaces.find({userId:Meteor.userId()}, {sort: {submitted: -1}});
-	},
 	spacesVisited: function() {
 		if (typeof Cookie.get('spacesVisited') != "undefined") {
 			var spaces = JSON.parse(Cookie.get('spacesVisited'));

@@ -61,7 +61,7 @@ Template.spaceEdit.events({
 					alert(TAPi18n.__('error-message')+error.message);
 				else {
 					alert(TAPi18n.__('space-edit--delete-space-confirm-message'));
-					Router.go('spaceList');
+					Router.go('indexTeacher');
 				}
 			});
 		}

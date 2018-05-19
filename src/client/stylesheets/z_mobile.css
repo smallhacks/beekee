@@ -29,6 +29,11 @@ z_mobile.css
 		width: 95%;
 	}
 
+	.index-student--code-wrapper {
+		width:80%;
+		padding: 19px 15px 24px 15px;
+	}
+
 	.layout--main {
 		width: 100%;
 		padding-top: 68px;
@@ -108,11 +113,6 @@ z_mobile.css
 		width: 10%;
 	}
 
-	.space-list--code-wrapper {
-		width:80%;
-		padding: 19px 15px 24px 15px;
-	}
-
 	.space-page--notification-panel {
 		width: 50%;
 	}
@@ -125,11 +125,6 @@ z_mobile.css
 		width: 100%;
 		box-sizing: border-box;
 		height: 50px;
-	}
-
-	.space-list--footer a {
-		border-left: none;
-		display:block;
 	}
 
 

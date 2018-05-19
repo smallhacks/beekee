@@ -8,7 +8,7 @@ Template.resetPassword.events({
 
         Accounts.resetPassword(Accounts._resetPasswordToken, password,function(){
             alert(TAPi18n.__("register--password-changed-message"));
-            Router.go('spaceList');
+            Router.go('indexTeacher');
         });
     },
     'click .reset-password--button-submit': function(e) {

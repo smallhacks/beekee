@@ -33,7 +33,7 @@ Template.register.events({
             if (password === passwordConfirm) {
                 Accounts.createUser({email:email.toLowerCase().trim(),password:password,profile:{lastAlert:1}},function(err){
                     if(!err) {
-                        Router.go('spaceList');
+                        Router.go('indexTeacher');
                         if (Meteor.settings.public.isBox === "false") {
                             Meteor.call('sendEmail', // Send an e-mail to user
                                 Meteor.user().emails[0].address,
