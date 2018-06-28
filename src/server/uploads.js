@@ -19,6 +19,7 @@ Meteor.startup(function () {
 					if (error) {
 						console.log("Error when resizing :"+error)
 					} else {
+						console.log("on insert : "+fileInfo.name);
 						Files.insert({fileId:fileInfo.name, fileType:extension});
 					}
 				}));

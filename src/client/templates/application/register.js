@@ -21,19 +21,25 @@ Template.register.onRendered(function () {
 
 Template.register.events({
     
+    'keypress input': function(event) {
+        if (event.keyCode == 13) {
+            $('#register--form').submit();
+        }
+    },
     'submit form': function (event) {
  
         event.preventDefault();
  
         var email = event.target.email.value; // E-mail is used as username
+        var name = event.target.name.value; // E-mail is used as username
         var password = event.target.password.value;
         var passwordConfirm = event.target.passwordConfirm.value;
   
         if (email && password) {
             if (password === passwordConfirm) {
-                Accounts.createUser({email:email.toLowerCase().trim(),password:password,profile:{lastAlert:1}},function(err){
+                Accounts.createUser({email:email.toLowerCase().trim(),password:password,profile:{name:name,lastAlert:1}},function(err){
                     if(!err) {
-                        Router.go('spaceList');
+                        Router.go('indexTeacher');
                         if (Meteor.settings.public.isBox === "false") {
                             Meteor.call('sendEmail', // Send an e-mail to user
                                 Meteor.user().emails[0].address,
@@ -64,12 +70,6 @@ Template.register.helpers({
 
     errorMessage: function() {
         return Session.get('errorMessage');
-    },
-    isBox: function() {
-        if (Meteor.settings.public.isBox === "true")
-            return true;
-        else
-            return false;
     }
 });
 

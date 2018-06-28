@@ -21,7 +21,6 @@ SpaceUsersController = RouteController.extend({
 	},
 
 	action: function () {
-		this.render('headerBackButton', {to: 'layout--header'});
 		this.render();
 	},
 	

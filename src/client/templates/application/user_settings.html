@@ -1,0 +1,14 @@
+<template name="userSettings">
+	{{> backHeader}}
+	<div class="container h-100">
+		<div class="row justify-content-center min-h-100">
+    		<div class="col-8 bg-white border-left border-right min-h-100 pt-4 pl-4 pr-4">
+                <h5 class="text-center mb-5">{{_ 'user-settings--page-title'}}</h5>
+                <div class="list-group w-100">
+                	<a href="#" class="list-group-item list-group-item-action d-flex user-settings--change-password"><span>{{_ 'user-settings--change-password'}}</span><span class="ml-auto"></span></a>
+  					<a href="#" class="list-group-item list-group-item-action list-group-item-danger d-flex user-settings--logout"><span>{{_ 'user-settings--logout'}}</span><span class="ml-auto"></span></a>
+  				</div>
+    		</div>
+  		</div>
+	</div>
+</template>

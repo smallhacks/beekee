@@ -1,0 +1,16 @@
+<template name="home">
+	{{#if ownSpace}}
+		<div class="float-right">
+			<a href="#" class="home--submit">
+				<i class="fas fa-plus"></i> {{_ 'home--submit-button'}}
+			</a>
+		</div>
+	{{/if}}
+	<h5 class="mb-4">{{_ 'home--title'}}</h5>
+	{{#each homePosts}}
+		{{> homePost}}
+	{{/each}}
+	{{> homePostSubmit}}
+	{{> homePostEdit}}
+	{{> homePostDelete}}
+</template>

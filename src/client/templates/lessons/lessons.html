@@ -1,0 +1,15 @@
+<template name="lessons">
+	{{#if ownSpace}}
+		<div class="float-right">
+			<a href="#" class="" data-toggle="modal" data-target="#lessonsPostSubmit">
+				<i class="fas fa-plus"></i> {{_ 'lessons--submit-button'}}
+			</a>
+		</div>
+	{{/if}}
+	<h5 class="">{{_ 'lessons--title'}}</h5>
+	<div class="text-secondary small mb-4">{{_ 'lessons--subtitle'}}</div>
+	{{#each lessonsPosts}}
+		{{> lessonsPost}}
+	{{/each}}
+	{{> lessonsPostSubmit}}
+</template>

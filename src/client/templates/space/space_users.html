@@ -1,0 +1,24 @@
+<template name="spaceUsers">
+	{{> usersHeader}}
+	<div class="container pt-4">
+		<div class="row">
+			<div class="col-6 offset-3">
+				<div class="card text-center">
+					<div class="card-body">
+						<h4>{{_ 'space-users--page-title'}}</h4>
+						<p class="text-secondary">{{_ 'space-users--page-description'}}</p>
+						<form id="space-users--form" name="space-users--form">
+	 						<div class="form-group">
+	    						<input type="text" class="form-control" id="space-users--input" aria-describedby="emailHelp" placeholder="{{_ 'space-users--input-choose-author-placeholder'}}">
+	  						</div>
+	  						<div class="text-right">
+	  	    	    			<a href="{{pathFor 'space' _id=this.space._id}}" role="button" class="btn btn-secondary">Cancel</a>
+	  	    	  				<a href="#" role="button" class="btn btn-primary space-users--button-submit-author">Change</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

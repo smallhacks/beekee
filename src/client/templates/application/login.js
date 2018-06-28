@@ -26,9 +26,13 @@ Template.login.onRendered(function () {
 
 
 Template.login.events({
-	
-	'submit form': function(e) {
 
+	'keypress input': function(event) {
+	    if (event.keyCode == 13) {
+			$('#login--form').submit();
+	    }
+	},
+	'submit form': function(e) {
 		e.preventDefault();
 		Session.set('errorMessage', ''); // hide error messages
 		var email = e.target.email.value;
@@ -37,7 +41,7 @@ Template.login.events({
 		if (email && password) {
 			Meteor.loginWithPassword(email.trim(), password, function(err) {
 				if(!err)
-					Router.go('spaceList');
+					Router.go('indexTeacher');
 				else    
 					Session.set('errorMessage', err.reason);
 			});

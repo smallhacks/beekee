@@ -21,8 +21,7 @@ SpaceFirstConnectionController = RouteController.extend({
 	},
 
 	action: function () {
-		this.render('headerBackButtonHome', {to: 'layout--header'});
-		this.render('spaceUsers');
+		this.render();
 	},
 	
 	fastRender: true

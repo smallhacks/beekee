@@ -20,9 +20,38 @@ Meteor.publish('post', function(postId) {
 	return Posts.find({_id: postId});
 });
 
-Meteor.publish('posts', function(filters,skip,limit) {
-	return Posts.find(filters, {sort: {submitted: 1},skip:skip,limit:limit});
+
+
+
+// Meteor.publish('homePosts', function(spaceId) {
+// 	check(spaceId, String);
+// 	return Posts.find({spaceId: spaceId, type:"home"},{sort: {submitted: 1}});
+// });
+
+// Meteor.publish('liveFeedPosts', function(spaceId) {
+// 	check(spaceId, String);
+// 	return Posts.find({spaceId: spaceId, type:"liveFeed"},{sort: {submitted: -1}});
+// });
+
+// Meteor.publish('lessonsPosts', function(spaceId) {
+// 	check(spaceId, String);
+// 	return Posts.find({spaceId: spaceId, type:"lessons"});
+// });
+
+// Meteor.publish('resourcesPosts', function(spaceId) {
+// 	check(spaceId, String);
+// 	return Posts.find({spaceId: spaceId, type:"resources"});
+// });
+
+
+Meteor.publish('posts', function(filters, skip, limit) {
+	return Posts.find(filters, {sort: {submitted:1},skip:skip,limit:limit});
 });
+
+
+// Meteor.publish('posts', function(filters,skip,limit) {
+// 	return Posts.find(filters, {sort: {submitted: 1},skip:skip,limit:limit});
+// });
 
 Meteor.publish("file", function(fileId) {
 	return Files.find({fileId:fileId})
@@ -30,6 +59,10 @@ Meteor.publish("file", function(fileId) {
 
 Meteor.publish("files", function(spaceId) {
 	return Files.find({spaceId: spaceId})
+});
+
+Meteor.publish("allFiles", function() {
+	return Files.find({})
 });
 
 Meteor.publish("authors", function(spaceId) {
@@ -49,39 +82,39 @@ Meteor.publish('allUsers', function() {
  })
 
 // Publish the current size of a collection without subscribe to the collection
-Meteor.publish("count-all-posts", function (spaceId) {
-	var self = this;
-	var count = 0;
-	var initializing = true;
+// Meteor.publish("count-all-live-feed-posts", function (spaceId) {
+// 	var self = this;
+// 	var count = 0;
+// 	var initializing = true;
 
-	var handle = Posts.find({spaceId: spaceId}).observeChanges({
-		added: function (doc, idx) {
-			count++;
-			if (!initializing) {
-				self.changed("counts", spaceId, {count: count});  // "counts" is the published collection name
-			}
-		},
-		removed: function (doc, idx) {
-			count--;
-			self.changed("counts", spaceId, {count: count});  // Same published collection, "counts"
-		}
-	});
+// 	var handle = Posts.find({spaceId: spaceId, type:"liveFeed"}).observeChanges({
+// 		added: function (doc, idx) {
+// 			count++;
+// 			if (!initializing) {
+// 				self.changed("counts", spaceId, {count: count});  // "counts" is the published collection name
+// 			}
+// 		},
+// 		removed: function (doc, idx) {
+// 			count--;
+// 			self.changed("counts", spaceId, {count: count});  // Same published collection, "counts"
+// 		}
+// 	});
 
-	initializing = false;
+// 	initializing = false;
 
-	// publish the initial count. `observeChanges` guaranteed not to return
-	// until the initial set of `added` callbacks have run, so the `count`
-	// variable is up to date.
-	self.added("counts", spaceId, {count: count});
+// 	// publish the initial count. `observeChanges` guaranteed not to return
+// 	// until the initial set of `added` callbacks have run, so the `count`
+// 	// variable is up to date.
+// 	self.added("counts", spaceId, {count: count});
 
-	// and signal that the initial document set is now available on the client
-	self.ready();
+// 	// and signal that the initial document set is now available on the client
+// 	self.ready();
 
-	// turn off observe when client unsubscribes
-	self.onStop(function () {
-		handle.stop();
-	});
-});
+// 	// turn off observe when client unsubscribes
+// 	self.onStop(function () {
+// 		handle.stop();
+// 	});
+// });
 
 
 Meteor.publish("count-all-pinned", function (spaceId) {
@@ -180,6 +213,42 @@ Meteor.publish("count-all-images", function (spaceId) {
 	// until the initial set of `added` callbacks have run, so the `count`
 	// variable is up to date.
 	self.added("imagesCounts", spaceId, {count: imagesCounts});
+
+	// and signal that the initial document set is now available on the client
+	self.ready();
+
+	// turn off observe when client unsubscribes
+	self.onStop(function () {
+		handle.stop();
+	});
+});
+
+
+
+Meteor.publish("count-all-live-feed", function (spaceId) {
+	var self = this;
+	var liveFeedCounts = 0;
+	var initializing = true;
+
+	var handle = Posts.find({spaceId: spaceId, type:'liveFeed'}).observeChanges({
+		added: function (doc, idx) {
+			liveFeedCounts++;
+			if (!initializing) {
+				self.changed("liveFeedCounts", spaceId, {count: liveFeedCounts});  // "counts" is the published collection name
+			}
+		},
+		removed: function (doc, idx) {
+			liveFeedCounts--;
+			self.changed("liveFeedCounts", spaceId, {count: liveFeedCounts});  // Same published collection, "counts"
+		}
+	});
+
+	initializing = false;
+
+	// publish the initial count. `observeChanges` guaranteed not to return
+	// until the initial set of `added` callbacks have run, so the `count`
+	// variable is up to date.
+	self.added("liveFeedCounts", spaceId, {count: liveFeedCounts});
 
 	// and signal that the initial document set is now available on the client
 	self.ready();

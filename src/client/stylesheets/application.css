@@ -60,109 +60,29 @@ application.css
 }
 
 
-/* ----- privacy template ----- */
+/* ----- index templates ----- */
 
-.privacy {
-	margin: 15px auto 0 auto;
-	width: 85%;
+.index--lang-wrapper {
+	margin-top: 40px;
 }
 
-.privacy h1 {
-	margin-top: 20px;
+.index--lang-wrapper a {
+	padding: 6px;
+	border-left: solid 1px #b7b7b7;
 }
 
-.privacy p {
-	margin-top: 5px;
-	text-align: justify;
-	line-height: 1.3em;
+.index--lang-wrapper a:first-of-type {
+	border-left: none;
 }
 
-
-/* ----- layout template ----- */
-
-.layout--connection-status {
-	position: fixed;
-	text-align: center;
-	color:white;
-	line-height: 40px;
-	width: 150px;;
-	left: 50%;
-	right: 50%;
-	margin-left: -75px;
-	height: 40px;
-	background-color: #d24848;
-	display:none;
-;}
-
-.layout--status-connected {
-	display:none;
+.index--lang-wrapper a.selected {
+	font-weight: bold;
+	color:grey;
+	cursor: default;
 }
 
-.layout--status-disconnected {
-	display:block;
-}
-
-.layout--main {
-	width: 760px;
-	margin: 0 auto 0 auto;
-	padding: 74px 0 100px 0;
-}
-
-
-/* ----- login template ----- */
-
-.login--wrapper {
-	text-align: left;
-	margin: 0 auto 20px auto;
-	padding: 20px;
-	width: 60%;
-	border: 1px solid #e2e3e7;
-	border-radius: 4px;
-	background-color: white;
-}
-
-.login--input {
-	font-size: 1em;
-	width: 100%;
-	padding: 8px;
-	box-sizing: border-box;
-}
-
-.login--message {
-	margin-top: 15px;
-	color: red;
-}
-
-.login--button-wrapper {
-	text-align: center;
-	width: 60%;
-	margin-left: auto;
-	margin-right: auto;	
-}
-
-.login--register-link-wrapper {
-	text-align: center;
-	margin-top: 30px;
-}
-
-
-/* ----- logout template ----- */
-
-.logout--wrapper {
-	text-align: center;
-	margin: 0 auto 20px auto;
-	padding: 20px 7px 20px 7px;
-	width: 60%;
-	border: 1px solid #e2e3e7;
-	border-radius: 4px;	
-	background-color: white;
-}
-
-.logout--button-wrapper {
-	text-align: center;
-	width: 60%;
-	margin-left: auto;
-	margin-right: auto;	
+.index--lang-wrapper a.selected:hover {
+	text-decoration: none;
 }
 
 
@@ -171,45 +91,4 @@ application.css
 .not-found {
 	margin-top: 50px;
 	text-align: center;
-}
-
-
-/* ----- register template ----- */
-
-.register--wrapper {
-	margin: 0 0 20px 0;
-	padding: 20px;
-	width: 60%;
-	margin-left: auto;
-	margin-right: auto;
-	border: 1px solid #e2e3e7;
-	border-radius: 4px;	
-	background-color: white;
-	text-align: left;
-}
-
-.register--input {
-	width: 100%;
-	font-size: 1em;
-	padding: 8px;
-	box-sizing: border-box;
-}
-
-.register--button-wrapper {
-	width: 60%;
-	margin-left: auto;
-	margin-right: auto;	
-	text-align: center;
-}
-
-.register--message {
-	margin-top: 15px;
-	color: red;
-}
-
-.register--terms {
-	color: #979797; 
-	font-size: 0.9em;
-	text-align: center;
-	margin-bottom: 15px;
 }

@@ -1,29 +1,39 @@
 <template name="login">
-	<div class="login">
-		<div class="page-title">{{_ 'login--page-title'}}</div>
-		<form id="login--form" class="login--form">        
-			<div class="login--wrapper">
-				<label>{{_ 'login--mail'}}</label>
-				<input type="text" class="login--input login--input-username form-control" id="email" value="" autofocus><br><br>
-				<label>{{_ 'login--password'}}</label>
-				<input type="password" name="" class="login--input form-control" id="password" value=""><br>
-				{{#if errorMessage}}
-					<div class="login--message">
-						<p>{{t9n errorMessage}}</p>
-						{{#unless isBox}}
-							{{#if passwordRecovery}}
-								<br><a href="#" class="login--send-mail-forgot-password">{{_ 'login--send-mail-forgot-password-link'}}</a>
-							{{/if}}
-						{{/unless}}
-					</div> 
-				{{/if}}                 
-			</div> 
-			<div class="login--button-wrapper">
-				<button type="submit" class="button button-primary login--button-submit">{{_ 'login--button-submit'}}</button>
-			</div>   
-		</form>
-		<div class="login--register-link-wrapper">{{_ 'login--register'}}<br><br>
-			<a href="{{pathFor 'register'}}"> {{_ 'login--register-link'}}</a> !
+	{{> loginHeader}}
+	<div class="container">
+  		<div class="row justify-content-center mt-5">
+  			<div class="col-12 col-lg-5">
+  				<h4 class="text-center mb-4">{{_ 'login--page-title'}}</h4>
+				<div class="card text-center">
+					<div class="card-body">
+						<form id="login--form" name="login--form">
+	 						<div class="form-group">
+	    						<input type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{_ 'login--mail'}}" autofocus>
+	  						</div>
+	  						<div class="form-group">
+	  							<input type="password" name="password" class="form-control" id="password" value="" placeholder="{{_ 'login--password'}}">
+	  						</div>
+							{{#if errorMessage}}
+								<div class="alert alert-danger" role="alert">
+									{{t9n errorMessage}}
+								</div>
+								{{#unless isBox}}
+									{{#if passwordRecovery}}
+										<br><a href="#" class="login--send-mail-forgot-password">{{_ 'login--send-mail-forgot-password-link'}}</a>
+									{{/if}}
+								{{/unless}}
+							{{/if}} 
+	  	    	  			<button type="button" class="btn btn-primary w-100 login--button-submit">{{_ 'login--button-submit'}}</button>
+						</form>
+					</div>
+				</div>
+			</div>
+  		</div>
+  		<div class="row justify-content-center mt-5 text-center">
+  			<div class="col-12 col-lg-6 text-center">
+				<h6>{{_ 'login--register'}}</h6>
+				<a href="{{pathFor 'register'}}"> {{_ 'login--register-link'}}</a> !
+			</div>
 		</div>
 	</div>
 </template>

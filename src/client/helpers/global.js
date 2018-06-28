@@ -6,6 +6,24 @@ Template.registerHelper("isBox", function () {
 });
 
 
+Template.registerHelper("ownSpace", function () {
+
+	var spaceId = Session.get('spaceId');
+	var spaceUserId = Spaces.findOne(spaceId).userId;
+
+	var userId = Meteor.userId();
+	var isAdmin = Roles.userIsInRole(Meteor.userId(), ['admin'])
+	if (userId)
+		if (spaceUserId === userId)
+			return true;
+	else if (isAdmin)
+		if (isAdmin === true)
+			return true;
+	else
+		return false;
+});
+
+
 resetPostInterval = function() { // Reset interval of post subscription
 	if (Session.get('postsServerNonReactive') >= 10) {
 		Session.set('postsToSkip',Session.get('postsServerNonReactive') - 10);
@@ -19,9 +37,6 @@ resetPostInterval = function() { // Reset interval of post subscription
 		Session.set('postsToSkip',0);
 		Session.set('postsLimit',1);
 	}
-	console.log("postsServerNonReactive : "+Session.get('postsServerNonReactive'));
-	console.log("postsLimit : "+Session.get('postsLimit'));
-
 }
 
 
@@ -34,33 +49,14 @@ resetPostsServerNonReactive = function() {
 			var category = Session.get('category');
 			Session.set('postsServerNonReactive', Categories.findOne({name:category}).nRefs);
 		}
-		else if (Session.get('tag') !== "") {
-			var tag = Session.get('tag');
-			Session.set('postsServerNonReactive', Tags.findOne({name:tag}).nRefs);
-		}
-		else if (Session.get('pinned') == true) {
-			Session.set('postsServerNonReactive', PinnedCounts.findOne().count);
-		}
-		else if (Session.get('files') == true) {
-			Session.set('postsServerNonReactive', FilesCounts.findOne().count);
-		}		
-		else if (Session.get('images') == true) {
-			Session.set('postsServerNonReactive', ImagesCounts.findOne().count);
-		}
 		else
-			Session.set('postsServerNonReactive', Counts.findOne().count);
+			Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count);
 
 		resetPostInterval();
 	}
 
 
 resetFilters = function() {
-	//Session.set('last',false);
-	Session.set('pinned',false);
-	Session.set('favorites',false);
-	Session.set('files',false);
-	Session.set('images',false);
 	Session.set('author','');
-	Session.set('tag','');
 	Session.set('category','');
 }

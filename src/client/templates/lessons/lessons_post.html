@@ -1,0 +1,18 @@
+<template name="lessonsPost">
+	<div class="card mb-4">
+		<div class="card-header d-flex">{{title}}
+			{{#if ownSpace}}
+				<span class="align-baseline ml-auto" id="dropdownMenuLink" data-toggle="dropdown"><i class="fa fa-ellipsis-v fa-fw align-baseline btn-icon" ></i>
+				</span>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<a class="dropdown-item" data-toggle="modal" data-target="#resourcesPostEdit-{{this._id}}" href="#">{{_ 'post--edit'}}</a>
+					<a class="dropdown-item text-danger resources-post--delete" data-postid="{{this._id}}" href="#">{{_ 'post--delete'}}</a>
+				</div>
+			{{/if}}
+		</div>
+		<div class="card-body">
+			<p class="card-text post-item--text2">{{body}}</p>
+			<a role="button" href="{{url}}" class="btn btn-primary text-white">Start this lesson</a>
+		</div>
+	</div>
+</template>

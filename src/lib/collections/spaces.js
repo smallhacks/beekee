@@ -2,9 +2,13 @@ Spaces = new Mongo.Collection('spaces');
 
 Spaces.allow({
 
-	update: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); },
+	update: function(userId, space) { return true},
+	remove: function(userId, space) { return true}
 
-	remove: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); }
+
+	// update: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); },
+
+	// remove: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); }
 });
 
 
@@ -82,7 +86,8 @@ if(Meteor.isServer) {
 				guestWrite: true,
 				commentsAllowed:true,
 				postEditPermissions:"own",
-				createUserAllowed:true
+				createUserAllowed:true,
+				permissions:{}
 			});
 
 			var spaceId = Spaces.insert(space);

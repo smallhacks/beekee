@@ -15,6 +15,7 @@ if(Meteor.isClient) {
 	PinnedCounts = new Mongo.Collection("pinnedCounts"); // Store post count of a space ; Allow to count them without subscribe to all posts (optimization)
 	FilesCounts = new Mongo.Collection("filesCounts"); // Store post count of a space ; Allow to count them without subscribe to all posts (optimization)
 	ImagesCounts = new Mongo.Collection("imagesCounts"); // Store post count of a space ; Allow to count them without subscribe to all posts (optimization)
+	LiveFeedCounts = new Mongo.Collection("liveFeedCounts"); // Store post count of a space ; Allow to count them without subscribe to all posts (optimization)
 }
 
 if(Meteor.isServer) {
@@ -48,43 +49,45 @@ if(Meteor.isServer) {
 
 
 	Posts.before.remove(function (userId, doc) { 
-		var deletionTime = Date.now();
+		// var deletionTime = Date.now();
 
-		Meteor.call('tagsEdit', {spaceId: doc.spaceId, newTags: [], oldTags: doc.tags}, function(error) { // Decrement tags nRefs
-			if (error) {
-				throwError(error.reason);
-			}
- 		});
+		// Meteor.call('tagsEdit', {spaceId: doc.spaceId, newTags: [], oldTags: doc.tags}, function(error) { // Decrement tags nRefs
+		// 	if (error) {
+		// 		throwError(error.reason);
+		// 	}
+ 	// 	});
 
-		var file = Files.findOne({'metadata.postId': doc.fileId}); // Remove file
-		if (file){
-			 // TODO : remove file (not only from collection)
-			Files.remove(file._id);
-		}
+		// var file = Files.findOne({'metadata.postId': doc.fileId}); // Remove file
+		// if (file){
+		// 	 // TODO : remove file (not only from collection)
+		// 	Files.remove(file._id);
+		// }
 
 		var author = Authors.findOne({spaceId: doc.spaceId, name: doc.author});
 		Authors.update(author._id, {$inc: {nRefs: -1}}); // Decrement author nRefs
 
-		var category = Categories.findOne({spaceId: doc.spaceId, name: doc.category});
-		if (category)
-			Categories.update(category._id, {$inc: {nRefs: -1}}); // Decrement category nRefs
+		if (doc.category) {
+			var category = Categories.findOne({spaceId: doc.spaceId, name: doc.category});
+			if (category)
+				Categories.update(category._id, {$inc: {nRefs: -1}}); // Decrement category nRefs
+		}
 
-		// Add post to posts versions
-		// TODO : refactoring
-		var space = Spaces.findOne(doc.spaceId);
-		// var oldPosts = [];
-		// if (space.oldPosts !== undefined) {
-		// 	oldPosts = space.oldPosts;
-		// }
-		// oldPosts.push(doc._id);
-		//Spaces.update(doc.spaceId, {$set: {oldPosts: oldPosts, modified: Date.now()}});
-		Spaces.update(doc.spaceId, {$set: {modified: Date.now()}});
+		// // Add post to posts versions
+		// // TODO : refactoring
+		// var space = Spaces.findOne(doc.spaceId);
+		// // var oldPosts = [];
+		// // if (space.oldPosts !== undefined) {
+		// // 	oldPosts = space.oldPosts;
+		// // }
+		// // oldPosts.push(doc._id);
+		// //Spaces.update(doc.spaceId, {$set: {oldPosts: oldPosts, modified: Date.now()}});
+		// Spaces.update(doc.spaceId, {$set: {modified: Date.now()}});
 
-		doc.version =  doc.version++;
-		doc.modified = Date.now();
-		var versionning = {};
-		_.extend(versionning, doc, {modifiedBy: userId, last: true});
-		Meteor.call('addPostVersion', versionning);
+		// doc.version =  doc.version++;
+		// doc.modified = Date.now();
+		// var versionning = {};
+		// _.extend(versionning, doc, {modifiedBy: userId, last: true});
+		// Meteor.call('addPostVersion', versionning);
 	});
 }
 
@@ -97,11 +100,27 @@ Meteor.methods({
 	removeLikeComment: function(data) {
 		Posts.update({_id:data.currentPostId,"comments.id":data.currentCommentId}, {$pull: {"comments.$.likes": data.author}});
 	},
+	homePostInsert: function(postAttributes) {
+		check(postAttributes.spaceId, String);
+
+		//if (Meteor.settings.public)
+			//var postFromCloud = !(Meteor.settings.public.isBox === "true"); // Set where post is submitted (box or cloud)
+
+		post = _.extend(postAttributes, {
+			submitted: Date.now()
+			//nb: Posts.find({spaceId: postAttributes.spaceId}).count() + 1,
+			//pinned : false,
+		});
+
+		var space = Spaces.findOne(postAttributes.spaceId);
+		post._id = Posts.insert(post);		
+		return post._id;
+	},
 	postInsert: function(postAttributes) {
 		check(postAttributes.spaceId, String);
 
-		if (Meteor.settings.public)
-			var postFromCloud = !(Meteor.settings.public.isBox === "true"); // Set where post is submitted (box or cloud)
+		//if (Meteor.settings.public)
+			//var postFromCloud = !(Meteor.settings.public.isBox === "true"); // Set where post is submitted (box or cloud)
 
 		item = Authors.findOne({spaceId: postAttributes.spaceId, name: postAttributes.author});
 		Authors.update(item, {$inc: {nRefs: 1}});
@@ -110,7 +129,7 @@ Meteor.methods({
 			submitted: Date.now(),
 			nb: Posts.find({spaceId: postAttributes.spaceId}).count() + 1,
 			pinned : false,
-			postFromCloud: postFromCloud // Workaround bug sync
+			// postFromCloud: postFromCloud // Workaround bug sync
 		});
 
 		var space = Spaces.findOne(postAttributes.spaceId);
