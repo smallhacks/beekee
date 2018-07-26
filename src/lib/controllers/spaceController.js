@@ -2,19 +2,26 @@ SpaceController = RouteController.extend({
 
 	onBeforeAction: function () {
 		var spaceId = this.params._id;
-		if (!Session.get(spaceId)) {
-			if (Meteor.userId()) {
-				var adminName = Meteor.user().profile.name;
-				Meteor.call('authorInsert', adminName, spaceId, function(error) {
-					if (error) {
-						console.log(error);
+		if (Spaces.findOne(spaceId)) {
+			if (!Session.get(spaceId)) {
+				if (Meteor.userId()) {
+					var adminName = Meteor.user().profile.name;
+					if (!Authors.findOne({spaceId:spaceId,name:adminName})) {
+						Meteor.call('authorInsert', adminName, spaceId, function(error) {
+							if (error) {
+								console.log(error);
+							}
+							else {
+								Session.setPersistent(spaceId, {author: adminName}); // Persistent to browser refresh
+							}
+						});
 					}
-					else {
-						Session.setPersistent(spaceId, {author: adminName}); // Persistent to browser refresh
-					}
-				});
-			} else
-				Router.go('spaceUsersFirstConnection', {_id: spaceId});
+				} else
+					Router.go('spaceUsersFirstConnection', {_id: spaceId});
+			}
+		}
+		else {
+			Router.go('notFound');
 		}
 		
 		this.next();
@@ -22,14 +29,7 @@ SpaceController = RouteController.extend({
 
 	waitOn: function () { 
 		return [
-			//Meteor.subscribe('homePosts', this.params._id),
-			//Meteor.subscribe('posts', this.params._id),
-
 			Meteor.subscribe("count-all-live-feed", this.params._id),
-			// Meteor.subscribe('files', this.params._id),
-			//Meteor.subscribe('allFiles'),
-
-			//Meteor.subscribe("count-all-posts", this.params._id),
 			Meteor.subscribe("count-all-pinned", this.params._id),
 			Meteor.subscribe("count-all-files", this.params._id),
 			Meteor.subscribe("count-all-images", this.params._id),

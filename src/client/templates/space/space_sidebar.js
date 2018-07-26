@@ -4,10 +4,16 @@ Template.spaceSidebar.events({
 		e.preventDefault();
 		var menuItemId = $(e.currentTarget).attr("data-id");
 		Session.set('menuItem',menuItemId);
+
+		if (menuItemId != "2") { // Dismiss sidebar unless menuItem is not "Live feed"
+			$('#sidebar').removeClass('active');
+	        $('.overlay').removeClass('active');
+	        $('.collapse.in').removeClass('in');
+	    }
 	},
 	'click .space-sidebar--category-edit': function(e) {
 		e.preventDefault();
-		var categoryName = $(event.target).data("category");
+		var categoryName = $(e.target).data("category");
 		Session.set('categoryToEdit',categoryName);
 		$('#liveFeedCategoryEdit').modal('show');
 	},
@@ -25,6 +31,11 @@ Template.spaceSidebar.events({
 		Session.set('category',category);
 		Session.set('postsServerNonReactive', Categories.findOne({name:category}).nRefs);
 		resetPostInterval();
+
+		// Dismiss sidebar
+		$('#sidebar').removeClass('active');
+	    $('.overlay').removeClass('active');
+	    $('.collapse.in').removeClass('in');
 	}, 	
 	'click .filter-author': function(e) {
 		e.preventDefault();
@@ -34,6 +45,11 @@ Template.spaceSidebar.events({
 		Session.set('author',author);
 		Session.set('postsServerNonReactive', Authors.findOne({name:author}).nRefs);
 		resetPostInterval();
+
+		// Dismiss sidebar
+		$('#sidebar').removeClass('active');
+	    $('.overlay').removeClass('active');
+	    $('.collapse.in').removeClass('in');
 	}
 });
 
@@ -45,7 +61,7 @@ Template.spaceSidebar.helpers({
 	},
 	'selectedMenuItemBg': function(menuItemId) {
 		if (menuItemId == Session.get('menuItem'))
-			return "bg-white"	
+			return "menu-item--selected"	
 	},
 	'selectedMenuItemTxt': function(menuItemId) {
 		if (menuItemId == Session.get('menuItem'))
@@ -55,13 +71,13 @@ Template.spaceSidebar.helpers({
 	},
 	'selectedCategory': function(){
 		if (this.name == Session.get('category'))
-			return "font-weight-bold bg-white selected"
+			return "font-weight-bold menu-item--selected selected"
 		else
 			return "font-weight-light"
 	},
 	'selectedAuthor': function(){
 		if (this.name == Session.get('author'))
-			return "font-weight-bold bg-white selected"
+			return "font-weight-bold menu-item--selected selected"
 		else
 			return "font-weight-light"
 	},
@@ -74,6 +90,15 @@ Template.spaceSidebar.helpers({
 	},
 	authors: function() {
 		return Authors.find({}, {sort: {name: 1}});
+	},
+	liveFeed: function() {
+		return this.space.liveFeed
+	},
+	lessons: function() {
+		return this.space.lessons
+	},
+	resources: function() {
+		return this.space.resources
 	},
 	permissionAddCategories: function() {
 		if (this.space.permissions.addCategories || Roles.userIsInRole(Meteor.userId(), ['admin']) || Meteor.userId() == this.space.userId)

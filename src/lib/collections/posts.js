@@ -12,10 +12,10 @@ Posts.allow({
 
 if(Meteor.isClient) {
 	Counts = new Mongo.Collection("counts"); // Store post count of a space ; Allow to count them without subscribe to all posts (optimization)
-	PinnedCounts = new Mongo.Collection("pinnedCounts"); // Store post count of a space ; Allow to count them without subscribe to all posts (optimization)
-	FilesCounts = new Mongo.Collection("filesCounts"); // Store post count of a space ; Allow to count them without subscribe to all posts (optimization)
-	ImagesCounts = new Mongo.Collection("imagesCounts"); // Store post count of a space ; Allow to count them without subscribe to all posts (optimization)
-	LiveFeedCounts = new Mongo.Collection("liveFeedCounts"); // Store post count of a space ; Allow to count them without subscribe to all posts (optimization)
+	PinnedCounts = new Mongo.Collection("pinnedCounts");
+	FilesCounts = new Mongo.Collection("filesCounts");
+	ImagesCounts = new Mongo.Collection("imagesCounts");
+	LiveFeedCounts = new Mongo.Collection("liveFeedCounts");
 }
 
 if(Meteor.isServer) {
@@ -63,15 +63,24 @@ if(Meteor.isServer) {
 		// 	Files.remove(file._id);
 		// }
 
-		var author = Authors.findOne({spaceId: doc.spaceId, name: doc.author});
-		Authors.update(author._id, {$inc: {nRefs: -1}}); // Decrement author nRefs
-
-		if (doc.category) {
-			var category = Categories.findOne({spaceId: doc.spaceId, name: doc.category});
-			if (category)
-				Categories.update(category._id, {$inc: {nRefs: -1}}); // Decrement category nRefs
+		// Delete the file if exists
+		var fileId = doc.fileId;
+		var fileExt = doc.fileExt;
+		if (fileId) {
+			Files.remove({fileId:fileId});
+			Meteor.call('deleteFile',doc);
 		}
 
+		if (doc.type == 'liveFeed') {
+			var author = Authors.findOne({spaceId: doc.spaceId, name: doc.author});
+			Authors.update(author._id, {$inc: {nRefs: -1}}); // Decrement author nRefs
+
+			if (doc.category) {
+				var category = Categories.findOne({spaceId: doc.spaceId, name: doc.category});
+				if (category)
+					Categories.update(category._id, {$inc: {nRefs: -1}}); // Decrement category nRefs
+			}
+		}
 		// // Add post to posts versions
 		// // TODO : refactoring
 		// var space = Spaces.findOne(doc.spaceId);

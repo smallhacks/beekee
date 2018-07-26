@@ -1,0 +1,36 @@
+<template name="register">
+    {{> backHeader}}
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 col-lg-5">
+                <h4 class="text-center mb-4">{{_ 'register--page-title'}}</h4>
+                <div class="card text-center">
+                    <div class="card-body">
+                        <form id="register--form" class="register--form" name="register--form">
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control email" id="email" aria-describedby="emailHelp" placeholder="{{_ 'register--mail'}}" autofocus>
+                                <small id="passwordHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="{{_ 'register--name'}}">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control" id="password" value="" placeholder="{{_ 'register--password'}}">
+                                <small id="passwordHelp" class="form-text text-muted">Please choose a password with at least 5 characters.</small>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password_confirm" class="form-control password_confirm" id="password_confirm" value="" placeholder="{{_ 'register--password-confirm'}}">
+                            </div>
+                            {{#if errorMessage}}
+                                <div class="alert alert-danger" role="alert">
+                                    {{t9n errorMessage}}
+                                </div>
+                            {{/if}} 
+                            <button type="button" class="btn btn-primary w-100 register--button-submit">{{_ 'register--button-submit'}}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

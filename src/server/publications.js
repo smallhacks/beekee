@@ -44,7 +44,7 @@ Meteor.publish('post', function(postId) {
 // });
 
 
-Meteor.publish('posts', function(filters, skip, limit) {
+Meteor.publish('posts', function(filters, skip = 0, limit = 0) {
 	return Posts.find(filters, {sort: {submitted:1},skip:skip,limit:limit});
 });
 
@@ -54,7 +54,7 @@ Meteor.publish('posts', function(filters, skip, limit) {
 // });
 
 Meteor.publish("file", function(fileId) {
-	return Files.find({fileId:fileId})
+	return Files.find({_id:fileId})
 });
 
 Meteor.publish("files", function(spaceId) {

@@ -49,11 +49,16 @@ var requireAdmin = function() {
 		}
 }
 
-Router.onBeforeAction(requireLogin, {only: 'spaceSubmit'});
-Router.onBeforeAction(requireAdmin, {only: 'admin'});
+Router.onBeforeAction(requireLogin, {only: 'settings'});
+Router.onBeforeAction(requireAdmin, {only: ['admin','update']});
 
 
 // ###### Routes without controller ######
+
+Router.route('/not-found', {
+	name: 'notFound',
+	fastRender: true
+});
 
 Router.route('/privacy', {
 	name: 'privacy',
@@ -67,6 +72,11 @@ Router.route('/login', {
 
 Router.route('/register', {
 	name: 'register',
+	fastRender: true
+});
+
+Router.route('/update', {
+	name: 'update',
 	fastRender: true
 });
 
@@ -92,6 +102,11 @@ Router.route('/', {
 Router.route('/teacher', {
 	name: 'indexTeacher',
 	controller: 'IndexTeacherController'
+});
+
+Router.route('/lesson/:_id', {
+	name: 'lessonsFrame',
+	controller: 'LessonsFrameController'
 });
 
 Router.route('/space/:_id', {

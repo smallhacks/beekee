@@ -1,0 +1,80 @@
+<template name="liveFeedPost">
+	<div class="card rounded-0" style="border-radius: 0.25rem 0.25rem 0 0 !important;">
+		{{#if this.fileId}}
+			{{#if image}}
+				<div class="life-feed-post--image-wrapper">
+					<a class="life-feed-post--image-link" href="/upload{{this.filePath}}" target="_blank">
+						<img class="card-img-top" src="/upload{{this.filePath}}" alt="Card image cap" />
+					</a>
+			</div>
+			{{/if}}
+		{{/if}}
+		<div class="card-body">
+			{{#if ownPost}}
+				<i class="fa fa-ellipsis-v fa-fw float-right btn-icon" id="dropdownMenuLink" data-toggle="dropdown"></i> 
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<a class="dropdown-item live-feed-post--edit" href="#">{{_ 'post--edit'}}</a>
+					<a class="dropdown-item text-danger live-feed-post--delete" href="#">{{_ 'post--delete'}}</a>
+				</div>
+			{{/if}}
+			<h6 class="card-title">{{author}}<small class="text-muted ml-1">• {{livestamp submitted}}</small></h6>
+			<p class="card-text">{{#autolink}}{{body}}{{/autolink}}</p>
+			{{#if this.fileId}}
+				{{#unless image}}
+					<div class="mt-3">
+						<i class="fas fa-paperclip"></i>
+						<a class="" href="/upload{{this.filePath}}" target="_blank">{{this.fileId}}.{{this.fileExt}}</a>
+					</div>
+				{{/unless}}
+			{{/if}}
+			{{#if category}}
+				<div class="small text-secondary float-right"><i class="fas fa-tag"></i> {{category}}</div>
+			{{/if}}
+			{{#if likeAlready}}
+				<a href="#" class="btn-link-black live-feed-post--remove-like text-primary"><i class="fas fa-thumbs-up"></i></a>
+				{{#if othersLikes}}
+					<span class="small">{{_ 'live-feed-post--nb-likes-with-me' likesWithoutMe}}</span>
+				{{else}}
+					<span class="small">{{_ 'live-feed-post--like'}}</span>
+				{{/if}}
+			{{else}}
+				<a href="#" class="btn-link-black live-feed-post--add-like"><i class="far fa-thumbs-up"></i></a>
+				{{#if likes}}
+					<span class="small">{{likes}} {{_ 'live-feed-post--nb-likes'}}</span>
+				{{/if}}
+			{{/if}}
+		</div>
+	</div>
+	<div class="border border-top-0 rounded-bottom mb-4 p-2 bg-light small">
+		{{#each comments}}
+			<div class="border-bottom mb-2 p-1">
+				{{#if commentEditAllowed}}
+					<a href="#" class="float-right text-secondary" data-toggle="modal" data-target="#live-feed-post--delete-comment-{{this.id}}">x</a>
+					{{> liveFeedDeleteComment}}
+				{{/if}}
+				<div class="small">{{this.author}} • {{livestamp this.submitted}}</div>
+				<div class="mt-1">{{#autolink}}{{this.text}}{{/autolink}}</div>
+				{{#if likeAlreadyComment}}
+					<div class="mt-2 small">
+						<a href="#" class="btn-link-black live-feed-post--comment-remove-like text-primary" data-postid="{{../_id}}"><i class="fas fa-thumbs-up" data-postid="{{../_id}}"></i></a>
+						{{#if othersLikesComment}}
+							<span>{{_ 'live-feed-post--nb-likes-with-me' likesWithoutMeComment}}</span>
+						{{else}}
+							<span>{{_ 'live-feed-post--like'}}</span>
+						{{/if}}
+					</div>
+				{{else}}
+					<div class="mt-2 small">
+						<a href="#" class="btn-link-black live-feed-post--comment-add-like" data-postid="{{../_id}}"><i class="far fa-thumbs-up" data-postid="{{../_id}}"></i></a>
+						{{#if likesComment}}
+							<span>{{likesComment}}</span>
+						{{/if}}
+					</div>
+				{{/if}}
+			</div>
+		{{/each}}
+		<div class="form-group mb-0">
+			<textarea class="form-control live-feed-post--add-comment-textarea" id="comment" rows="1" placeholder="{{_ 'live-feed-post--add-comment'}}"></textarea>
+		</div>
+	</div>
+</template>

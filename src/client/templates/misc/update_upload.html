@@ -1,0 +1,16 @@
+<template name="updateUpload">
+	<form method="POST" enctype="multipart/form-data">
+		{{#unless infoLabel}}
+			<label class="text-center">
+				<input type="file" accept="*/*" class="file-upload--input-file jqUploadclass" data-form-data='{{ submitData }}'>
+				<span class="btn btn-primary text-center">Upload an update file <i class="fas fa-upload"></i></span>
+			</label>
+		{{/unless}}
+		{{#with infoLabel}} 	
+			<div class="progress">
+ 	  			<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ progress }}" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+		{{/with}}
+	</form>
+</template>
+
