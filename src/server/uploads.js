@@ -76,10 +76,15 @@ Meteor.startup(function () {
 			}
 			else if (formFields.type == 'update') {
 				cmd = Meteor.wrapAsync(exec);	
-				res = cmd("tar zxvf '"+process.env.PWD+'/.uploads'+fileInfo.path+"' -C /beekee/bundle/");
+				res = cmd("tar zxvf '"+process.env.PWD+'/.uploads'+fileInfo.path+"' -C /Users/Vince/beekee/",function(error,result){
+					if (error) {
+						var errorMessage = "An error has occured."
+						Files.insert({_id: fileInfo.fileId, error:errorMessage});
+					} else {				
+						Files.insert({_id: fileInfo.fileId, fileName:fileInfo.fileName, fileExt:fileExt, filePath: fileInfo.path})
+					}
+				});
 				res2 = cmd("rm '"+process.env.PWD+'/.uploads'+fileInfo.path+"'");
-
-				Files.insert({_id: fileInfo.fileId, fileName:fileInfo.fileName, fileExt:fileExt, filePath: fileInfo.path})
 			}
 		},
 		getFileName: function(fileInfo, formFields, formData) { 

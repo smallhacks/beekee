@@ -7,17 +7,18 @@
 				<div class="row justify-content-center mt-4 mb-4">
 					<div class="col-12">
 						<div class="card">
-							<div class="card-header">System informations</div>			
+							<div class="card-header">Manual update</div>			
  							<div class="card-body p-0">
- 								<ul class="list-group">
-  									<li class="list-group-item rounded-0 border-left-0 border-right-0 border-top-0 d-flex"><span>Beekee version</span><span class="ml-auto">{{beekeeVersion}}</span></li>
-								</ul>
 								<div class="text-center mt-3 mb-3">
 									{{#unless updateUploaded}}
 										{{>updateUpload formData='{"type":"update"}' autoStart=true}}
 									{{/unless}}
 									{{#if updateUploaded}}
-										<div class="text-success">Beekee has been updated.</div>
+										{{#if updateUploaded.error}}
+          									<div class=""><span class="text-danger">{{updateUploaded.error}}</span> (<a href="#" class="update--retry">retry</a>)</div>
+          								{{else}}
+											<div class="text-success">Beekee has been updated.<br><a href="#" role="button" class="btn btn-danger update--reboot mt-3">Reboot the box</a></div>
+										{{/if}}
 									{{/if}}
 								</div>
 							</div>

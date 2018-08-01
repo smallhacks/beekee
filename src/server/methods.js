@@ -73,11 +73,16 @@ Meteor.methods({
 	},
 	'getBeekeeVersion': function() {
 		json = JSON.parse(Assets.getText("version.json"));
+		//json = JSON.parse(Assets.getText("version.json"));
 		return json.version;
 	},
 	'getBoxSerial': function() {
-		json = JSON.parse(Assets.getText("serial.json"));
-		return json.serial;
+		return Meteor.settings.serial;
+	},
+	'rebootBox': function() { // Shutdown the Raspberry Pi
+			var res;
+			res = cmd("sudo reboot");
+			return res;
 	},
 	'shutdownBox': function() { // Shutdown the Raspberry Pi
 			var res;
