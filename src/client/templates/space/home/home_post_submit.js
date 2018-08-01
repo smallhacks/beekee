@@ -14,6 +14,7 @@ Template.homePostSubmit.events({
 			} else {
 
 				tinymce.activeEditor.setContent(''); // Remove textarea content
+				$(e.target).find('[name=title]').val('');
 				$('#homePostSubmit').modal('hide');
 			};
 		});
