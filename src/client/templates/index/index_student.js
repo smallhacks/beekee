@@ -37,6 +37,7 @@ Template.indexStudent.events({
 							spacesVisited.push(spaceId);
 					}
 					Cookie.set('spacesVisited', JSON.stringify(spacesVisited), {expires: 30}); // Set a cookie to remember visited spaces
+					Session.set(spaceId,null); // Reset Session
 					Router.go('space', {_id: spaceId});
 				}
 				else if (result == null) {
