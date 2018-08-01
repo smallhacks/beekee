@@ -9,27 +9,27 @@
         </button>
       </div>
       <div class="modal-body">
-      	<form name="lessons-post-edit--form" id="lessons-post-edit--form">
-      		      <div class="form-group">
-       		    <input type="text" class="form-control" name="title" id="title" aria-describedby="title" placeholder="Title of the lesson" value="{{post.title}}"></div>
-       		<div class="form-group">
-				<textarea name="body" id="body" class="form-control lessons-post-edit--textarea" placeholder="" aria-label="" aria-describedby="basic-addon2">{{post.body}}</textarea>
-			</div>
-			</form>
-			{{#unless fileUploaded}}
+        <form name="lessons-post-edit--form" id="lessons-post-edit--form">
+                <div class="form-group">
+              <input type="text" class="form-control" name="title" id="title" aria-describedby="title" placeholder="Title of the lesson" value="{{post.title}}"></div>
+          <div class="form-group">
+        <textarea name="body" id="body" class="form-control lessons-post-edit--textarea" placeholder="" aria-label="" aria-describedby="basic-addon2">{{post.body}}</textarea>
+      </div>
+      </form>
+      {{#unless lessonUploaded}}
             {{>lessonsUpload formData=formData autoStart=true}}
-				{{/unless}}
-				{{#if fileUploaded}}
+        {{/unless}}
+        {{#if lessonUploaded}}
           {{#if lessonUploaded.error}}
             <div class=""><span class="text-danger">{{lessonUploaded.error}}</span> (<a href="#" class="lessons-post-submit--retry">retry</a>)</div>
           {{else}}
-  					<div class="p-2">
-  						<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}
-  						<a href="#" class="post-submit--button-delete-file">
-  							<i class="fa fa-trash" aria-hidden="true"></i>
-  						</a>
-  					</div>
-  				{{/if}}
+            <div class="p-2">
+              <i class="fa fa-file-o" aria-hidden="true"></i> {{lessonUploaded.fileName}}
+              <a href="#" class="post-submit--button-delete-file">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </a>
+            </div>
+          {{/if}}
         {{/if}}
       </div>
       <div class="modal-footer">
