@@ -103,7 +103,7 @@ if(Meteor.isServer) {
 				liveFeed:true,
 				lessons:false,
 				resources:true,
-				permissions:{}
+				permissions:{public:false}
 			});
 
 			var spaceId = Spaces.insert(space);

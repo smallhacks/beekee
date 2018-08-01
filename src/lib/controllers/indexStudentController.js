@@ -8,6 +8,7 @@ IndexStudentController = RouteController.extend({
 	},
 
 	waitOn: function() {
+		Meteor.subscribe('publicSpaces')
 	},
 	
 	action: function () {

@@ -73,6 +73,9 @@ Template.indexStudent.helpers({
 			return Spaces.find({'_id':{$in:spaces}});
 		}
 	},
+	publicSpaces: function() {
+		return Spaces.find({permissions:{public:true}});
+	},
   	isLangSelected: function(lang) {
   		if (Session.get('lang')) {
 	  		langSelected = Session.get('lang');

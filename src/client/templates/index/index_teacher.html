@@ -5,8 +5,8 @@
 			<div class=""><img src="/img/logo.png" /></div>
   		</div>
   		<div class="row justify-content-center mt-5">
-  			<div class="col-12 col-lg-5">
-				<h5 class="text-center mb-4">{{_ 'index-teacher--spaces-title'}}</h5>
+  			<div class="col-12 col-lg-5 text-center">
+				<h5 class="mb-3">{{_ 'index-teacher--spaces-title'}}</h5>
 				{{#if ownSpaces.count}}
 					<div class="list-group">
 						{{#each ownSpaces}}
@@ -17,12 +17,26 @@
 					<p class="text-center">{{_ 'index-teacher--no-space'}}</p>
 				{{/if}}
 			</div>
-  		</div>
-  		 <div class="row justify-content-center mt-5 bt-5 text-center">
+		</div>	
+		<div class="row justify-content-center mt-4 bt-5 text-center">
   			<div class="col-12 col-lg-6 text-center">
 				<button class="btn btn-primary" data-toggle="modal" data-target="#spaceSubmit"><i class="fa fa-plus"></i> {{_ 'index-teacher--button-submit-space'}}</button>
 			</div>
 		</div>
+		{{#if publicSpaces.count}}
+			<div class="row justify-content-center mt-5 mb-5 text-center">
+  				<div class="col-12 col-lg-5 text-center">
+					<div class="index-teacher--visited-spaces">
+			 			<h5 class="mb-3">{{_ 'index-student--public-spaces-title'}}</h5>
+			 			<div class="list-group w-100">
+			 				{{#each publicSpaces}}
+								<a href="{{pathFor 'space' _id=this._id}}" class="list-group-item list-group-item-action d-flex"><span>{{title}}</span></a>
+							{{/each}}
+						</div>
+					</div>
+				</div>
+  			</div>
+  		{{/if}}
   		<div class="row justify-content-center mt-5 text-center">
   			<div class="col-12 col-lg-6 text-center mt-3 mb-3">
 				{{#if isBox}}

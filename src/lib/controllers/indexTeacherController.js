@@ -11,7 +11,8 @@ IndexTeacherController = RouteController.extend({
 	},
 
 	waitOn: function() {
-		Meteor.subscribe('ownSpaces', Meteor.userId())
+		Meteor.subscribe('ownSpaces', Meteor.userId()),
+		Meteor.subscribe('publicSpaces')
 	},
 	
 	action: function () {
