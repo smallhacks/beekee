@@ -19,8 +19,9 @@ Template.userSettings.events({
 		e.preventDefault();
 
 		if (confirm(TAPi18n.__('user-settings--confirm-logout'))) {
-			Meteor.logout(); 
-			Router.go('indexStudent');
+			Meteor.logout(function(err) {
+				Router.go('indexStudent');
+			});
 		}
 	}
 });
