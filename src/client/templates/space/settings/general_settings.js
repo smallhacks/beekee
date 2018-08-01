@@ -4,55 +4,65 @@ Template.generalSettings.events({
 		e.preventDefault();
 
 		var currentSpaceId = this.space._id;
-		console.log("currentSpaceId : "+currentSpaceId);
 		var currentSpaceCode = this.space.spaceCode;
-				console.log("currentSpaceCode : "+currentSpaceCode);
 
 		var newCode = prompt(TAPi18n.__('space-edit--change-code-message')+" :", currentSpaceCode);
 		if (newCode && newCode != currentSpaceCode && newCode !="") {
-			Meteor.call('getSpaceId', newCode, function(error,result) {
-				if (error) {
-					alert(TAPi18n.__('error-message')+error.message);
-				}
-				else {
-					if (result == null) {
-						var spaceProperties = { spaceCode: newCode }
-						Spaces.update(currentSpaceId, {$set: spaceProperties}, function(error) {
-							if (error)
-							{
-								alert("ici : "+TAPi18n.__('error-message')+error.message);
-							}
-							else {
-								alert(TAPi18n.__('space-edit--change-code-confirm-message'));
-								Meteor.call('updateCode', currentSpaceCode, newCode)
-							}
-						});
+			if (newCode.length < 4 || newCode.length > 8) {
+				alert("The code must be at least 3 characters and at most 12");
+			}
+			else {
+				Meteor.call('getSpaceId', newCode, function(error,result) {
+					if (error) {
+						alert(TAPi18n.__('error-message')+error.message);
 					}
 					else {
-						alert(TAPi18n.__('space-edit--change-code-already-used-message'));
+						if (result == null) {
+							var spaceProperties = { spaceCode: newCode }
+							Spaces.update(currentSpaceId, {$set: spaceProperties}, function(error) {
+								if (error)
+								{
+									alert("ici : "+TAPi18n.__('error-message')+error.message);
+								}
+								else {
+									alert(TAPi18n.__('space-edit--change-code-confirm-message'));
+									Meteor.call('updateCode', currentSpaceCode, newCode)
+								}
+							});
+						}
+						else {
+							alert(TAPi18n.__('space-edit--change-code-already-used-message'));
+						}
 					}
-				}
-			});
+				});
+			}
 		}
 	},
 	'click .general-settings--rename-button': function(e) {
 		e.preventDefault();
 
 		var currentSpaceId = this.space._id;
+		var currentSpaceName = this.space.title;
+
 		var newName = prompt(TAPi18n.__('space-edit--rename-space-message')+" :", this.space.title);
-		if (newName) {
-			var spaceProperties = {
-				title: newName
+		if (newName && newName != currentSpaceName && newName !="") {
+			if (newName.length < 4 || newName.length > 19) {
+				alert("The name must be at least 3 characters and at most 20");
 			}
-			Spaces.update(currentSpaceId, {$set: spaceProperties}, function(error) {
-				if (error)
-				{
-					alert(TAPi18n.__('error-message')+error.message);
+			else {
+				var spaceProperties = {
+					title: newName
 				}
-				else {
-					alert(TAPi18n.__('space-edit--rename-space-confirm-message')+" : "+newName);
-				}
-			});
+				Spaces.update(currentSpaceId, {$set: spaceProperties}, function(error) {
+					if (error)
+					{
+						alert(TAPi18n.__('error-message')+error.message);
+					}
+					else {
+						alert(TAPi18n.__('space-edit--rename-space-confirm-message')+" : "+newName);
+					}
+				});
+			}
 		}
 	},
 	'click .general-settings--delete-button': function(e) {
