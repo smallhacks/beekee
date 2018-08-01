@@ -18,6 +18,13 @@ Template.register.onRendered(function () {
 
     $(".register--form").validate({
         rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            name: {
+                required: true
+            },
             password: {
                 required: true,
                 minlength: 5
@@ -44,13 +51,13 @@ Template.register.events({
         event.preventDefault();
  
         var email = event.target.email.value; // E-mail is used as username
-        var name = event.target.name.value; // E-mail is used as username
+        var name = event.target.name.value;
         var password = event.target.password.value;
-        var passwordConfirm = event.target.passwordConfirm.value;
-  
+        var passwordConfirm = event.target.password_confirm.value;
+
         if (email && password) {
             //if (password === passwordConfirm) {
-                Accounts.createUser({email:email.toLowerCase().trim(),password:password,profile:{name:name,lastAlert:1}},function(err){
+                Accounts.createUser({email:email.toLowerCase().trim(),password:password,profile:{name:name}},function(err){
                     if(!err) {
                         Router.go('indexTeacher');
                         if (Meteor.settings.public.isBox === "false") {
