@@ -16,8 +16,29 @@ SpaceController = RouteController.extend({
 							}
 						});
 					}
+					else {
+						Session.setPersistent(spaceId, {author: adminName}); // Persistent to browser refresh
+					}
 				} else
 					Router.go('spaceUsersFirstConnection', {_id: spaceId});
+			}
+			else {
+				if (Meteor.userId()) {
+					var adminName = Meteor.user().profile.name;
+					if (!Authors.findOne({spaceId:spaceId,name:adminName})) {
+						Meteor.call('authorInsert', adminName, spaceId, function(error) {
+							if (error) {
+								console.log(error);
+							}
+							else {
+								Session.setPersistent(spaceId, {author: adminName}); // Persistent to browser refresh
+							}
+						});
+					}
+					else {
+						Session.setPersistent(spaceId, {author: adminName}); // Persistent to browser refresh
+					}
+				}	
 			}
 		}
 		else {
