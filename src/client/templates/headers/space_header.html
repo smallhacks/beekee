@@ -28,8 +28,10 @@
 						<span class="dropdown-item"><i class="fas fa-key"></i> Code : {{space.spaceCode}}</span>
 						{{#if ownSpace}}
 							<a class="dropdown-item" href="{{pathFor 'settings' _id=this.space._id}}"><i class="fas fa-cog"></i> {{_ 'space-header--settings'}}</a>
+							<div class="dropdown-divider"></div>
 							<a class="dropdown-item text-danger" href="{{pathFor 'indexTeacher'}}"><i class="fas fa-sign-out-alt"></i> {{_ 'space-header--leave'}}</a>
 						{{else}}
+							<div class="dropdown-divider"></div>
 							<a class="dropdown-item text-danger" href="{{pathFor 'indexStudent'}}"><i class="fas fa-sign-out-alt"></i> {{_ 'space-header--leave'}}</a>
 						{{/if}}
 					</div>
