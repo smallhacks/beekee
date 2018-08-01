@@ -1,3 +1,11 @@
+Template.admin.onRendered(function () {
+
+	$('.modal').on('shown.bs.modal', function (e) {
+		  $(this).find('[autofocus]').focus(); // Force autofocus on modal
+	});
+});
+
+
 Template.admin.events({
 
 	'click .admin--space-delete': function(e) {
@@ -47,7 +55,22 @@ Template.admin.events({
 				}
 			});
 		}
-	}
+	},
+	'click .admin--shutdown': function(e, template) {
+		e.preventDefault();
+
+		var alert = confirm(TAPi18n.__('index-teacher--shutdown-message'));
+		if (alert) {
+			Meteor.call('shutdownBox', function(error, result){
+				if (error) {
+					alert(TAPi18n.__('error-message')+error.message);
+				}
+				else {
+					alert(TAPi18n.__('index-teacher--shutdown-confirm'));
+				}
+			});
+		}
+	} 
 });
 
 
@@ -109,6 +132,17 @@ Template.admin.helpers({
 			}
 		});
 		return Session.get('usedSpace');
+	},
+	ipAddress: function() {
+		Meteor.call('getIP', function(error, result){
+			if (error) {
+				Session.set('ipAddress',error);
+			}
+			else {
+				Session.set('ipAddress',result);
+			}
+		});
+		return Session.get('ipAddress');
 	},
 	spaceCreatedAt: function() {
 		return moment(this.submitted).format("DD/MM/YYYY HH:mm");
