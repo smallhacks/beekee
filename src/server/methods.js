@@ -46,6 +46,9 @@ Meteor.methods({
 			Accounts.setPassword(userId, newPassword);
 		}
 	},
+	'createAccount': function(email, password, profile) {
+		Accounts.createUser({email:email,password:password,profile:profile}); // Callback is not supported on server-side
+	},
 	'deleteUser': function(userId) {
 		Meteor.users.remove(userId, function (error, result) {
 			if (error) {

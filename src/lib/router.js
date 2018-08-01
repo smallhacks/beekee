@@ -50,7 +50,7 @@ var requireAdmin = function() {
 }
 
 Router.onBeforeAction(requireLogin, {only: 'settings'});
-Router.onBeforeAction(requireAdmin, {only: ['admin','update']});
+Router.onBeforeAction(requireAdmin, {only: ['admin','register','update']});
 
 
 // ###### Routes without controller ######
