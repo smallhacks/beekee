@@ -2,6 +2,11 @@ Spaces = new Mongo.Collection('spaces');
 
 Spaces.allow({
 
+	//update: function(userId, space) { return true},
+	//remove: function(userId, space) { return true},
+
+	insert: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); },
+
 	update: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); },
 
 	remove: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); }
@@ -26,6 +31,13 @@ if(Meteor.isServer) {
 	});
 
 
+	Spaces.before.remove(function (userId, doc) {
+
+		var spaceId = doc._id;
+		Posts.remove({spaceId:spaceId});
+	});
+
+
 	Meteor.methods({
 
 		getSpaceId: function(spaceCode) {
@@ -46,8 +58,13 @@ if(Meteor.isServer) {
 			})
 		},
 		deleteSpace: function(spaceId) {
-				Spaces.remove(spaceId);
-				Posts.remove({spaceId:spaceId});
+			Spaces.remove(spaceId);
+			//Posts.remove({spaceId:spaceId},{multi:true});
+		},
+		deleteSpaces: function(userId) {
+
+			Spaces.remove({userId:userId});
+
 		},
 		spaceInsert: function(spaceAttributes) {
 
@@ -82,12 +99,19 @@ if(Meteor.isServer) {
 				guestWrite: true,
 				commentsAllowed:true,
 				postEditPermissions:"own",
-				createUserAllowed:true
+				createUserAllowed:true,
+				liveFeed:true,
+				lessons:false,
+				resources:true,
+				permissions:{public:false}
 			});
 
 			var spaceId = Spaces.insert(space);
 
 			Meteor.call('authorInsert', 'Invité', spaceId );
+
+			// Insert welcome post
+			Posts.insert({spaceId:spaceId, type:"home", submitted: Date.now(),title: "Welcome!", body:"<p><em>Spaces</em> in Beekee are ideal for real-time interactions using the <strong>Live Feed</strong>, hosting training content in <strong>Lessons</strong> and sharing files with your learners in <strong>Resources</strong>.</p>\n<p>This is the Home page of your space. Right now it is empty but feel free to edit (or delete) this post to start.</p>"});
 
 			return { _id: spaceId };
 		}

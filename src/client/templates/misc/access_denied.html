@@ -1,0 +1,12 @@
+<template name="accessDenied">
+	{{> simpleHeader}}
+	<div class="container">
+		<div class="row justify-content-center">
+    		<div class="col-sm-12 col-lg-8 pt-4 pl-4 pr-4 text-center">
+                <h3 class="mb-4">{{_ 'access-denied--page-title'}}</h3>
+                <div>{{_ 'access-denied--login-needed'}}</div>
+               	<a href="{{pathFor 'login'}}" role="button" class="btn btn-primary mt-4">{{_ 'access-denied--login'}}</a>
+    		</div>
+  		</div>
+	</div>
+</template>

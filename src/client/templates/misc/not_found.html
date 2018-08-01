@@ -1,0 +1,12 @@
+<template name="notFound">
+	{{> backHeader}}
+	<div class="container">
+		<div class="row justify-content-center">
+    		<div class="col-sm-12 col-lg-8 pt-4 pl-4 pr-4 text-center">
+                <h3 class="mb-4">{{_ 'not-found--page-title'}}</h3>
+                <div>{{_ 'not-found--page-description'}}</div>
+               	<a href="{{pathFor 'indexStudent'}}" role="button" class="btn btn-primary mt-4">{{_ 'not-found--go-back'}}</a>
+    		</div>
+  		</div>
+	</div>
+</template>

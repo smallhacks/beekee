@@ -1,0 +1,20 @@
+<template name="liveFeed">
+	{{> liveFeedPostSubmit}}
+		{{#if newMessages}}
+			<div class="text-center mb-2">
+				<button type="button" class="btn btn-outline-primary live-feed--refresh">{{newMessages}} {{_ 'live-feed--notification-panel'}}</button>
+			</div>
+		{{/if}}
+	{{#each liveFeedPosts}}
+		{{> liveFeedPost}}
+	{{/each}}
+	{{#if loadMore}}
+		<div class="text-center mb-2">
+			<button type="button" class="btn btn-primary live-feed--load-more"><i class="fas fa-arrow-circle-down"></i> {{_ 'live-feed--load-more'}}</button>
+		</div>
+	{{/if}}
+	{{> liveFeedPostEdit}}
+	{{> liveFeedPostDelete}}
+	{{> liveFeedCategorySubmit}}
+	{{> liveFeedCategoryEdit}}
+</template>

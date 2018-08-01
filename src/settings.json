@@ -1,4 +1,5 @@
 {
+	"serial":"SERIALTEST",
 	"syncServerIP": "",
 	"adminPassword": "admin",
 	"mailAddress": "",

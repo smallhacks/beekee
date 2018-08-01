@@ -1,11 +1,17 @@
 IndexStudentController = RouteController.extend({
+	
+	onBeforeAction: function () {
+		if (Roles.userIsInRole(Meteor.user(), 'admin')) {
+			Router.go('admin');
+		}
+		this.next();
+	},
 
 	waitOn: function() {
-		//Meteor.subscribe('ownSpaces', Meteor.userId())
+		Meteor.subscribe('publicSpaces')
 	},
 	
 	action: function () {
-		this.render('indexHeader', {to: 'layout--header'});
 		this.render();
 	},
 	

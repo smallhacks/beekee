@@ -1,0 +1,42 @@
+<template name="spaceHeader">	
+	<nav class="bg-dark text-white" style="z-index:500;height:52px;line-height:52px;">
+		<div class="container h-100">
+			<div class="row justify-content-center h-100">
+				<div class="col-4 col-lg-3" style="">
+					<a role="button" id="sidebarCollapse" class="btn-icon d-inline d-lg-none">
+                    	<i class="fas fa-bars fa-lg d-inline"></i>
+                	</a>
+                	<a class="menu-item d-none d-sm-none d-lg-inline h-100" data-id="1" href="#">
+						<img style="height: 35px; padding: 0px 10px 5px 0;" alt="logo" src="/img/logo_header.png">
+					</a>
+					<span class="d-none d-sm-none d-lg-inline">{{space.title}}</span>
+				</div>
+				<div class="col-8 text-right">
+					{{#if ownSpace}}
+						<a href="{{pathFor 'userSettings'}}" class="text-white px-3 mr-4">
+							<i class="fa fa-user fa-fw"></i> 
+							<span>{{adminName}}</span>
+						</a>
+					{{else}}
+						<a href="{{pathFor 'spaceUsers' _id=this.space._id}}" class="text-white px-3 mr-4">
+							<i class="fa fa-user fa-fw"></i> 
+							<span>{{authorName}}</span>
+						</a>
+					{{/if}}
+					<a class="btn-icon" role="button" id="dropdownMenuLink" data-toggle="dropdown"><i class="fa fa-ellipsis-v fa-lg"></i></a>
+					<div class="dropdown-menu" style="line-height:1.5" aria-labelledby="dropdownMenuLink">
+						<span class="dropdown-item"><i class="fas fa-key"></i> Code : {{space.spaceCode}}</span>
+						{{#if ownSpace}}
+							<a class="dropdown-item" href="{{pathFor 'settings' _id=this.space._id}}"><i class="fas fa-cog"></i> {{_ 'space-header--settings'}}</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item text-danger" href="{{pathFor 'indexTeacher'}}"><i class="fas fa-sign-out-alt"></i> {{_ 'space-header--leave'}}</a>
+						{{else}}
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item text-danger" href="{{pathFor 'indexStudent'}}"><i class="fas fa-sign-out-alt"></i> {{_ 'space-header--leave'}}</a>
+						{{/if}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+</template>

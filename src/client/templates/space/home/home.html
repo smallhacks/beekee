@@ -1,0 +1,26 @@
+<template name="home">
+	{{#if ownSpace}}
+		<div class="float-right">
+			<a href="#" class="home--submit">
+				<i class="fas fa-plus"></i> {{_ 'home--submit-button'}}
+			</a>
+		</div>
+	{{/if}}
+	<h5 class="mb-4">{{_ 'home--title'}}</h5>
+	{{#unless space.permissions.public}}
+		{{#if codePanel}}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		  		<strong>Bzz!</strong> Spread this code for others to join you: <span style="font-size:1.1em" class="badge badge-secondary">{{space.spaceCode}}</span>
+		  		<button type="button" class="close home--hide-code-panel">
+		    		<span aria-hidden="true">&times;</span>
+		  		</button>
+			</div>
+		{{/if}}
+	{{/unless}}
+	{{#each homePosts}}
+		{{> homePost}}
+	{{/each}}
+	{{> homePostSubmit}}
+	{{> homePostEdit}}
+	{{> homePostDelete}}
+</template>

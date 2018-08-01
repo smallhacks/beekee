@@ -1,0 +1,42 @@
+<template name="lessonsPostEdit">
+<div class="modal fade" id="lessonsPostEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{_ 'lessons-post-edit--title'}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<form name="lessons-post-edit--form" id="lessons-post-edit--form">
+      		      <div class="form-group">
+       		    <input type="text" class="form-control" name="title" id="title" aria-describedby="title" placeholder="Title of the lesson" value="{{post.title}}"></div>
+       		<div class="form-group">
+				<textarea name="body" id="body" class="form-control lessons-post-edit--textarea" placeholder="" aria-label="" aria-describedby="basic-addon2">{{post.body}}</textarea>
+			</div>
+			</form>
+			{{#unless fileUploaded}}
+            {{>lessonsUpload formData=formData autoStart=true}}
+				{{/unless}}
+				{{#if fileUploaded}}
+          {{#if lessonUploaded.error}}
+            <div class=""><span class="text-danger">{{lessonUploaded.error}}</span> (<a href="#" class="lessons-post-submit--retry">retry</a>)</div>
+          {{else}}
+  					<div class="p-2">
+  						<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}
+  						<a href="#" class="post-submit--button-delete-file">
+  							<i class="fa fa-trash" aria-hidden="true"></i>
+  						</a>
+  					</div>
+  				{{/if}}
+        {{/if}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary lessons-post-edit--submit">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</template>

@@ -1,0 +1,16 @@
+<template name="resources">
+	{{#if ownSpace}}
+		<div class="float-right">
+			<a href="#" class="" data-toggle="modal" data-target="#resourcesPostSubmit">
+				<i class="fas fa-plus"></i> Add a resource
+			</a>
+		</div>
+	{{/if}}
+	<h5 class="mb-4">Resources</h5>
+	{{#each resourcesPosts}}
+		{{> resourcesPost}}
+	{{/each}}
+	{{> resourcesPostSubmit}}
+	{{> resourcesPostEdit}}
+	{{> resourcesPostDelete}}
+</template>

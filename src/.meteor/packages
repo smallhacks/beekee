@@ -18,7 +18,6 @@ accounts-ui-unstyled
 alanning:roles
 msavin:mongol
 sergeyt:typeahead
-chriswessels:slideout
 copleykj:jquery-autosize
 froatsnook:request
 matb33:collection-hooks
@@ -51,7 +50,9 @@ reactive-var
 tap:i18n
 smallhacks:jquery-contextmenu
 ecmascript
-tomi:upload-server@=1.3.3
-tomi:upload-jquery@=2.2.1
 fds:latinize
 konecty:autolinker
+alexwine:bootstrap-4
+teamon:tinymce
+tomi:upload-jquery@=2.2.3
+tomi:upload-server

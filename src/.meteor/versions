@@ -3,6 +3,7 @@ accounts-password@1.1.4
 accounts-ui-unstyled@1.1.8
 alanning:roles@1.2.14
 aldeed:simple-schema@1.3.3
+alexwine:bootstrap-4@4.1.0
 amplify@1.0.0
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
@@ -19,7 +20,6 @@ callback-hook@1.0.4
 cfs:graphicsmagick@0.0.18
 cfs:http-methods@0.0.32
 check@1.1.0
-chriswessels:slideout@0.1.9_2
 chuangbo:cookie@1.1.0
 coffeescript@1.0.11
 copleykj:jquery-autosize@1.17.8
@@ -111,11 +111,12 @@ spacebars-compiler@1.0.7
 srp@1.0.4
 standard-minifiers@1.0.2
 tap:i18n@1.8.2
+teamon:tinymce@4.5.4
 templating@1.1.5
 templating-tools@1.0.0
 themeteorchef:jquery-validation@1.14.0
-tomi:upload-jquery@2.2.1
-tomi:upload-server@1.3.3
+tomi:upload-jquery@2.2.3
+tomi:upload-server@1.3.4_3
 tracker@1.0.9
 u2622:persistent-session@0.4.4
 ui@1.0.8

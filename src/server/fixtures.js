@@ -13,7 +13,8 @@ if (Spaces.find().count() === 0) {
 			id = Accounts.createUser({
 				username: user.username,
 				email: "Admin",
-				password: adminPassword
+				password: adminPassword,
+				profile:{name:"Admin"}
 			});
 
 			if (user.roles.length > 0) {

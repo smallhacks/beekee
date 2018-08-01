@@ -1,0 +1,27 @@
+<template name="liveFeedCategoryEdit">
+	<div class="modal fade" id="liveFeedCategoryEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">{{_ 'live-feed-category-edit--title'}}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form name="live-feed-category-edit--form" class="live-feed-category-edit--form" id="live-feed-category-edit--form">
+						<div class="form-group">
+							<input type="text" class="form-control" name="categoryName" id="categoryName" aria-describedby="categoryName" placeholder="Category name" value="{{categoryName}}">
+							<div class="text-secondary">{{numChars}}/20</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ 'modal--close'}}</button>
+					<button type="button" class="btn btn-danger live-feed-category-edit--button-delete">{{_ 'modal--delete'}}</button>
+					<button type="button" class="btn btn-primary live-feed-category-edit--button-submit">{{_ 'modal--save'}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

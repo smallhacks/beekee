@@ -1,0 +1,48 @@
+/* 
+application.css
+*/
+
+
+/* ----- access-denied template ----- */
+
+.access-denied {
+	text-align: center;
+}
+
+.access-denied .page-title {
+	margin-bottom: 40px;
+}
+
+
+/* ----- index templates ----- */
+
+.index--lang-wrapper {
+	margin-top: 40px;
+}
+
+.index--lang-wrapper a {
+	padding: 6px;
+	border-left: solid 1px #b7b7b7;
+}
+
+.index--lang-wrapper a:first-of-type {
+	border-left: none;
+}
+
+.index--lang-wrapper a.selected {
+	font-weight: bold;
+	color:grey;
+	cursor: default;
+}
+
+.index--lang-wrapper a.selected:hover {
+	text-decoration: none;
+}
+
+
+/* ----- notFound template ----- */
+
+.not-found {
+	margin-top: 50px;
+	text-align: center;
+}
