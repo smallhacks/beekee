@@ -106,6 +106,9 @@ Template.liveFeedPost.helpers({
 		if (this.fileId && $.inArray(this.fileExt, imageExtensions) != -1)
 			return this.fileId
 	},
+	filePath: function() {
+		return escape(this.filePath);
+	},
 	commentEditAllowed: function() {
 		if (Template.parentData(2).space.postEditPermissions !== undefined) {
 			if (Template.parentData(2).space.postEditPermissions === "all" || (Template.parentData(2).space.postEditPermissions === "own" && Session.get(Template.parentData(2).space._id).author === this.author) || Template.parentData(2).space.userId === Meteor.userId() || Roles.userIsInRole(Meteor.userId(), ['admin']) === true)

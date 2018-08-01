@@ -20,13 +20,17 @@
             {{>lessonsUpload formData=formData autoStart=true}}
 				{{/unless}}
 				{{#if fileUploaded}}
-					<div class="p-2">
-						<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}
-						<a href="#" class="post-submit--button-delete-file">
-							<i class="fa fa-trash" aria-hidden="true"></i>
-						</a>
-					</div>
-				{{/if}}
+          {{#if lessonUploaded.error}}
+            <div class=""><span class="text-danger">{{lessonUploaded.error}}</span> (<a href="#" class="lessons-post-submit--retry">retry</a>)</div>
+          {{else}}
+  					<div class="p-2">
+  						<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}
+  						<a href="#" class="post-submit--button-delete-file">
+  							<i class="fa fa-trash" aria-hidden="true"></i>
+  						</a>
+  					</div>
+  				{{/if}}
+        {{/if}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

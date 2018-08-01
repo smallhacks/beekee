@@ -79,6 +79,14 @@ Template.resourcesPostSubmit.events({
 			};
 		});
 	},
+	'click .resources-post-submit--retry': function(e) {
+		e.preventDefault();
+		Session.set("fileId",null); // Clear fileId session
+		Session.set("fileName",null); // Clear fileId session
+		Session.set("fileExt",null); // Clear fileId session
+		Session.set("filePath",null); // Clear fileId session
+		$('.resources-post-submit--button-submit').prop('disabled', false);
+	},
 	'click .resources-post-submit--button-submit': function(e) {
 		e.preventDefault();
 		$('#resources-post-submit--form').submit();
@@ -88,12 +96,14 @@ Template.resourcesPostSubmit.events({
 		if (confirm(TAPi18n.__('post-submit--confirm-delete-image'))) {
 			Session.set('fileId', false);
 		}  
+		$('.resources-post-submit--button-submit').prop('disabled', true);
 	},
 	'click .post-submit--button-delete-file': function(e) {
 		e.preventDefault();
 		if (confirm(TAPi18n.__('post-submit--confirm-delete-file'))) {
 			Session.set('fileId', false);
 		}  
+		$('.resources-post-submit--button-submit').prop('disabled', true);
 	}
 });
 
@@ -118,7 +128,10 @@ Template.resourcesPostSubmit.helpers({
 
 			 // Wait until file is in Files collection
 			var fileInCollection = Files.findOne({_id:fileId});
-				return fileInCollection;
+			if (fileInCollection && !fileInCollection.error) {
+				$('.resources-post-submit--button-submit').prop('disabled', false);
+			}
+			return fileInCollection;
 		}
 		else
 			return false;

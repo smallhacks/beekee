@@ -99,6 +99,14 @@ Template.liveFeedPostEdit.events({
 			Session.set('fileId', false);
 		}
 	},
+	'click .live-feed-post-edit--retry': function(e) {
+		e.preventDefault();
+		Session.set("fileId",null); // Clear fileId session
+		Session.set("fileName",null); // Clear fileId session
+		Session.set("fileExt",null); // Clear fileId session
+		Session.set("filePath",null); // Clear fileId session
+		$('.live-feed-post-edit--submit').prop('disabled', false);
+	},
 	'click .post-submit--button-delete-file': function(e) {
 		e.preventDefault();
 		if (confirm(TAPi18n.__('post-submit--confirm-delete-file'))) {
@@ -120,10 +128,16 @@ Template.liveFeedPostEdit.helpers({
 
 			// Wait until file is in Files collection
 			var fileInCollection = Files.findOne({_id:fileId});
+			if (fileInCollection && !fileInCollection.error) {
+				$('.live-feed-post-edit--submit').prop('disabled', false);
+			}
 			return fileInCollection;
 		}
 		else
 			return false;
+	},
+	filePath:function() {
+		return escape(Session.get("filePath"));
 	},
 	file: function() {
 		if (Session.get("fileExt") && $.inArray(Session.get("fileExt"), imageExtensions) == -1 )

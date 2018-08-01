@@ -3,12 +3,14 @@
 		<div class="card-body">
 			<form name="live-feed-post-submit--form" id="live-feed-post-submit--form">
 				{{#if fileUploaded}}
-					{{#if image}}
-						<div class="mt-2 mb-4 text-center">
-							<img class="card-img-top" src="/upload{{fileUploaded.filePath}}" alt="" />
-		 					<a href="#" class="post-submit--button-delete-image"><i class="fa fa-trash" aria-hidden="true"></i> {{_ 'post-submit--delete-image'}}</a>
-		 				</div>
-	 				{{/if}}
+					{{#unless fileUploaded.error}}
+						{{#if image}}
+							<div class="mt-2 mb-4 text-center">
+								<img class="card-img-top" src="/upload{{filePath}}" alt="" />
+			 					<a href="#" class="post-submit--button-delete-image"><i class="fa fa-trash" aria-hidden="true"></i> {{_ 'post-submit--delete-image'}}</a>
+			 				</div>
+		 				{{/if}}
+		 			{{/unless}}
 				{{/if}}
 				<div class="form-group">
 					<textarea rows="1" name="body" id="body" class="form-control post-submit--textarea" placeholder="{{_ 'post-submit--body-placeholder'}}" aria-label="{{_ 'post-submit--body-placeholder'}}"></textarea>
@@ -35,14 +37,18 @@
           			{{>fileUpload formData=formData autoStart=true}}
 				{{/unless}}
 				{{#if fileUploaded}}
-					{{#unless image}}
-						<div class="p-2">
-							<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}.{{fileUploaded.fileExt}}
-							<a href="#" class="post-submit--button-delete-file">
-								<i class="fa fa-trash" aria-hidden="true"></i>
-							</a>
-						</div>
-					{{/unless}}
+					{{#if fileUploaded.error}}
+          				<div class=""><span class="text-danger">{{fileUploaded.error}}</span> (<a href="#" class="live-feed-post-submit--retry">retry</a>)</div>
+          			{{else}}
+						{{#unless image}}
+							<div class="p-2">
+								<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}.{{fileUploaded.fileExt}}
+								<a href="#" class="post-submit--button-delete-file">
+									<i class="fa fa-trash" aria-hidden="true"></i>
+								</a>
+							</div>
+						{{/unless}}
+					{{/if}}
 				{{/if}}
 			</form>
 		</div>

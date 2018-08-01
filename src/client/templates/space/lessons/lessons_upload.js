@@ -24,10 +24,10 @@ Template.lessonsUpload.helpers({
 
     var progress = instance.globalInfo.get();
 
-    // if (progress.progress != 100) { // Hide buttons if progress is not 100%
-    //   $(".post-submit--button-submit").hide();
-    //   $(".post-edit--button-submit").hide();
-    // }
+    if (progress.progress != 100) { // Hide buttons if progress is not 100%
+        $('.lessons-post-submit--button-submit').prop('disabled', true);
+        $('.lessons-post-edit--submit').prop('disabled', true);
+    }
  
     return progress.running ?
       info.name + ' - ' + progress.progress + '% - [' + progress.bitrate + ']' :

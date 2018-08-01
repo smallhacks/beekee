@@ -22,17 +22,21 @@
           {{>fileUpload formData=formData autoStart=true}}
         {{/unless}}
         {{#if fileUploaded}}
-          <div class="p-2">
-            <i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}.{{fileUploaded.fileExt}}
-            <a href="#" class="post-submit--button-delete-file">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </a>
-          </div>
+          {{#if fileUploaded.error}}
+            <div class=""><span class="text-danger">{{fileUploaded.error}}</span> (<a href="#" class="resources-post-submit--retry">retry</a>)</div>
+          {{else}}
+            <div class="p-2">
+              <i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}.{{fileUploaded.fileExt}}
+              <a href="#" class="post-submit--button-delete-file">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </a>
+            </div>
+          {{/if}}
         {{/if}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary resources-post-submit--button-submit">Submit</button>
+        <button type="button" class="btn btn-primary resources-post-submit--button-submit" disabled>Submit</button>
       </div>
     </div>
   </div>

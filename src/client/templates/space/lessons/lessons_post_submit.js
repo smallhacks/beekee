@@ -32,6 +32,14 @@ Template.lessonsPostSubmit.onRendered(function() {
 	if (Template.parentData(2))
 		if (!Session.get(Template.parentData(2).space._id))
 			Session.set(Template.parentData(2).space._id, {author: 'Invité'});
+
+	$(".lessons-post-submit--form").validate({
+        rules: {
+            title: {
+                required: true
+            }
+        }
+    }); 
 });
 
 
@@ -74,9 +82,19 @@ Template.lessonsPostSubmit.events({
 				delete Session.keys["fileName"]; // Clear fileId session
 				delete Session.keys["fileExt"]; // Clear fileId session
 				delete Session.keys["filePath"]; // Clear fileExt session
+
+				$('.lessons-post-submit--button-submit').prop('disabled', true);
 				$('#lessonsPostSubmit').modal('hide');
 			};
 		});
+	},
+	'click .lessons-post-submit--retry': function(e) {
+		e.preventDefault();
+		Session.set("fileId",null); // Clear fileId session
+		Session.set("fileName",null); // Clear fileId session
+		Session.set("fileExt",null); // Clear fileId session
+		Session.set("filePath",null); // Clear fileId session
+		$('.lessons-post-submit--button-submit').prop('disabled', false);
 	},
 	'click .lessons-post-submit--button-submit': function(e) {
 		e.preventDefault();
@@ -87,12 +105,14 @@ Template.lessonsPostSubmit.events({
 		if (confirm(TAPi18n.__('post-submit--confirm-delete-image'))) {
 			Session.set('fileId', false);
 		}  
+		$('.lessons-post-submit--button-submit').prop('disabled', true);
 	},
 	'click .post-submit--button-delete-file': function(e) {
 		e.preventDefault();
 		if (confirm(TAPi18n.__('post-submit--confirm-delete-file'))) {
 			Session.set('fileId', false);
 		}  
+		$('.lessons-post-submit--button-submit').prop('disabled', true);
 	}
 });
 
@@ -117,6 +137,9 @@ Template.lessonsPostSubmit.helpers({
 
 			// Wait until file is in Files collection
 			var fileInCollection = Files.findOne({_id:fileId});
+			if (fileInCollection && !fileInCollection.error) {
+				$('.lessons-post-submit--button-submit').prop('disabled', false);
+			}
 			return fileInCollection;
 		}
 		else

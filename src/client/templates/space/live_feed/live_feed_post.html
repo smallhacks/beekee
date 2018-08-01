@@ -3,8 +3,8 @@
 		{{#if this.fileId}}
 			{{#if image}}
 				<div class="life-feed-post--image-wrapper">
-					<a class="life-feed-post--image-link" href="/upload{{this.filePath}}" target="_blank">
-						<img class="card-img-top" src="/upload{{this.filePath}}" alt="Card image cap" />
+					<a class="life-feed-post--image-link" href="/upload{{filePath}}" target="_blank">
+						<img class="card-img-top" src="/upload{{filePath}}" alt="Card image cap" />
 					</a>
 			</div>
 			{{/if}}
@@ -23,7 +23,7 @@
 				{{#unless image}}
 					<div class="mt-3">
 						<i class="fas fa-paperclip"></i>
-						<a class="" href="/upload{{this.filePath}}" target="_blank">{{this.fileId}}.{{this.fileExt}}</a>
+						<a class="" href="/upload{{filePath}}" target="_blank">{{this.fileName}}.{{this.fileExt}}</a>
 					</div>
 				{{/unless}}
 			{{/if}}

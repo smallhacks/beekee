@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form name="lessons-post-submit--form" id="lessons-post-submit--form">
+        <form name="lessons-post-submit--form" class="lessons-post-submit--form" id="lessons-post-submit--form">
         	<div class="form-group">
               <input type="text" class="form-control" name="title" id="title" aria-describedby="title" placeholder="Title of the lesson">
           	</div>
@@ -18,23 +18,27 @@
         	</div>
       	</form>
       	<div class="text-center">
-          <div class="small text-secondary col-8 offset-2">Storyline lessons must be exported in HTML5 format with Storyline and the folder must be zipped.</div>
+          <div class="small text-secondary mb-2">Lessons must be exported in HTML5 format within Storyline.<br>The resulting folder must be zipped before being uploaded, and the .zip file must have the same name as the zipped folder it contains.</div>
 	      {{#unless lessonUploaded}}
             {{>lessonsUpload formData=formData autoStart=true}}
 	        {{/unless}}
 	    </div>
 	        {{#if lessonUploaded}}
-          <div class="p-2">
-            <i class="fa fa-file-o" aria-hidden="true"></i> {{lessonUploaded.fileName}}
-            <a href="#" class="post-submit--button-delete-file">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </a>
-          </div>
+            {{#if lessonUploaded.error}}
+                  <div class=""><span class="text-danger">{{lessonUploaded.error}}</span> (<a href="#" class="lessons-post-submit--retry">retry</a>)</div>
+            {{else}}
+              <div class="p-2">
+                <i class="fa fa-file-o" aria-hidden="true"></i> {{lessonUploaded.fileName}}
+                <a href="#" class="post-submit--button-delete-file">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+              </div>
+            {{/if}}
         {{/if}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary lessons-post-submit--button-submit">Submit</button>
+        <button type="button" class="btn btn-primary lessons-post-submit--button-submit" disabled>Submit</button>
       </div>
     </div>
   </div>

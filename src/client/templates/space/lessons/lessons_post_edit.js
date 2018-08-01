@@ -77,9 +77,18 @@ Template.lessonsPostEdit.events({
 			if (error) {
 				alert(TAPi18n.__('error-message')+error.message);
 			} else {
+				$('.lessons-post-edit--submit').prop('disabled', true);
 				$('#lessonsPostEdit').modal('hide');
 			}
 		});
+	},
+	'click .lessons-post-edit--retry': function(e) {
+		e.preventDefault();
+		Session.set("fileId",null); // Clear fileId session
+		Session.set("fileName",null); // Clear fileId session
+		Session.set("fileExt",null); // Clear fileId session
+		Session.set("filePath",null); // Clear fileId session
+		$('.lessons-post-edit--submit').prop('disabled', false);
 	},
 	'click .lessons-post-edit--submit': function(e) {
 		e.preventDefault();
@@ -101,12 +110,14 @@ Template.lessonsPostEdit.events({
 			Posts.update(Template.currentData()._id, {$unset: {'fileId': ''}});
 			Session.set('fileId', false);
 		}
+		$('.lessons-post-edit--submit').prop('disabled', true);
 	},
 	'click .post-submit--button-delete-file': function(e) {
 		e.preventDefault();
 		if (confirm(TAPi18n.__('post-submit--confirm-delete-file'))) {
 			Session.set('fileId', false);
 		}  
+		$('.lessons-post-edit--submit').prop('disabled', true);
 	}
 });
 
@@ -117,12 +128,15 @@ Template.lessonsPostEdit.helpers({
 		var postId = Session.get('postToEdit');
 		return Posts.findOne(postId);
 	},
-	fileUploaded: function() {
+	lessonUploaded: function() {
 		if (Session.get("fileId")) {
 			var fileId = Session.get("fileId");
 
 			// Wait until file is in Files collection
 			var fileInCollection = Files.findOne({_id:fileId});
+			if (fileInCollection && !fileInCollection.error) {
+				$('.lessons-post-edit--submit').prop('disabled', false);
+			}
 			return fileInCollection;
 		}
 		else

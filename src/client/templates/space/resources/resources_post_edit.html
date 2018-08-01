@@ -20,12 +20,16 @@
 					{{>fileUpload formData=formData autoStart=true}}
 				{{/unless}}
 				{{#if fileUploaded}}
-					<div class="p-2">
-						<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileId}}
-						<a href="#" class="post-submit--button-delete-file">
-							<i class="fa fa-trash" aria-hidden="true"></i>
-						</a>
-					</div>
+          {{#if fileUploaded.error}}
+            <div class=""><span class="text-danger">{{fileUploaded.error}}</span> (<a href="#" class="resources-post-edit--retry">retry</a>)</div>
+          {{else}}
+  					<div class="p-2">
+  						<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}.{{fileUploaded.fileExt}}
+  						<a href="#" class="post-submit--button-delete-file">
+  							<i class="fa fa-trash" aria-hidden="true"></i>
+  						</a>
+  					</div>
+          {{/if}}
 				{{/if}}
       </div>
       <div class="modal-footer">

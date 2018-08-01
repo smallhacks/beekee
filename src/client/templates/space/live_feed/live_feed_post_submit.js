@@ -51,6 +51,8 @@ Template.liveFeedPostSubmit.events({
 		var fileName = Session.get("fileName");
 		var fileExt = Session.get("fileExt");
 		var filePath = Session.get("filePath");
+		//var filePath = escape(Session.get("filePath"));
+
 		//var tags = $(e.target).find('[name=tags]').val().toLowerCase().replace(/ /g,'').split(',');
 		var category = $(e.target).find('[name=categorySelect]').val();
 
@@ -100,6 +102,14 @@ Template.liveFeedPostSubmit.events({
 			Session.set('fileId', false);
 		}  
 	},
+	'click .live-feed-post-submit--retry': function(e) {
+		e.preventDefault();
+		Session.set("fileId",null); // Clear fileId session
+		Session.set("fileName",null); // Clear fileId session
+		Session.set("fileExt",null); // Clear fileId session
+		Session.set("filePath",null); // Clear fileId session
+		$('.live-feed-post-submit--button-submit').prop('disabled', false);
+	},
 	'change #categorySelect': function(e) {
 		if ($(e.target).val() == "add-category") {
 			$('#liveFeedCategorySubmit').modal('show');
@@ -128,6 +138,9 @@ Template.liveFeedPostSubmit.helpers({
 
 			// Wait until file is in Files collection
 			var fileInCollection = Files.findOne({_id:fileId});
+			if (fileInCollection && !fileInCollection.error) {
+				$('.live-feed-post-submit--button-submit').prop('disabled', false);
+			}
 			return fileInCollection;
 		}
 		else
@@ -136,6 +149,9 @@ Template.liveFeedPostSubmit.helpers({
 	file: function() {
 		if (Session.get("fileExt") && $.inArray(Session.get("fileExt"), imageExtensions) == -1 )
 			return true;
+	},
+	filePath:function() {
+		return escape(Session.get("filePath"));
 	},
 	image: function() {
 		if (Session.get("fileExt") && $.inArray(Session.get("fileExt"), imageExtensions) != -1 )
