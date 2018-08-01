@@ -4,6 +4,9 @@ IndexTeacherController = RouteController.extend({
 		if (!Meteor.userId()) {
 			Router.go('login');
 		}
+		else if (Roles.userIsInRole(Meteor.user(), 'admin')) {
+			Router.go('admin');
+		}
 		this.next();
 	},
 
@@ -12,7 +15,6 @@ IndexTeacherController = RouteController.extend({
 	},
 	
 	action: function () {
-		this.render('teacherHeader', {to: 'layout--header'});
 		this.render();
 	},
 	
