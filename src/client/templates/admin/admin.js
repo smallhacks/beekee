@@ -142,7 +142,11 @@ Template.admin.helpers({
 				Session.set('ipAddress',result);
 			}
 		});
-		return Session.get('ipAddress');
+		var ipAdress = Session.get('ipAddress');
+		if (ipAdress =="")
+			return "Not connected"
+		else
+			return ipAdress;
 	},
 	spaceCreatedAt: function() {
 		return moment(this.submitted).format("DD/MM/YYYY HH:mm");
