@@ -31,7 +31,6 @@ LiveFeedController = RouteController.extend({
 	},
 
 	action: function () {
-		this.render('spaceHeader', {to: 'layout--header'});
 		this.render();
 	},
 
