@@ -1,3 +1,19 @@
+Template.liveFeedCategoryEdit.onRendered(function() {
+
+	$(".live-feed-category-edit--form").validate({
+        rules: {
+            categoryName: {
+                required: true,
+                minlength: 1,
+                maxlength: 20
+            }
+        }
+    }); 
+
+    Session.set('numChars', 0); // Count the number of characters
+});
+
+
 Template.liveFeedCategoryEdit.events({
 
 	'submit form': function(e, template) {
@@ -18,6 +34,7 @@ Template.liveFeedCategoryEdit.events({
 				}
 			});
 			$('#categoryName').val('');
+			Session.set('numChars', 0); // Count the number of characters
 		}
 	},
 	'click .live-feed-category-edit--button-submit': function(e) {
@@ -39,7 +56,10 @@ Template.liveFeedCategoryEdit.events({
 				Session.set('categoryToEdit',null);
 			}
 		});
-	}
+	},
+	'input #categoryName': function(){
+    	Session.set('numChars', $('#categoryName').val().length);
+  	}
 });
 
 
@@ -48,5 +68,8 @@ Template.liveFeedCategoryEdit.helpers({
 	categoryName: function() {
 		var categoryName = Session.get('categoryToEdit');
 		return categoryName
-	}
+	},
+	'numChars': function(menuItemId) {
+		return Session.get('numChars');
+	},
 });
