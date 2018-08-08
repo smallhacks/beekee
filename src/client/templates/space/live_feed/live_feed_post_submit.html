@@ -16,7 +16,7 @@
 					<textarea rows="1" name="body" id="body" class="form-control post-submit--textarea" placeholder="{{_ 'post-submit--body-placeholder'}}" aria-label="{{_ 'post-submit--body-placeholder'}}"></textarea>
 				</div>
 				<div class="form-group d-none d-lg-block float-right mb-0">
-					<button class="btn btn-outline-secondary bg-primary text-white border-0 live-feed-post-submit--button-submit" type="button">Send</button>
+					<button class="btn btn-outline-secondary bg-primary text-white border-0 live-feed-post-submit--button-submit" type="button">{{_ 'modal--submit'}}</button>
 				</div>	
 				<div class="form-group float-lg-right mb-lg-2 mr-4">
     				<select class="form-control" name="categorySelect" id="categorySelect">
@@ -31,7 +31,7 @@
     				</select>
   				</div>				
 	  			<div class="form-group d-lg-none float-right mb-0">
-					<button class="btn btn-outline-secondary bg-primary text-white border-0 live-feed-post-submit--button-submit" type="button">Send</button>
+					<button class="btn btn-outline-secondary bg-primary text-white border-0 live-feed-post-submit--button-submit" type="button">{{_ 'modal--submit'}}</button>
 				</div>				  
 				{{#unless fileUploaded}}
           			{{>fileUpload formData=formData autoStart=true}}

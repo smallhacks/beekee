@@ -1,12 +1,32 @@
 Template.indexTeacher.onCreated(function() {
 
-	Session.set('lang','en-US');
-	TAPi18n.setLanguage(Session.get('lang')); // Translation of app-specific texts
-	T9n.setLanguage(Session.get('lang')); // Translation for basic Meteor packages (account, etc.)
-	moment.locale(Session.get('lang')); // Translation for livestamp
+	//Set locale
+	var lang = null;
+	if (Session.get('lang')) // If locale is set by user
+		lang = Session.get('lang');
+	else {
+		// Set locale according to browser
+		function getLang() {
+			console.log(navigator.languages[0]);
+		    return (
+		        navigator.languages && navigator.languages[0] ||
+		        navigator.language ||
+		        navigator.browserLanguage ||
+		        navigator.userLanguage ||
+		        'en-US'
+		    );
+		}
+		lang = getLang();
+		Session.set('lang',lang);
+	}
 
-	Deps.autorun(function() { // Autorun to reactively update space visited subscription
-		if (typeof Cookie.get('spacesVisited') != "undefined") {
+	Deps.autorun(function() {
+
+		TAPi18n.setLanguage(Session.get('lang')); // Translation of app-specific texts
+		T9n.setLanguage(Session.get('lang')); // Translation for basic Meteor packages (account, etc.)
+		moment.locale(Session.get('lang')); // Translation for livestamp
+
+		if (typeof Cookie.get('spacesVisited') != "undefined") { // Autorun to reactively update space visited subscription
 			var spaces = JSON.parse(Cookie.get('spacesVisited'));
 			Meteor.subscribe('spacesVisited', spaces);
 		}
@@ -47,10 +67,9 @@ Template.indexTeacher.onRendered(function () {
 
 Template.indexTeacher.events({
 
-	'click .index--select-lang': function(e) {
-		e.preventDefault();
-
-		Session.setPersistent('lang',$(e.currentTarget).data('lang'));
+	'change #langSelect': function(e) {
+		var lang = $(e.target).val();
+		Session.set('lang', lang);
 	},
 	'click .login--button-submit': function(e) {
 		e.preventDefault();
@@ -73,21 +92,28 @@ Template.indexTeacher.events({
 
 		var alert = confirm(TAPi18n.__('index-teacher--shutdown-message'));
 		if (alert) {
-			Meteor.call('shutdownBox', function(error, result){
-				if (error) {
-					alert(TAPi18n.__('error-message')+error.message);
-				}
-				else {
-					alert(TAPi18n.__('index-teacher--shutdown-confirm'));
-				}
-			});
+			var alertConfirm = confirm("Shutdown in progress. Please allow the Beekee Box 3 minutes to shut down before unplugging it");
+			if (alertConfirm) {
+				Meteor.call('shutdownBox', function(error, result){
+					if (error) {
+						alert(TAPi18n.__('error-message')+error.message);
+					}
+					else {
+						alert(TAPi18n.__('index-teacher--shutdown-confirm'));
+					}
+				});
+			}
 		}
 	} 
 });
 
 
 Template.indexTeacher.helpers({
-	
+
+	langIsSelected: function(lang) {
+		if (Session.get('lang') == lang)
+			return 'selected'
+	},
 	ownSpaces: function() {
 		return Spaces.find({userId:Meteor.userId()}, {sort: {submitted: -1}});
 	},

@@ -1,12 +1,34 @@
 Template.indexStudent.onCreated(function() {
 
-	Session.set('lang','en-US');
-	TAPi18n.setLanguage(Session.get('lang')); // Translation of app-specific texts
-	T9n.setLanguage(Session.get('lang')); // Translation for basic Meteor packages (account, etc.)
-	moment.locale(Session.get('lang')); // Translation for livestamp
+	//Session.set('lang','en-US');
+
+	//Set locale
+	var lang = null;
+	if (Session.get('lang')) // If locale is set by user
+		lang = Session.get('lang');
+	else {
+		// Set locale according to browser
+		function getLang() {
+			console.log(navigator.languages[0]);
+		    return (
+		        navigator.languages && navigator.languages[0] ||
+		        navigator.language ||
+		        navigator.browserLanguage ||
+		        navigator.userLanguage ||
+		        'en-US'
+		    );
+		}
+		lang = getLang();
+		Session.set('lang',lang);
+	}
 	
-	Deps.autorun(function() { // Autorun to reactively update space visited subscription
-		if (typeof Cookie.get('spacesVisited') != "undefined") {
+	Deps.autorun(function() {
+
+		TAPi18n.setLanguage(Session.get('lang')); // Translation of app-specific texts
+		T9n.setLanguage(Session.get('lang')); // Translation for basic Meteor packages (account, etc.)
+		moment.locale(Session.get('lang')); // Translation for livestamp
+
+		if (typeof Cookie.get('spacesVisited') != "undefined") { // Autorun to reactively update space visited subscription
 			var spaces = JSON.parse(Cookie.get('spacesVisited'));
 			Meteor.subscribe('spacesVisited', spaces);
 		}
@@ -16,6 +38,11 @@ Template.indexStudent.onCreated(function() {
 
 Template.indexStudent.events({
 
+	'change #langSelect': function(e) {
+		var lang = $(e.target).val();
+		Session.set('lang', lang);
+
+	},
 	'submit form#index-student--code-link-form': function(e) {
 		e.preventDefault();
 
@@ -66,7 +93,11 @@ Template.indexStudent.events({
 
 
 Template.indexStudent.helpers({
-	
+
+	langIsSelected: function(lang) {
+		if (Session.get('lang') == lang)
+			return 'selected'
+	},
 	spacesVisited: function() {
 		if (typeof Cookie.get('spacesVisited') != "undefined") {
 			var spaces = JSON.parse(Cookie.get('spacesVisited'));

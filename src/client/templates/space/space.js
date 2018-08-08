@@ -47,7 +47,7 @@ Template.space.onCreated(function() {
 	// 	Session.set('lang',lang);
 	// }
 
-	Session.set('lang','en-US');
+	//Session.set('lang','en-US');
 	TAPi18n.setLanguage(Session.get('lang')); // Translation of app-specific texts
 	T9n.setLanguage(Session.get('lang')); // Translation for basic Meteor packages (account, etc.)
 	moment.locale(Session.get('lang')); // Translation for livestamp
