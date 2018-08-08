@@ -169,6 +169,10 @@ and (max-device-width : 568px) {*/
 	height:100%;
 }
 
+.home-post--text img {
+	max-width:100%;
+}
+
 
 /* ----- File upload ----- */
 
