@@ -32,7 +32,7 @@ Template.home.events({
 Template.home.helpers({
 
 	homePosts: function() {
-		return Posts.find({},{sort: {submitted: 1}});
+		return Posts.find({type:"home"},{sort: {order: 1}});
 	},
 	codePanel: function() {
 		return this.space.codePanel;

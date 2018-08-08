@@ -111,7 +111,7 @@ if(Meteor.isServer) {
 			Meteor.call('authorInsert', 'Invité', spaceId );
 
 			// Insert welcome post
-			Posts.insert({spaceId:spaceId, type:"home", submitted: Date.now(),title: "Welcome!", body:"<p><em>Spaces</em> in Beekee are ideal for real-time interactions using the <strong>Live Feed</strong>, hosting training content in <strong>Lessons</strong> and sharing files with your learners in <strong>Resources</strong>.</p>\n<p>This is the Home page of your space. Right now it is empty but feel free to edit (or delete) this post to start.</p>"});
+			Posts.insert({spaceId:spaceId, type:"home", order:0, submitted: Date.now(),title: "Welcome!", body:"<p><em>Spaces</em> in Beekee are ideal for real-time interactions using the <strong>Live Feed</strong>, hosting training content in <strong>Lessons</strong> (if enabled) and sharing files with your learners in <strong>Resources</strong>.</p>\n<p>This is the Home page of your space. Right now it is empty but feel free to edit (or delete) this post to start.</p>"});
 
 			return { _id: spaceId };
 		}

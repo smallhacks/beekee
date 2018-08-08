@@ -37,6 +37,8 @@ if(Meteor.isServer) {
 	// TODO : refactoring
 	Posts.before.update(function (userId, doc, fieldNames, modifier, options) {
 
+
+
 		// var versionning = {};
 		// _.extend(versionning, doc, {modifiedBy: userId});
 		// Meteor.call('addPostVersion', versionning);
@@ -49,6 +51,8 @@ if(Meteor.isServer) {
 
 
 	Posts.before.remove(function (userId, doc) { 
+
+
 		// var deletionTime = Date.now();
 
 		// Meteor.call('tagsEdit', {spaceId: doc.spaceId, newTags: [], oldTags: doc.tags}, function(error) { // Decrement tags nRefs
@@ -69,6 +73,18 @@ if(Meteor.isServer) {
 		if (fileId) {
 			Files.remove({fileId:fileId});
 			Meteor.call('deleteFile',doc);
+		}
+
+		if (doc.type == 'home') { // Update post order
+			var post = doc;
+
+			var postsDown = Posts.find({spaceId:doc.spaceId, type:'home', order:{$gt:post.order}}).fetch();
+
+			for (var i=0; i<postsDown.length; i++) {
+				console.log("id : "+postsDown[i]._id);
+				var currentPost = postsDown[i];
+				Posts.update({_id:currentPost._id},{$set:{order:currentPost.order-1}});
+			}
 		}
 
 		if (doc.type == 'liveFeed') {
@@ -116,7 +132,8 @@ Meteor.methods({
 			//var postFromCloud = !(Meteor.settings.public.isBox === "true"); // Set where post is submitted (box or cloud)
 
 		post = _.extend(postAttributes, {
-			submitted: Date.now()
+			submitted: Date.now(),
+			order: Posts.find({spaceId: postAttributes.spaceId, type: postAttributes.type}).count(),
 			//nb: Posts.find({spaceId: postAttributes.spaceId}).count() + 1,
 			//pinned : false,
 		});
