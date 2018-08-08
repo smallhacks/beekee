@@ -76,7 +76,7 @@ Meteor.startup(function () {
 			}
 			else if (formFields.type == 'update') {
 				cmd = Meteor.wrapAsync(exec);	
-				res = cmd("tar zxvf '"+process.env.PWD+'/.uploads'+fileInfo.path+"' -C /Users/Vince/beekee/",function(error,result){
+				res = cmd("tar zxvf '"+process.env.PWD+'/.uploads'+fileInfo.path+"' -C /home/pi/beekee/", function(error,result){
 					if (error) {
 						var errorMessage = "An error has occured."
 						Files.insert({_id: fileInfo.fileId, error:errorMessage});
