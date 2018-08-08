@@ -169,7 +169,7 @@ Edit /etc/rc.local and add before exit:<br>
 export MONGO_URL='mongodb://localhost'
 export ROOT_URL='http://localhost'
 export PORT=80
-export METEOR_SETTINGS='{"serial":"", syncServerIP": "","adminPassword": "admin","public" : {"isBox": "true","prefix": "XX"}}'
+export METEOR_SETTINGS='{"serial":"", "syncServerIP": "","adminPassword": "admin","public" : {"isBox": "true","prefix": "XX"}}'
 forever start -o /home/pi/outputs.log -e /home/pi/errors.log /home/pi/beekee/bundle/main.js
 ``` 
 Allow Node to run on port 80 without sudo privileges
