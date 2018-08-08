@@ -104,18 +104,21 @@ $("body").tooltip({selector: '[data-toggle=tooltip]', trigger: 'hover'});
 
 Template.space.events({
 	'click .overlay': function(e) {
-            $('#sidebar').removeClass('active');
-            $('.overlay').removeClass('active');
+    	$('#sidebar').removeClass('active');
+        $('.overlay').removeClass('active');
+        alert("ok");
+	    //$('.collapse.in').removeClass('in');
     },
-    	'click #dismiss': function(e) {
-            $('#sidebar').removeClass('active');
-            $('.overlay').removeClass('active');
+    'click #dismiss': function(e) {
+        $('#sidebar').removeClass('active');
+        $('.overlay').removeClass('active');
+       	//$('.collapse.in').removeClass('in');
     },
-    	'click #sidebarCollapse': function(e) {
-   			$('#sidebar').addClass('active');
+    'click #sidebarCollapse': function(e) {
+   		$('#sidebar').addClass('active');
             // fade in the overlay
-            $('.overlay').addClass('active');
-            $('.collapse.in').toggleClass('in');
+        $('.overlay').addClass('active');
+        $('.collapse.in').toggleClass('in');
         // and also adjust aria-expanded attributes we use for the open/closed arrows
         // in our CSS
         //$('a[aria-expanded=true]').attr('aria-expanded', 'false');
