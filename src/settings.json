@@ -1,5 +1,7 @@
 {
 	"serial":"SERIALTEST",
+	"uploadDir":"/Users/Vince/Desktop/Beekee_uploads/.uploads",
+	"updateDir":"/Users/Vince/Desktop/",
 	"syncServerIP": "",
 	"adminPassword": "admin",
 	"mailAddress": "",
