@@ -40,8 +40,7 @@ Template.indexStudent.events({
 
 	'change #langSelect': function(e) {
 		var lang = $(e.target).val();
-		Session.set('lang', lang);
-
+		Session.setPersistent('lang',lang);
 	},
 	'submit form#index-student--code-link-form': function(e) {
 		e.preventDefault();
@@ -83,11 +82,6 @@ Template.indexStudent.events({
 
 		Cookie.remove('spacesVisited');
 		$('.index-student--visited-spaces').hide();
-	},
-	'click .index-student--select-lang': function(e) {
-		e.preventDefault();
-
-		Session.setPersistent('lang',$(e.currentTarget).data('lang'));
 	}
 });
 

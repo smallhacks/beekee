@@ -1,5 +1,9 @@
 Template.spaceSidebar.events({
-	
+
+	'change #langSelect': function(e) {
+		var lang = $(e.target).val();
+		Session.setPersistent('lang',lang);
+	},
 	'click .menu-item': function(e) {
 		e.preventDefault();
 		var menuItemId = $(e.currentTarget).attr("data-id");
@@ -56,6 +60,10 @@ Template.spaceSidebar.events({
 
 Template.spaceSidebar.helpers({
 
+	langIsSelected: function(lang) {
+		if (Session.get('lang') == lang)
+			return 'selected'
+	},
 	'selectedMenuItem': function(menuItemId) {
 		return menuItemId == Session.get('menuItem');
 	},

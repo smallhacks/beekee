@@ -1,5 +1,37 @@
 Template.space.onCreated(function() {
 
+	//Set locale
+	var lang = null;
+	if (Session.get('lang')) // If locale is set by user
+		lang = Session.get('lang');
+	else {
+		// Set locale according to browser
+		function getLang() {
+			console.log(navigator.languages[0]);
+		    return (
+		        navigator.languages && navigator.languages[0] ||
+		        navigator.language ||
+		        navigator.browserLanguage ||
+		        navigator.userLanguage ||
+		        'en-US'
+		    );
+		}
+		lang = getLang();
+		Session.set('lang',lang);
+	}
+	
+	Deps.autorun(function() {
+
+		TAPi18n.setLanguage(Session.get('lang')); // Translation of app-specific texts
+		T9n.setLanguage(Session.get('lang')); // Translation for basic Meteor packages (account, etc.)
+		moment.locale(Session.get('lang')); // Translation for livestamp
+
+		if (typeof Cookie.get('spacesVisited') != "undefined") { // Autorun to reactively update space visited subscription
+			var spaces = JSON.parse(Cookie.get('spacesVisited'));
+			Meteor.subscribe('spacesVisited', spaces);
+		}
+	});
+
 	viewport = document.querySelector("meta[name=viewport]");
 	viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=4');
 
@@ -46,11 +78,6 @@ Template.space.onCreated(function() {
 	// 	lang = getLang();
 	// 	Session.set('lang',lang);
 	// }
-
-	//Session.set('lang','en-US');
-	TAPi18n.setLanguage(Session.get('lang')); // Translation of app-specific texts
-	T9n.setLanguage(Session.get('lang')); // Translation for basic Meteor packages (account, etc.)
-	moment.locale(Session.get('lang')); // Translation for livestamp
 
 		// var postsToSkip = Session.get('postsToSkip');
 		// var postsLimit = Session.get('postsLimit');

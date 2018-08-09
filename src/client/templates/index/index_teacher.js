@@ -69,7 +69,7 @@ Template.indexTeacher.events({
 
 	'change #langSelect': function(e) {
 		var lang = $(e.target).val();
-		Session.set('lang', lang);
+		Session.setPersistent('lang',lang);
 	},
 	'click .login--button-submit': function(e) {
 		e.preventDefault();
