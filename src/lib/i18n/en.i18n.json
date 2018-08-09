@@ -122,6 +122,7 @@
 	"index-teacher--shutdown":"Shutdown",
 	"index-teacher--shutdown-message": "Do you really want to shutdown the box ?",
 	"index-teacher--shutdown-confirm": "The box will shutdown in a few seconds...",
+	"update--reboot-confirm": "The box will reboot in a few seconds...",
 	"space-page--hide-panel":"Hide",
 	"space-page--code-panel-title":"Space's access code :",
 	"space-page--code-panel-description":"Spread this code for others to join you:",

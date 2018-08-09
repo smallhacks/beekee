@@ -122,6 +122,7 @@
 	"index-teacher--shutdown":"Éteindre",
 	"index-teacher--shutdown-message": "Voulez-vous vraiment éteindre la box ?",
 	"index-teacher--shutdown-confirm": "La box va s'éteindre dans quelques secondes...",
+	"update--reboot-confirm": "La box va redémarrer dans quelques secondes...",
 	"space-page--hide-panel":"Cacher",
 	"space-page--code-panel-title":"Code d'accès de l'espace :",
 	"space-page--code-panel-description":"Transmettez ce code pour que d'autres vous rejoignent:",
