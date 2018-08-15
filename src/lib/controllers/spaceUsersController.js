@@ -8,7 +8,6 @@ SpaceUsersController = RouteController.extend({
 	
 		return [
 			Meteor.subscribe('authors', this.params._id),
-			Meteor.subscribe('categories', this.params._id),
 			Meteor.subscribe('space', this.params._id)
 		]
 	},

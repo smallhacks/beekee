@@ -44,14 +44,15 @@ Template.liveFeedPostEdit.events({
 			_.extend(set, {body: body});
 
 		var category = $(e.target).find('[name=category]').val();
+		var categoryType = 'liveFeed;'
 		if (category != currentPost.category) {
 			_.extend(set, {category: category})
 
-			var oldCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, name: currentPost.category}); // Decrement category
+			var oldCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, type: categoryType, name: currentPost.category}); // Decrement category
 			if (oldCategoryItem)
 				Categories.update(oldCategoryItem._id, {$inc: {nRefs: -1}}); 
 
-			var newCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, name: category}); // Increment category
+			var newCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, type: categoryType, name: category}); // Increment category
 			if (newCategoryItem)
 				Categories.update(newCategoryItem._id, {$inc: {nRefs: 1}});    
 		}
@@ -73,7 +74,7 @@ Template.liveFeedPostEdit.events({
 			if (error) {
 				alert(TAPi18n.__('error-message')+error.message);
 			} else {
-				resetPostsServerNonReactive();
+				liveFeedResetPostsServerNonReactive();
 				$('#liveFeedPostEdit').modal('hide');
 			}
 		});

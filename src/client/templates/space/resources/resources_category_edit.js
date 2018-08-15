@@ -1,6 +1,6 @@
-Template.liveFeedCategoryEdit.onRendered(function() {
+Template.resourcesCategoryEdit.onRendered(function() {
 
-	$(".live-feed-category-edit--form").validate({
+	$(".resources-category-edit--form").validate({
         rules: {
             categoryName: {
                 required: true,
@@ -14,15 +14,15 @@ Template.liveFeedCategoryEdit.onRendered(function() {
 });
 
 
-Template.liveFeedCategoryEdit.events({
+Template.resourcesCategoryEdit.events({
 
 	'submit form': function(e, template) {
 		 e.preventDefault();
 
 		var spaceId = template.data.space._id;
 
-		var currentCategoryName = Session.get('liveFeedCategoryToEdit');
-		var categoryType = 'liveFeed';
+		var currentCategoryName = Session.get('resourcesCategoryToEdit');
+		var categoryType = 'resource';
 
 		var newCategoryName = $(e.target).find('[name=categoryName]').val();
 		if (currentCategoryName != newCategoryName) {
@@ -31,31 +31,31 @@ Template.liveFeedCategoryEdit.events({
 				if (error)
 						alert(TAPi18n.__('error-message')+error.message);
 				else {
-					$('#liveFeedCategoryEdit').modal('hide');
-					Session.set('liveFeedCategoryToEdit',null);
+					$('#resourcesCategoryEdit').modal('hide');
+					Session.set('resourcesCategoryToEdit',null);
 				}
 			});
 			$('#categoryName').val('');
 			Session.set('numChars', 0); // Count the number of characters
 		}
 	},
-	'click .live-feed-category-edit--button-submit': function(e) {
+	'click .resources-category-edit--button-submit': function(e) {
 		e.preventDefault();
-		$('#live-feed-category-edit--form').submit();
+		$('#resources-category-edit--form').submit();
 	},
-	'click .live-feed-category-edit--button-delete': function(e, template) {
+	'click .resources-category-edit--button-delete': function(e, template) {
 		e.preventDefault();
 
 		var spaceId = template.data.space._id;
-		var categoryName = Session.get('liveFeedCategoryToEdit');
-		var categoryType = 'liveFeed';
+		var categoryName = Session.get('resourcesCategoryToEdit');
+		var categoryType = 'resource';
 
 		Meteor.call('categoryDelete', categoryType, categoryName, spaceId, function(error) {
 			if (error)
 					alert(TAPi18n.__('error-message')+error.message);
 			else {
-				$('#liveFeedCategoryEdit').modal('hide');
-				Session.set('liveFeedCategoryToEdit',null);
+				$('#resourcesCategoryEdit').modal('hide');
+				Session.set('resourcesCategoryToEdit',null);
 			}
 		});
 	},
@@ -65,10 +65,10 @@ Template.liveFeedCategoryEdit.events({
 });
 
 
-Template.liveFeedCategoryEdit.helpers({
+Template.resourcesCategoryEdit.helpers({
 
 	categoryName: function() {
-		var categoryName = Session.get('liveFeedCategoryToEdit');
+		var categoryName = Session.get('resourcesCategoryToEdit');
 		return categoryName
 	},
 	'numChars': function(menuItemId) {

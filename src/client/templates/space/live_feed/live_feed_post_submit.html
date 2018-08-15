@@ -19,17 +19,24 @@
 					<button class="btn btn-outline-secondary bg-primary text-white border-0 live-feed-post-submit--button-submit" type="button">{{_ 'modal--submit'}}</button>
 				</div>	
 				<div class="form-group float-lg-right mb-lg-2 mr-4">
-    				<select class="form-control" name="categorySelect" id="categorySelect">
-    					<option val="" disabled selected>{{_ 'post-submit--select-category'}}</option>
-    	      			<option val="">{{_ 'post-submit--no-category'}}</option>
-    					{{#each categories}}
-      						<option {{selectedOption name}}>{{name}}</option>
-      					{{/each}}
-      					{{#if permissionAddCategories}}
-      						<option style="color:red" value="add-category">{{_ 'live-feed-post-submit--add-category'}}</option>
-      					{{/if}}
-    				</select>
-  				</div>				
+
+
+					<div class="input-group float-lg-right mb-lg-2 mr-4">
+					  <div class="input-group-prepend">
+					    <label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-tag"></i></label>
+					  </div>
+					  <select class="custom-select" name="categorySelect" id="categorySelect">
+	    					<option val="" disabled selected>{{_ 'post-submit--select-category'}}</option>
+	    	      			<option val="">{{_ 'post-submit--no-category'}}</option>
+	    					{{#each categories}}
+	      						<option {{selectedOption name}}>{{name}}</option>
+	      					{{/each}}
+	      					<option style="color:red" value="add-category">{{_ 'live-feed-post-submit--add-category'}}</option>
+					  </select>
+					</div>	
+
+</div>
+			
 	  			<div class="form-group d-lg-none float-right mb-0">
 					<button class="btn btn-outline-secondary bg-primary text-white border-0 live-feed-post-submit--button-submit" type="button">{{_ 'modal--submit'}}</button>
 				</div>				  

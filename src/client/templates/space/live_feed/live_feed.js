@@ -4,9 +4,9 @@ Template.liveFeed.onRendered(function() {
 		  $(this).find('[autofocus]').focus();
 	});
 
-	resetFilters();
+	liveFeedResetFilters();
 	Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
-	resetPostInterval();
+	liveFeedResetPostInterval();
 
 	this.autorun(function() { // Autorun to reactively update subscription (filtering + interval of loaded posts)
 
@@ -16,8 +16,8 @@ Template.liveFeed.onRendered(function() {
 		var filters = {spaceId:Session.get('spaceId'), type:"liveFeed"};
 		if (Session.get('author') != "")
 			filters = {spaceId:Session.get('spaceId'), type:"liveFeed", author:Session.get('author')};
-		else if (Session.get('category') != "") {
-			filters = {spaceId:Session.get('spaceId'), type:"liveFeed", category:Session.get('category')};
+		else if (Session.get('liveFeedCategory') != "") {
+			filters = {spaceId:Session.get('spaceId'), type:"liveFeed", category:Session.get('liveFeedCategory')};
 		}
 
  		// Interval of posts subscription : load every posts from "postsToSkip" (skip) to "postsLimit" (limit)
@@ -37,15 +37,15 @@ Template.liveFeed.events({
 			var author = Session.get('author');
 			Session.set('postsServerNonReactive', Authors.findOne({name:author}).nRefs);
 		}
-		else if (Session.get('category') !== "") {
-			var category = Session.get('category');
+		else if (Session.get('liveFeedCategory') !== "") {
+			var category = Session.get('liveFeedCategory');
 			Session.set('postsServerNonReactive', Categories.findOne({name:category}).nRefs);
 		}
 		else {
 			Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count);
 		}
 
-		resetPostsServerNonReactive();
+		liveFeedResetPostsServerNonReactive();
 	},
 	'click .live-feed--load-more': function(e) {
 		e.preventDefault();
@@ -66,7 +66,7 @@ Template.liveFeed.events({
 Template.liveFeed.helpers({
 
 	liveFeedPosts: function() {
-		return Posts.find({},{sort: {submitted: -1}});
+		return Posts.find({spaceId:Session.get('spaceId'), type:"liveFeed"},{sort: {submitted: -1}});
 	},
 	newMessages: function() { // Check if server posts  > client posts (if reactive is on)
 
@@ -77,8 +77,8 @@ Template.liveFeed.helpers({
 			var author = Session.get('author');
 			postsReactiveCount = Authors.findOne({name:author}).nRefs;  
 		}
-		else if (Session.get('category') !== "") {
-			var category = Session.get('category');
+		else if (Session.get('liveFeedCategory') !== "") {
+			var category = Session.get('liveFeedCategory');
 			postsReactiveCount = Categories.findOne({name:category}).nRefs;  
 		}
 		else {
@@ -105,8 +105,8 @@ Template.liveFeed.helpers({
 			var author = Session.get('author');
 			serverPosts = Authors.findOne({name:author}).nRefs;
 		}
-		else if (Session.get('category') !== "") {
-			var category = Session.get('category');
+		else if (Session.get('liveFeedCategory') !== "") {
+			var category = Session.get('liveFeedCategory');
 			serverPosts = Categories.findOne({name:category}).nRefs;
 		}
 		else
@@ -122,7 +122,7 @@ Template.liveFeed.helpers({
 });
 
 
-resetPostInterval = function() { // Reset interval of post subscription
+liveFeedResetPostInterval = function() { // Reset interval of post subscription
 	if (Session.get('postsServerNonReactive') >= 10) {
 		Session.set('postsToSkip',Session.get('postsServerNonReactive') - 10);
 		Session.set('postsLimit',10);
@@ -138,23 +138,23 @@ resetPostInterval = function() { // Reset interval of post subscription
 }
 
 
-resetPostsServerNonReactive = function() { 
+liveFeedResetPostsServerNonReactive = function() { 
 		if (Session.get('author') !== "") {
 			var author = Session.get('author');
 			Session.set('postsServerNonReactive', Authors.findOne({name:author}).nRefs);
 		}
-		else if (Session.get('category') !== "") {
-			var category = Session.get('category');
+		else if (Session.get('liveFeedCategory') !== "") {
+			var category = Session.get('liveFeedCategory');
 			Session.set('postsServerNonReactive', Categories.findOne({name:category}).nRefs);
 		}
 		else
 			Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count);
 
-		resetPostInterval();
+		liveFeedResetPostInterval();
 	}
 
 
-resetFilters = function() {
+liveFeedResetFilters = function() {
 	Session.set('author','');
-	Session.set('category','');
+	Session.set('liveFeedCategory','');
 }

@@ -11,7 +11,7 @@
 		</li> 	
 		{{#if liveFeed}}						
 			<li class="nav-item sidebar-item w-100 {{selectedMenuItemBg 2}}">
-				<a class="nav-link pl-1 text-nowrap text-dark menu-item filter-all {{selectedMenuItemTxt 2}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="2" href="#">
+				<a class="nav-link pl-1 text-nowrap text-dark menu-item filter-live-feed-all {{selectedMenuItemTxt 2}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="2" href="#">
 					<i class="fa fa-bolt fa-fw"></i> 
 					<span class="pl-1">{{_ 'space-sidebar--live-feed'}}</span>
 					<span class="badge badge-secondary-2 ml-2">{{liveFeedCount}}</span>
@@ -21,11 +21,11 @@
 		{{#if selectedMenuItem 2}}
 			<a class="small pl-4 pt-3 text-secondary mb-1 space-sidebar--menu-collapse" data-toggle="collapse" aria-expanded="true" href=".categories-list"><i class="fas fa-tags"></i> {{_ 'space-sidebar--categories'}} <i class="fa ml-1" aria-hidden="true"></i></a>
 			<div class="collapse categories-list show w-100">
-				{{#each categories}}
+				{{#each liveFeedCategories}}
 					<li class="align-middle nav-item sidebar-item w-100 small">
-						<a class="align-bottom nav-link space-sidebar--filter-category pl-1 py-1 text-nowrap text-dark filter-category {{selectedCategory}}  pl-4 py-2 py-lg-2" data-category="{{name}}" href="#"><span class="align-bottom pl-1" data-category="{{name}}">{{name}}</span>
+						<a class="align-bottom nav-link space-sidebar--filter-live-feed-category pl-1 py-1 text-nowrap text-dark filter-live-feed-category {{selectedLiveFeedCategory}}  pl-4 py-2 py-lg-2" data-category="{{name}}" href="#"><span class="align-bottom pl-1" data-category="{{name}}">{{name}}</span>
 							<span class="align-baseline text-secondary small ml-1" data-category="{{name}}">{{nRefs}}</span>
-							<a class="align-middle space-sidebar--category-edit small ml-2" data-category="{{name}}">
+							<a class="align-middle space-sidebar--live-feed-category-edit small ml-2" data-category="{{name}}">
 								<i class="align-middle fas fa-pencil-alt" data-category="{{name}}"></i>
 							</a>
 						</a>
@@ -59,13 +59,35 @@
 				</a>
 			</li>
 		{{/if}}
-		{{#if resources}}						
+		{{#if resources}}	
 			<li class="nav-item sidebar-item w-100 {{selectedMenuItemBg 4}}">
-				<a class="nav-link pl-1 text-nowrap text-dark menu-item {{selectedMenuItemTxt 4}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="4" href="#">
+				<a class="nav-link pl-1 text-nowrap text-dark menu-item filter-resources-all {{selectedMenuItemTxt 4}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="4" href="#">
 					<i class="far fa-copy fa-fw"></i> 
 					<span class="pl-1">{{_ 'space-sidebar--resources'}}</span>
 				</a>
 			</li>
+		{{/if}}			
+		{{#if selectedMenuItem 4}}
+		<a class="small pl-4 pt-3 text-secondary mb-1 space-sidebar--menu-collapse" data-toggle="collapse" aria-expanded="true" href=".categories-list"><i class="fas fa-tags"></i> {{_ 'space-sidebar--categories'}} <i class="fa ml-1" aria-hidden="true"></i></a>
+			<div class="collapse categories-list show w-100">
+				{{#each resourcesCategories}}
+					<li class="align-middle nav-item sidebar-item w-100 small">
+						<a class="align-bottom nav-link space-sidebar--filter-resources-category pl-1 py-1 text-nowrap text-dark filter-resources-category {{selectedResourcesCategory}}  pl-4 py-2 py-lg-2" data-category="{{name}}" href="#"><span class="align-bottom pl-1" data-category="{{name}}">{{name}}</span>
+							<span class="align-baseline text-secondary small ml-1" data-category="{{name}}">{{nRefs}}</span>
+							<a class="align-middle space-sidebar--resources-category-edit small ml-2" data-category="{{name}}">
+								<i class="align-middle fas fa-pencil-alt" data-category="{{name}}"></i>
+							</a>
+						</a>
+					</li>
+				{{/each}}
+				<div class="pl-3 ml-2 mt-1">
+					{{#if ownSpace}}
+						<a href="#" class="small pt-1 pl-1 font-weight-light" data-toggle="modal" data-target="#resourcesCategorySubmit">
+							<span class="pl-1"><i class="fas fa-plus"></i> {{_ 'space-sidebar--add-category'}}</span>
+						</a>
+					{{/if}}
+				</div>
+			</div>	
 		{{/if}}
 	</ul>
 		<select id="langSelect" class="mt-5 custom-select custom-select-sm border-0 ml-3 ml-lg-0 pl-lg-0 mb-2" style="width:auto; background-color: #fafafa;">

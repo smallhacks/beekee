@@ -1,10 +1,11 @@
 // ###  Update database
 
 
+// As of v1.1
 // Check if home posts have order attribute
 if (Posts.find({type:"home"}) != 0) {
+	console.log('Checking if home posts without "order" attribute exist and updating if so');
 	if (Posts.find({type:"home", order:{$exists:false}}).count() > 0) {
-		console.log('Checking if home posts without "order" attribute exist and updating if so');
 		var spaces = Spaces.find({}).fetch();
 		for (i=0; i<spaces.length; i++) {
 			var posts = Posts.find({spaceId:spaces[i]._id,type:"home"}).fetch();
@@ -15,4 +16,20 @@ if (Posts.find({type:"home"}) != 0) {
 		}
 	}
 	Posts.update({type:"home", order:{$exists:false}},{$set:{"order":0}}); // If posts are not linked to a spaceId
+}
+
+
+// As of v1.2
+// Check if categories have type attribute
+console.log('Checking if categories without "type" attribute exist and updating if so');
+if (Categories.find({type:{$exists:false}}).count() > 0) {
+	console.log('There are categories without "type" attribute');
+	Categories.update({type:{$exists:false}},{$set:{"type":"liveFeed"}}, function(err) { // Before v1.2, categories was only available for liveFeed
+		if (err) {
+			console.log('Error when updating categories without "type" attribute : '+error.message);
+		}
+		else {
+			console.log('All categories without "order" attribute have been updated.');
+		}
+	});
 }

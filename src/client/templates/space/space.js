@@ -54,7 +54,7 @@ Template.space.onCreated(function() {
 				subscription = Meteor.subscribe('posts', {spaceId:Session.get('spaceId'),type:"lesson"});
 				break;
 			case "4":
-				subscription = Meteor.subscribe('posts', {spaceId:Session.get('spaceId'),type:"resource"});
+				//subscription = Meteor.subscribe('posts', {spaceId:Session.get('spaceId'),type:"resource"});
 				break;
 		}
 	});
