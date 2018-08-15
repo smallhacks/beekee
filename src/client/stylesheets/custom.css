@@ -6,8 +6,7 @@ custom.css
 /* ----- Global ----- */
 
 html {
-    overflow: auto;
-    height: 100% !important;
+    height:100% !important;
 }
 
 body {
@@ -18,6 +17,11 @@ body {
 
 a, button {
   outline: none;
+}
+
+.wrapper {
+	overflow-y: scroll;
+    overflow: -moz-scrollbars-vertical; 
 }
 
 .bg-beekee {
