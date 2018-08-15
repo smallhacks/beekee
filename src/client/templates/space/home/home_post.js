@@ -49,6 +49,7 @@ Template.homePost.events({
 			tinymce.init({
 			  	selector: 'textarea#body-edit-tinymce',
 			  	skin_url: '/packages/teamon_tinymce/skins/lightgray',
+		  		paste_data_images: true
 			});
 		});
 

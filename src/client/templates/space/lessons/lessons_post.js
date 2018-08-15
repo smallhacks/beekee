@@ -18,18 +18,6 @@ Template.lessonsPost.events({
 		}
 
 		$('#lessonsPostEdit').modal('show');
-
-		$('#lessonsPostEdit').on('shown.bs.modal', function (e) {
-			tinymce.init({
-			  	selector: 'textarea#body-edit-tinymce',
-			  	skin_url: '/packages/teamon_tinymce/skins/lightgray',
-			});
-		});
-
-		$('#lessonsPostEdit').on('hidden.bs.modal', function (e) {
-			tinymce.remove( "textarea#body-edit-tinymce" );
-		});
-
 	},
 	'click .lessons-post--delete': function(e) {
 		e.preventDefault();
