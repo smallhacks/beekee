@@ -31,7 +31,7 @@ Template.liveFeedPostEdit.onRendered(function() {
 
 Template.liveFeedPostEdit.events({
 
-	'submit form': function(e) {
+	'submit #live-feed-post-edit--form': function(e) {
 		e.preventDefault();
 	
 		var currentPostId = Session.get('postToEdit');
@@ -43,8 +43,8 @@ Template.liveFeedPostEdit.events({
 		if (body != currentPost.body) // If body has changed, replace by new one
 			_.extend(set, {body: body});
 
-		var category = $(e.target).find('[name=category]').val();
-		var categoryType = 'liveFeed;'
+		var category = $(e.target).find('[name=categorySelect]').val();
+		var categoryType = 'liveFeed'
 		if (category != currentPost.category) {
 			_.extend(set, {category: category})
 
@@ -158,7 +158,7 @@ Template.liveFeedPostEdit.helpers({
 		var currentPostId = Session.get('postToEdit');
 		var currentPost = Posts.findOne(currentPostId);
 		if (currentPost)
-			return Categories.find({spaceId: currentPost.spaceId},{sort: { name: 1 }});  
+			return Categories.find({spaceId: currentPost.spaceId, type:"liveFeed"},{sort: { name: 1 }});  
 	},
 	selectedCategory: function(){
 		var currentPostId = Session.get('postToEdit');

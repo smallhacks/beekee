@@ -15,6 +15,18 @@
        		<div class="form-group">
 				<textarea name="body" id="body" class="form-control resources-post-edit--textarea" placeholder="" aria-label="" aria-describedby="basic-addon2">{{post.body}}</textarea>
 			</div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-tag"></i></label>
+          </div>
+          <select class="custom-select" name="categorySelect" id="categorySelect">
+            <option val="" disabled selected>{{_ 'post-submit--select-category'}}</option>
+            <option val="">{{_ 'post-submit--no-category'}}</option>
+            {{#each categories}}
+              <option selected="{{selectedCategory}}" name="{{name}}">{{name}}</option>
+            {{/each}}
+            </select>
+          </div>
 			</form>
 			{{#unless fileUploaded}}
 					{{>fileUpload formData=formData autoStart=true}}

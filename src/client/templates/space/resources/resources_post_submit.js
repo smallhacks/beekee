@@ -37,7 +37,7 @@ Template.resourcesPostSubmit.onRendered(function() {
 
 Template.resourcesPostSubmit.events({
 
-	'submit form': function(e, template) {
+	'submit #resources-post-submit--form': function(e, template) {
 		 e.preventDefault();
 
 		var author = Session.get(this.space._id).author;  

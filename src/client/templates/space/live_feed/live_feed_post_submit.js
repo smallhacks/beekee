@@ -37,7 +37,7 @@ Template.liveFeedPostSubmit.onRendered(function() {
 
 Template.liveFeedPostSubmit.events({
 
-	'submit form': function(e, template) {
+	'submit #live-feed-post-submit--form': function(e, template) {
 		 e.preventDefault();
 
 		//$(".post-submit--button-spinner").show(); // Show a spiner while sending

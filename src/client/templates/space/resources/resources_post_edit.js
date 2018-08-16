@@ -34,7 +34,7 @@ Template.resourcesPostEdit.onRendered(function() {
 
 Template.resourcesPostEdit.events({
 
-	'submit form': function(e) {
+	'submit #resources-post-edit--form': function(e) {
 		e.preventDefault();
 	
 		var currentPostId = Session.get('postToEdit');
@@ -50,15 +50,20 @@ Template.resourcesPostEdit.events({
 		if (body != currentPost.body) // If body has changed, replace by new one
 			_.extend(set, {body: body});
 
-		var category = $(e.target).find('[name=category]').val();
+		var category = $(e.target).find('[name=categorySelect]').val();
+
+		var categoryType = 'resource'
+
 		if (category != currentPost.category) {
 			_.extend(set, {category: category})
 
-			var oldCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, name: currentPost.category}); // Decrement category
+			var oldCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, type: categoryType, name: currentPost.category}); // Decrement category
+
 			if (oldCategoryItem)
 				Categories.update(oldCategoryItem._id, {$inc: {nRefs: -1}}); 
 
-			var newCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, name: category}); // Increment category
+			var newCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, type: categoryType, name: category}); // Increment category
+
 			if (newCategoryItem)
 				Categories.update(newCategoryItem._id, {$inc: {nRefs: 1}});    
 		}
@@ -158,11 +163,12 @@ Template.resourcesPostEdit.helpers({
 		var spaceId = Spaces.findOne(currentPost.spaceId);
 		return spaceId;
 	},
-	// categories: function() {
-	// 	var currentPostId = Session.get('postToEdit');
-	// 	var currentPost = Posts.findOne(currentPostId);
-	// 	return Categories.find({spaceId: currentPost.spaceId},{sort: { name: 1 }});  
-	// },
+	categories: function() {
+		var currentPostId = Session.get('postToEdit');
+		var currentPost = Posts.findOne(currentPostId);
+		if (currentPost)
+			return Categories.find({spaceId: currentPost.spaceId, type:"resource"},{sort: { name: 1 }});  
+	},
 	selectedCategory: function(){
 		var currentPostId = Session.get('postToEdit');
 		var currentPost = Posts.findOne(currentPostId);

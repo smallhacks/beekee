@@ -92,7 +92,15 @@ if(Meteor.isServer) {
 			Authors.update(author._id, {$inc: {nRefs: -1}}); // Decrement author nRefs
 
 			if (doc.category) {
-				var category = Categories.findOne({spaceId: doc.spaceId, name: doc.category});
+				var category = Categories.findOne({spaceId: doc.spaceId, type:"liveFeed", name: doc.category});
+				if (category)
+					Categories.update(category._id, {$inc: {nRefs: -1}}); // Decrement category nRefs
+			}
+		}
+
+		if (doc.type == 'resource') {
+			if (doc.category) {
+				var category = Categories.findOne({spaceId: doc.spaceId, type:"resource", name: doc.category});
 				if (category)
 					Categories.update(category._id, {$inc: {nRefs: -1}}); // Decrement category nRefs
 			}
