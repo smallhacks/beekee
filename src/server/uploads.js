@@ -63,7 +63,7 @@ Meteor.startup(function () {
 			}
 			else if (formFields.type == 'lesson') {
 				cmd = Meteor.wrapAsync(exec);
-				res = cmd("unzip '"+Meteor.settings.uploadDir+fileInfo.path+"' -d '"+Meteor.settings.uploadDir+"/"+fileInfo.spaceId+"/lesson/"+fileInfo.fileId+"'",function(error,result){
+				res = cmd("unzip '"+Meteor.settings.uploadDir+fileInfo.path+"' -d '"+Meteor.settings.uploadDir+"/"+fileInfo.spaceId+"/lesson/"+fileInfo.fileId+"'", {maxBuffer : 1024 * 1024 * 64}, function(error,result){
 					if (error) {
 						console.log("Error when uploading a lesson : "+error);
 						var errorMessage = "An error has occured."
@@ -76,7 +76,7 @@ Meteor.startup(function () {
 			}
 			else if (formFields.type == 'update') {
 				cmd = Meteor.wrapAsync(exec);	
-				res = cmd("tar zxvf '"+Meteor.settings.uploadDir+fileInfo.path+"' -C "+Meteor.settings.updateDir, function(error,result){
+				res = cmd("tar zxvf '"+Meteor.settings.uploadDir+fileInfo.path+"' -C "+Meteor.settings.updateDir, {maxBuffer : 1024 * 1024 * 64}, function(error,result){
 					if (error) {
 						console.log("Error when uploading an update : "+error);
 						var errorMessage = "An error has occured."
@@ -85,7 +85,7 @@ Meteor.startup(function () {
 						Files.insert({_id: fileInfo.fileId, fileName:fileInfo.fileName, fileExt:fileExt, filePath: fileInfo.path})
 					}
 				});
-				res2 = cmd("rm '"+Meteor.settings.uploadDir+fileInfo.path+"'");
+				res2 = cmd("rm '"+Meteor.settings.uploadDir+fileInfo.path+"'", {maxBuffer : 1024 * 1024 * 64},);
 			}
 		},
 		getFileName: function(fileInfo, formFields, formData) { 
