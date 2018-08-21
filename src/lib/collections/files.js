@@ -15,7 +15,7 @@ if(Meteor.isServer) {
 
 	var fs = Npm.require('fs');
 	var rimraf = Npm.require('rimraf'); // Package to delete directories
-	var uploadDir = process.env.PWD + '/.uploads';
+	var uploadDir = Meteor.settings.uploadDir;
 
 	Meteor.methods({
 

@@ -8,12 +8,14 @@ Template.home.events({
 		tinymce.init({
 		  	selector: 'textarea#body-submit-tinymce',
 		  	skin_url: '/packages/teamon_tinymce/skins/lightgray',
+		  	paste_data_images: true
 		});
 
 		$('#homePostSubmit').on('show.bs.modal', function (e) {
 			tinymce.init({
 		  		selector: 'textarea#body-submit-tinymce',
 		  		skin_url: '/packages/teamon_tinymce/skins/lightgray',
+		  		paste_data_images: true
 			});
 		})
 
@@ -32,7 +34,7 @@ Template.home.events({
 Template.home.helpers({
 
 	homePosts: function() {
-		return Posts.find({},{sort: {submitted: 1}});
+		return Posts.find({type:"home"},{sort: {order: 1}});
 	},
 	codePanel: function() {
 		return this.space.codePanel;

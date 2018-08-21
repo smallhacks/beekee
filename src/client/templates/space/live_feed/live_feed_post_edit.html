@@ -3,7 +3,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 			 	<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Edit post</h5>
+					<h5 class="modal-title" id="exampleModalLabel">{{_ 'live-feed-post-edit--title'}}</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				 		<span aria-hidden="true">&times;</span>
 					</button>
@@ -21,15 +21,18 @@
 					<div class="form-group">
 						<textarea name="body" id="body" class="form-control live-feed-post-edit--textarea" placeholder="" aria-label="" aria-describedby="basic-addon2">{{post.body}}</textarea>
 					</div>
-					<div class="form-group">
-						<select name="category" class="form-control">
-							<option value="" disabled selected >{{_ 'post-submit--select-category'}}</option>
-							<option value="" >{{_ 'post-submit--no-category'}}</option>
-							{{#each categories}}
-								<option selected="{{selectedCategory}}">{{name}}</option>
-							{{/each}}
-						</select>
-					</div>
+			      <div class="input-group mb-3">
+			        <div class="input-group-prepend">
+			          <label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-tag"></i></label>
+			        </div>
+			        <select class="custom-select" name="categorySelect" id="categorySelect">
+			          <option val="" disabled selected>{{_ 'post-submit--select-category'}}</option>
+			          <option val="">{{_ 'post-submit--no-category'}}</option>
+			          {{#each categories}}
+			            <option selected="{{selectedCategory}}" name="{{name}}">{{name}}</option>
+			          {{/each}}
+			          </select>
+			        </div>
 				</form>
 				{{#unless fileUploaded}}
           			{{>fileUpload formData=formData autoStart=true}}

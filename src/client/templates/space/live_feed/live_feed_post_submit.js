@@ -37,7 +37,7 @@ Template.liveFeedPostSubmit.onRendered(function() {
 
 Template.liveFeedPostSubmit.events({
 
-	'submit form': function(e, template) {
+	'submit #live-feed-post-submit--form': function(e, template) {
 		 e.preventDefault();
 
 		//$(".post-submit--button-spinner").show(); // Show a spiner while sending
@@ -68,7 +68,7 @@ Template.liveFeedPostSubmit.events({
 			} else {
 				$(e.target).find('[name=body]').val('');
 
-				if (Session.get('category') == '') // Unless a category is filtered, change select to empty category
+				if (Session.get('liveFeedCategory') == '') // Unless a category is filtered, change select to empty category
 					$(e.target).find('[name=categorySelect]').val(TAPi18n.__('post-submit--no-category'));
 
 				Session.set("fileId",null); // Clear fileId session
@@ -80,7 +80,7 @@ Template.liveFeedPostSubmit.events({
 				delete Session.keys["fileName"]; // Clear fileId session
 				delete Session.keys["fileExt"]; // Clear fileId session
 				delete Session.keys["filePath"]; // Clear fileExt session
-				resetPostsServerNonReactive();
+				liveFeedResetPostsServerNonReactive();
 
 				//$(".post-submit--button-spinner").hide(); // Show a spiner while sending
 			};
@@ -158,10 +158,10 @@ Template.liveFeedPostSubmit.helpers({
 			return Session.get("fileId");
 	},
 	categories: function() {
-		return Categories.find({spaceId: this.space._id},{sort: { name: 1 }});  
+		return Categories.find({spaceId: this.space._id, type:"liveFeed"},{sort: { name: 1 }});  
 	},
 	selectedOption: function(option) {
-		if (Session.get('category') == option)
+		if (Session.get('liveFeedCategory') == option)
 			return 'selected'
 	},
 	permissionAddCategories: function(template) {

@@ -10,7 +10,7 @@ Template.liveFeedPostDelete.events({
 			if (error)
 				alert(TAPi18n.__('error-message')+error.message);
 			else {
-				resetPostsServerNonReactive();
+				liveFeedResetPostsServerNonReactive();
 				$('#liveFeedPostDelete').modal('hide');
 			}
 		});

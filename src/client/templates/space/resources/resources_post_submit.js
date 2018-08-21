@@ -37,7 +37,7 @@ Template.resourcesPostSubmit.onRendered(function() {
 
 Template.resourcesPostSubmit.events({
 
-	'submit form': function(e, template) {
+	'submit #resources-post-submit--form': function(e, template) {
 		 e.preventDefault();
 
 		var author = Session.get(this.space._id).author;  
@@ -50,7 +50,7 @@ Template.resourcesPostSubmit.events({
 		var filePath = Session.get("filePath");
 
 		//var tags = $(e.target).find('[name=tags]').val().toLowerCase().replace(/ /g,'').split(',');
-		var category = $(e.target).find('[name=category]').val();
+		var category = $(e.target).find('[name=categorySelect]').val();
 
 		// TODO : check how imagesToDelete work
 		// var imagesToDelete = Session.get('imagesToDelete');
@@ -152,5 +152,12 @@ Template.resourcesPostSubmit.helpers({
      		spaceId: this.space._id,
       		type: "resource"
     	}
-  	}
+  	},
+  	categories: function() {
+		return Categories.find({spaceId: this.space._id, type:"resource"},{sort: { name: 1 }});  
+	},
+	selectedOption: function(option) {
+		if (Session.get('resourcesCategory') == option)
+			return 'selected'
+	},
 });

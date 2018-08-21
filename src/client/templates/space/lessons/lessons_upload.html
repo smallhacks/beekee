@@ -3,7 +3,7 @@
 		{{#unless infoLabel}}
 			<label class="text-center">
 				<input type="file" accept="*/*" class="file-upload--input-file jqUploadclass" data-form-data='{{ submitData }}'>
-				<span class="btn btn-primary text-center">Upload a Storyline lesson <i class="fas fa-upload"></i></span>
+				<span class="btn btn-primary text-center">{{_ 'lessons-upload--button'}} <i class="fas fa-upload"></i></span>
 			</label>
 		{{/unless}}
 		{{#with infoLabel}} 	

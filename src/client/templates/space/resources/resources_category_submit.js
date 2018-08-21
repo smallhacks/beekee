@@ -1,6 +1,6 @@
-Template.liveFeedPostSubmit.onRendered(function() {
+Template.resourcesPostSubmit.onRendered(function() {
 
-	$(".live-feed-category-submit--form").validate({
+	$(".resources-category-submit--form").validate({
         rules: {
             categoryName: {
                 required: true,
@@ -14,35 +14,33 @@ Template.liveFeedPostSubmit.onRendered(function() {
 });
 
 
-Template.liveFeedCategorySubmit.events({
+Template.resourcesCategorySubmit.events({
 
 	'submit form': function(e, template) {
 		 e.preventDefault();
 
 		var spaceId = template.data.space._id;
-		var categoryType = 'liveFeed';
+		var categoryType = 'resource';
 
 		var categoryName = $('#categoryName').val().trim();
 		Meteor.call('categoryInsert', categoryType, categoryName, spaceId, function(error) {
 			if (error)
 				alert(TAPi18n.__('error-message')+error.message);
 			else {
-				$('#liveFeedCategorySubmit').modal('hide');
+				$('#resourcesCategorySubmit').modal('hide');
 
 				// Select the new category after submitted
 				$('[name=categorySelect]').val(categoryName); 
-				liveFeedResetFilters();
-				Session.set('liveFeedCategory',categoryName);
-				Session.set('postsServerNonReactive', Categories.findOne({name:categoryName, type: categoryType}).nRefs);
-				liveFeedResetPostInterval();
+				resourcesResetFilters();
+				Session.set('resourcesCategory',categoryName);
 			}
 		});
 		$('#categoryName').val('');
 		Session.set('numChars', 0); // Count the number of characters
 	},
-	'click .live-feed-category-submit--button-submit': function(e) {
+	'click .resources-category-submit--button-submit': function(e) {
 		e.preventDefault();
-		$('#live-feed-category-submit--form').submit();
+		$('#resources-category-submit--form').submit();
 	},
 	'input #categoryName': function(){
     	Session.set('numChars', $('#categoryName').val().length);
@@ -50,7 +48,7 @@ Template.liveFeedCategorySubmit.events({
 });
 
 
-Template.liveFeedCategorySubmit.helpers({
+Template.resourcesCategorySubmit.helpers({
 
 	'numChars': function(menuItemId) {
 		return Session.get('numChars');

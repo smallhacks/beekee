@@ -31,7 +31,7 @@ Template.liveFeedPostEdit.onRendered(function() {
 
 Template.liveFeedPostEdit.events({
 
-	'submit form': function(e) {
+	'submit #live-feed-post-edit--form': function(e) {
 		e.preventDefault();
 	
 		var currentPostId = Session.get('postToEdit');
@@ -43,15 +43,16 @@ Template.liveFeedPostEdit.events({
 		if (body != currentPost.body) // If body has changed, replace by new one
 			_.extend(set, {body: body});
 
-		var category = $(e.target).find('[name=category]').val();
+		var category = $(e.target).find('[name=categorySelect]').val();
+		var categoryType = 'liveFeed'
 		if (category != currentPost.category) {
 			_.extend(set, {category: category})
 
-			var oldCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, name: currentPost.category}); // Decrement category
+			var oldCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, type: categoryType, name: currentPost.category}); // Decrement category
 			if (oldCategoryItem)
 				Categories.update(oldCategoryItem._id, {$inc: {nRefs: -1}}); 
 
-			var newCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, name: category}); // Increment category
+			var newCategoryItem = Categories.findOne({spaceId: currentPost.spaceId, type: categoryType, name: category}); // Increment category
 			if (newCategoryItem)
 				Categories.update(newCategoryItem._id, {$inc: {nRefs: 1}});    
 		}
@@ -73,7 +74,7 @@ Template.liveFeedPostEdit.events({
 			if (error) {
 				alert(TAPi18n.__('error-message')+error.message);
 			} else {
-				resetPostsServerNonReactive();
+				liveFeedResetPostsServerNonReactive();
 				$('#liveFeedPostEdit').modal('hide');
 			}
 		});
@@ -157,7 +158,7 @@ Template.liveFeedPostEdit.helpers({
 		var currentPostId = Session.get('postToEdit');
 		var currentPost = Posts.findOne(currentPostId);
 		if (currentPost)
-			return Categories.find({spaceId: currentPost.spaceId},{sort: { name: 1 }});  
+			return Categories.find({spaceId: currentPost.spaceId, type:"liveFeed"},{sort: { name: 1 }});  
 	},
 	selectedCategory: function(){
 		var currentPostId = Session.get('postToEdit');

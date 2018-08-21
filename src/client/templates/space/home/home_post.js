@@ -1,5 +1,36 @@
 Template.homePost.events({
 
+	'click .home-post--order-up': function(e) {
+		e.preventDefault();
+		
+		var post = this;
+
+		if (this.order > 0) { // Check if post is not the first
+			var postUpOrder = Posts.findOne({type:"home",order:this.order-1});
+
+			Posts.update({_id:postUpOrder._id},{$set:{order:post.order}},function(err) {
+				if (!err) {
+					Posts.update({_id:post._id},{$set: {order:post.order-1}});
+				}
+			});
+		}
+	},
+	'click .home-post--order-down': function(e) {
+		e.preventDefault();
+
+		var maxOrder = Posts.find({type:"home"},{sort:{order:-1},limit:1}).fetch();
+
+		if (this.order < maxOrder[0].order) { // Check if post is not the last
+			var post = this;
+			var postDownOrder = Posts.findOne({type:"home",order:this.order+1});
+
+			Posts.update({_id:postDownOrder._id},{$set:{order:post.order}},function(err) {
+				if (!err) {
+					Posts.update({_id:post._id},{$set: {order:post.order+1}});
+				}
+			});
+		}
+	},
 	'click .home-post--edit': function(e) {
 		e.preventDefault();
 		
@@ -18,6 +49,7 @@ Template.homePost.events({
 			tinymce.init({
 			  	selector: 'textarea#body-edit-tinymce',
 			  	skin_url: '/packages/teamon_tinymce/skins/lightgray',
+		  		paste_data_images: true
 			});
 		});
 

@@ -9,8 +9,7 @@
 	<h5 class="mb-4">{{_ 'home--title'}}</h5>
 	{{#unless space.permissions.public}}
 		{{#if codePanel}}
-			<div class="alert alert-warning alert-dismissible fade show" role="alert">
-		  		<strong>Bzz!</strong> Spread this code for others to join you: <span style="font-size:1.1em" class="badge badge-secondary">{{space.spaceCode}}</span>
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">{{{_ 'home--space-code-message'}}} <span style="font-size:1.1em" class="badge badge-secondary">{{space.spaceCode}}</span>
 		  		<button type="button" class="close home--hide-code-panel">
 		    		<span aria-hidden="true">&times;</span>
 		  		</button>

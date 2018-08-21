@@ -1,44 +1,55 @@
 <template name="resourcesPostSubmit">
 <div class="modal fade" id="resourcesPostSubmit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add a resource</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form name="resources-post-submit--form" id="resources-post-submit--form">
-
-        <div class="form-group">
-              <input type="text" class="form-control" name="title" id="title" aria-describedby="title" placeholder="Title of the resource"></div>
-                      <div class="form-group">
-
-        <textarea name="body" id="body" class="form-control resources-post-submit--textarea" placeholder="Description of the resource" aria-label="" aria-describedby="basic-addon2"></textarea>
-        </div>
-      </form>
-      {{#unless fileUploaded}}
-          {{>fileUpload formData=formData autoStart=true}}
-        {{/unless}}
-        {{#if fileUploaded}}
-          {{#if fileUploaded.error}}
-            <div class=""><span class="text-danger">{{fileUploaded.error}}</span> (<a href="#" class="resources-post-submit--retry">retry</a>)</div>
-          {{else}}
-            <div class="p-2">
-              <i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}.{{fileUploaded.fileExt}}
-              <a href="#" class="post-submit--button-delete-file">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </a>
-            </div>
-          {{/if}}
-        {{/if}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary resources-post-submit--button-submit" disabled>Submit</button>
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">{{_ 'resources-post-submit--title'}}</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form name="resources-post-submit--form" id="resources-post-submit--form">
+					 <div class="form-group">
+						<input type="text" class="form-control" name="title" id="title" aria-describedby="title" placeholder="{{_ 'resources-post-submit--title-placeholder'}}">
+					</div>
+					<div class="form-group">
+						<textarea name="body" id="body" class="form-control resources-post-submit--textarea" placeholder="{{_ 'resources-post-submit--description-placeholder'}}" aria-label="" aria-describedby="basic-addon2"></textarea>
+					</div>
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-tag"></i></label>
+					  </div>
+					  <select class="custom-select" name="categorySelect" id="categorySelect">
+	    					<option val="" disabled selected>{{_ 'post-submit--select-category'}}</option>
+	    	      			<option val="">{{_ 'post-submit--no-category'}}</option>
+	    					{{#each categories}}
+	      						<option {{selectedOption name}}>{{name}}</option>
+	      					{{/each}}
+					  </select>
+					</div>	
+				</form>
+			{{#unless fileUploaded}}
+					{{>fileUpload formData=formData autoStart=true}}
+				{{/unless}}
+				{{#if fileUploaded}}
+					{{#if fileUploaded.error}}
+						<div class=""><span class="text-danger">{{fileUploaded.error}}</span> (<a href="#" class="resources-post-submit--retry">retry</a>)</div>
+					{{else}}
+						<div class="p-2">
+							<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}.{{fileUploaded.fileExt}}
+							<a href="#" class="post-submit--button-delete-file">
+								<i class="fa fa-trash" aria-hidden="true"></i>
+							</a>
+						</div>
+					{{/if}}
+				{{/if}}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ 'modal--close'}}</button>
+				<button type="button" class="btn btn-primary resources-post-submit--button-submit" disabled>{{_ 'modal--submit'}}</button>
+			</div>
+		</div>
+	</div>
 </div>
 </template>

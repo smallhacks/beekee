@@ -50,7 +50,14 @@ var requireAdmin = function() {
 }
 
 Router.onBeforeAction(requireLogin, {only: 'settings'});
-Router.onBeforeAction(requireAdmin, {only: ['admin','register','update']});
+
+var pathsRequireAdmin;
+if (Meteor.settings.public.isBox === "true")
+	pathsRequireAdmin = ['admin','register','update'];
+else
+	pathsRequireAdmin = ['admin','update'];
+
+Router.onBeforeAction(requireAdmin, {only: pathsRequireAdmin});
 
 
 // ###### Routes without controller ######

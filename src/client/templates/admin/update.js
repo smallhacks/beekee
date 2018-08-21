@@ -37,12 +37,12 @@ Template.update.events({
 	'click .update--reboot': function(e) {
 		e.preventDefault();
 
-		Meteor.call('shutdownBox', function(error, result){
+		Meteor.call('rebootBox', function(error, result){
 			if (error) {
 				alert(TAPi18n.__('error-message')+error.message);
 			}
 			else {
-				alert(TAPi18n.__('index-teacher--shutdown-confirm'));
+				alert(TAPi18n.__('update--reboot-confirm'));
 			}
 		});
 	}
