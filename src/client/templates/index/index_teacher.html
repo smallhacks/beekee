@@ -37,13 +37,15 @@
 				</div>
   			</div>
   		{{/if}}
-  		<div class="row justify-content-center mt-5 text-center">
-  			<div class="col-12 col-lg-6 text-center mt-3 mb-3">
-				{{#if isBox}}
-					<button type="button" class="btn btn-outline-secondary index-teacher--shutdown"><i class="fa fa-power-off"></i><br><span>{{_ 'index-teacher--shutdown'}}</span></button>
-				{{/if}}
+  		{{#if isBox}}
+	  		<div class="row justify-content-center mt-5 text-center">
+	  			<div class="col-12 col-lg-6 text-center mt-3 mb-3">
+					{{#if isBox}}
+						<button type="button" class="btn btn-outline-secondary index-teacher--shutdown"><i class="fa fa-power-off"></i><br><span>{{_ 'index-teacher--shutdown'}}</span></button>
+					{{/if}}
+				</div>
 			</div>
-		</div>
+		{{/if}}
 		<div class="row justify-content-center mt-5">
 			<div class="col-5 col-lg-2 text-center">
 				<select id="langSelect" class="custom-select custom-select-sm border-0" style="width:auto; background-color: #fafafa;">

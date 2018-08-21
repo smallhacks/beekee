@@ -13,8 +13,10 @@
  					<div class="card-body p-0">
  						<ul class="list-group">
   							<li class="list-group-item rounded-0 border-left-0 border-right-0 border-top-0 d-flex"><span>Beekee version</span><span class="ml-auto text-secondary">{{beekeeVersion}} (<a href="{{pathFor 'update'}}">update</a>)</span></li>
-  							<li class="list-group-item rounded-0 border-left-0 border-right-0 d-flex"><span>Raspbian version</span><span class="ml-auto text-secondary">{{raspbianVersion}}</span></li>
-  							<li class="list-group-item rounded-0 border-left-0 border-right-0 border-bottom-0 d-flex"><span>Serial number</span><span class="ml-auto text-secondary">{{boxSerial}}</span></li>
+  							{{#if isBox}}
+	  							<li class="list-group-item rounded-0 border-left-0 border-right-0 d-flex"><span>Raspbian version</span><span class="ml-auto text-secondary">{{raspbianVersion}}</span></li>
+	  							<li class="list-group-item rounded-0 border-left-0 border-right-0 border-bottom-0 d-flex"><span>Serial number</span><span class="ml-auto text-secondary">{{boxSerial}}</span></li>
+  							{{/if}}
 						</ul>
 					</div>
 				</div>
@@ -107,11 +109,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="row justify-content-center mb-4">
-			<div class="col-sm-12 col-lg-8 text-center">
-				<button type="button" class="btn btn-outline-secondary admin--shutdown"><i class="fa fa-power-off"></i><br><span>{{_ 'index-teacher--shutdown'}}</span></button>
+		{{#if isBox}}
+			<div class="row justify-content-center mb-4">
+				<div class="col-sm-12 col-lg-8 text-center">
+					<button type="button" class="btn btn-outline-secondary admin--shutdown"><i class="fa fa-power-off"></i><br><span>{{_ 'index-teacher--shutdown'}}</span></button>
+				</div>
 			</div>
-		</div>
+		{{/if}}
 	</div>
 	{{> adminSpaceSubmit}}
 	{{> adminCreateAccount}}
