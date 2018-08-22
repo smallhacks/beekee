@@ -99,7 +99,7 @@ Template.indexStudent.helpers({
 		}
 	},
 	publicSpaces: function() {
-		return Spaces.find({permissions:{public:true}});
+		return Spaces.find({"permissions.public":true});
 	},
   	isLangSelected: function(lang) {
   		if (Session.get('lang')) {
