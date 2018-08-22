@@ -139,8 +139,14 @@ Template.spaceSidebar.helpers({
 	resources: function() {
 		return this.space.resources
 	},
-	permissionAddCategories: function() {
-		if (this.space.permissions.addCategories || Roles.userIsInRole(Meteor.userId(), ['admin']) || Meteor.userId() == this.space.userId)
+	ownSpace: function() {
+		if (Meteor.userId() == Template.parentData(2).space.userId || Roles.userIsInRole(Meteor.userId(), ['admin']))
+			return true
+		else
+			return false
+	},
+	liveFeedAddCategory: function() {
+		if (this.space.permissions.liveFeedAddCategory || Roles.userIsInRole(Meteor.userId(), ['admin']) || Meteor.userId() == this.space.userId)
 			return true
 		else
 			return false

@@ -87,20 +87,6 @@ Template.generalSettings.events({
 		else
 			Session.set('isReactive',true);
 	},
-	'click .space-edit--activate-comments': function(e) {
-		e.preventDefault();
-	
-		if (this.space.commentsAllowed)
-			Spaces.update(this.space._id, {$set: {commentsAllowed:false}}, function(error) {
-				if (error)
-					alert(TAPi18n.__('error-message')+error.message);
-			});
-		else
-			Spaces.update(this.space._id, {$set: {commentsAllowed:true}}, function(error) {
-				if (error)
-					alert(TAPi18n.__('error-message')+error.message);
-			});
-	},
 	'click .space-edit--activate-create-user': function(e) {
 		e.preventDefault();
 
@@ -174,9 +160,6 @@ Template.generalSettings.helpers({
 	},
 	isReactive: function() {
 		return Session.get('isReactive')
-	},
-	commentsAreAllowed: function() {
-		return this.space.commentsAllowed
 	},
 	createUserIsAllowed: function() {
 		return this.space.createUserAllowed

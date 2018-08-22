@@ -5,41 +5,63 @@ Template.permissionsSettings.events({
 	
 		if (this.space.permissions)
 			if (this.space.permissions.public) {
-				Spaces.update(this.space._id, {$set: {permissions:{public:false}}}, function(error) {
+				Spaces.update(this.space._id, {$set: {"permissions.public":false}}, function(error) {
 					if (error)
 						alert(TAPi18n.__('error-message')+error.message);
 				});
 			}
 			else {
-				Spaces.update(this.space._id, {$set: {permissions:{public:true}}}, function(error) {
+				Spaces.update(this.space._id, {$set: {"permissions.public":true}}, function(error) {
 					if (error)
 						alert(TAPi18n.__('error-message')+error.message);
 				});				
 			}
 		else
-			Spaces.update(this.space._id, {$set: {permissions:{public:true}}}, function(error) {
+			Spaces.update(this.space._id, {$set: {"permissions.public":true}}, function(error) {
 				if (error)
 					alert(TAPi18n.__('error-message')+error.message);
 			});
 	},
-	'click .permissions-settings--addCategories': function(e) {
+	'click .permissions-settings--liveFeedAddCategory': function(e) {
 		e.preventDefault();
 	
 		if (this.space.permissions)
-			if (this.space.permissions.addCategories) {
-				Spaces.update(this.space._id, {$set: {permissions:{addCategories:false}}}, function(error) {
+			if (this.space.permissions.liveFeedAddCategory) {
+				Spaces.update(this.space._id, {$set: {"permissions.liveFeedAddCategory":false}}, function(error) {
 					if (error)
 						alert(TAPi18n.__('error-message')+error.message);
 				});
 			}
 			else {
-				Spaces.update(this.space._id, {$set: {permissions:{addCategories:true}}}, function(error) {
+				Spaces.update(this.space._id, {$set: {"permissions.liveFeedAddCategory":true}}, function(error) {
 					if (error)
 						alert(TAPi18n.__('error-message')+error.message);
 				});				
 			}
 		else
-			Spaces.update(this.space._id, {$set: {permissions:{addCategories:true}}}, function(error) {
+			Spaces.update(this.space._id, {$set: {"permissions.liveFeedAddCategory":true}}, function(error) {
+				if (error)
+					alert(TAPi18n.__('error-message')+error.message);
+			});
+	},
+	'click .permissions-settings--liveFeedAddPost': function(e) {
+		e.preventDefault();
+	
+		if (this.space.permissions)
+			if (this.space.permissions.liveFeedAddPost) {
+				Spaces.update(this.space._id, {$set: {"permissions.liveFeedAddPost":false}}, function(error) {
+					if (error)
+						alert(TAPi18n.__('error-message')+error.message);
+				});
+			}
+			else {
+				Spaces.update(this.space._id, {$set: {"permissions.liveFeedAddPost":true}}, function(error) {
+					if (error)
+						alert(TAPi18n.__('error-message')+error.message);
+				});				
+			}
+		else
+			Spaces.update(this.space._id, {$set: {"permissions.liveFeedAddPost":true}}, function(error) {
 				if (error)
 					alert(TAPi18n.__('error-message')+error.message);
 			});
