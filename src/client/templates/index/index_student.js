@@ -109,7 +109,10 @@ Template.indexStudent.helpers({
 			if (lang == langSelected)
 	  			return 'selected';
 	  	}
-	  }
+	},
+	isBox: function() {
+		return (Meteor.settings.public.isBox === "true")
+	}
 });
 
 
