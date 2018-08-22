@@ -8,7 +8,7 @@ Meteor.publish('allSpaces', function() {
 });
 
 Meteor.publish('publicSpaces', function(userId) {
-	return Spaces.find({permissions:{public:true}});
+	return Spaces.find({"permissions.public":true});
 });
 
 Meteor.publish('ownSpaces', function(userId) {

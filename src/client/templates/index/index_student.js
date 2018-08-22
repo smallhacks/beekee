@@ -99,7 +99,7 @@ Template.indexStudent.helpers({
 		}
 	},
 	publicSpaces: function() {
-		return Spaces.find({permissions:{public:true}});
+		return Spaces.find({"permissions.public":true});
 	},
   	isLangSelected: function(lang) {
   		if (Session.get('lang')) {
@@ -109,7 +109,10 @@ Template.indexStudent.helpers({
 			if (lang == langSelected)
 	  			return 'selected';
 	  	}
-	  }
+	},
+	isBox: function() {
+		return (Meteor.settings.public.isBox === "true")
+	}
 });
 
 

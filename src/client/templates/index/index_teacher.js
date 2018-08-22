@@ -118,7 +118,7 @@ Template.indexTeacher.helpers({
 		return Spaces.find({userId:Meteor.userId()}, {sort: {submitted: -1}});
 	},
 	publicSpaces: function() {
-		return Spaces.find({permissions:{public:true}});
+		return Spaces.find({"permissions.public":true});
 	},
   	isLangSelected: function(lang) {
   		if (Session.get('lang')) {
