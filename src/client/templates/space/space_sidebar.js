@@ -139,8 +139,8 @@ Template.spaceSidebar.helpers({
 	resources: function() {
 		return this.space.resources
 	},
-	permissionAddCategories: function() {
-		if (this.space.permissions.addCategories || Roles.userIsInRole(Meteor.userId(), ['admin']) || Meteor.userId() == this.space.userId)
+	liveFeedAddCategories: function() {
+		if (this.space.permissions.liveFeedAddCategories || Roles.userIsInRole(Meteor.userId(), ['admin']) || Meteor.userId() == this.space.userId)
 			return true
 		else
 			return false
