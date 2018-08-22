@@ -33,3 +33,33 @@ if (Categories.find({type:{$exists:false}}).count() > 0) {
 		}
 	});
 }
+
+
+// As of v1.25
+// Check if spaces have permissions attributes
+console.log('Checking if spaces without "permissions" attribute exist and updating if so');
+if (Spaces.find({"permissions":{$exists:false}}).count() > 0) {
+	console.log('There are spaces without "permissions" attribute');
+	Spaces.update({"permissions":{$exists:false}},{$set:{"permissions":{"public":false,"liveFeedAddPost":true}}}, function(err) {
+		if (err) {
+			console.log('Error when updating spaces without "permissions" attribute : '+error.message);
+		}
+		else {
+			console.log('All spaces without "permissions" attribute have been updated.');
+		}
+	});
+} else {
+	//Check if spaces have permissions.liveFeedAddPost attributes
+	console.log('Checking if spaces without "permissions.liveFeedAddPost" attribute exist and updating if so');
+	if (Spaces.find({"permissions.liveFeedAddPost":{$exists:false}}).count() > 0) {
+		console.log('There are spaces without "permissions.liveFeedAddPost" attribute');
+		Spaces.update({"permissions.liveFeedAddPost":{$exists:false}},{$set:{"permissions":{"liveFeedAddPost":"own"}}}, function(err) {
+			if (err) {
+				console.log('Error when updating spaces without "permissions.liveFeedAddPost" attribute : '+error.message);
+			}
+			else {
+				console.log('All spaces without "permissions.liveFeedAddPost" attribute have been updated.');
+			}
+		});
+	}
+}

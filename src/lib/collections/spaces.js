@@ -96,14 +96,12 @@ if(Meteor.isServer) {
 				submitted: new Date(),
 				visible: true,
 				codePanel: true,
-				guestWrite: true,
-				commentsAllowed:true,
-				postEditPermissions:"own",
 				createUserAllowed:true,
 				liveFeed:true,
 				lessons:false,
 				resources:true,
-				permissions:{public:false}
+				liveFeedComments:true,
+				permissions:{public:false, liveFeedAddPost:true}
 			});
 
 			var spaceId = Spaces.insert(space);

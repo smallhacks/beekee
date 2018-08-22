@@ -8,7 +8,7 @@
 	"mailPassword": "",
 	"mailServer": "",
 	"public" : {
-		"isBox": "true",
+		"isBox": "false",
 		 "prefix": "XX",
 		 "ga": {
 			"id": ""

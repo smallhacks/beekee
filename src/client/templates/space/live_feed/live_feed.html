@@ -1,5 +1,7 @@
 <template name="liveFeed">
-	{{> liveFeedPostSubmit}}
+	{{#if liveFeedAddPost}}
+		{{> liveFeedPostSubmit}}
+	{{/if}}
 		{{#if newMessages}}
 			<div class="text-center mb-2">
 				<button type="button" class="btn btn-outline-primary live-feed--refresh">{{newMessages}} {{_ 'live-feed--notification-panel'}}</button>

@@ -48,7 +48,7 @@
 	<div class="border border-top-0 rounded-bottom mb-4 p-2 bg-light small">
 		{{#each comments}}
 			<div class="border-bottom mb-2 p-1">
-				{{#if commentEditAllowed}}
+				{{#if ownComment}}
 					<a href="#" class="float-right text-secondary" data-toggle="modal" data-target="#live-feed-post--delete-comment-{{this.id}}">x</a>
 					{{> liveFeedDeleteComment}}
 				{{/if}}

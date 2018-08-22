@@ -43,5 +43,27 @@ Template.permissionsSettings.events({
 				if (error)
 					alert(TAPi18n.__('error-message')+error.message);
 			});
+	},
+	'click .permissions-settings--liveFeedAddPost': function(e) {
+		e.preventDefault();
+	
+		if (this.space.permissions)
+			if (this.space.permissions.liveFeedAddPost) {
+				Spaces.update(this.space._id, {$set: {permissions:{liveFeedAddPost:false}}}, function(error) {
+					if (error)
+						alert(TAPi18n.__('error-message')+error.message);
+				});
+			}
+			else {
+				Spaces.update(this.space._id, {$set: {permissions:{liveFeedAddPost:true}}}, function(error) {
+					if (error)
+						alert(TAPi18n.__('error-message')+error.message);
+				});				
+			}
+		else
+			Spaces.update(this.space._id, {$set: {permissions:{liveFeedAddPost:true}}}, function(error) {
+				if (error)
+					alert(TAPi18n.__('error-message')+error.message);
+			});
 	}
 }); 

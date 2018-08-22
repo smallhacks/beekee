@@ -65,8 +65,11 @@ Template.liveFeed.events({
 
 Template.liveFeed.helpers({
 
+	liveFeedAddPost: function() {
+		return Template.parentData(1).space.permissions.liveFeedAddPost || Template.parentData(1).space.userId === Meteor.userId() || Roles.userIsInRole(Meteor.userId(), ['admin']) === true;
+	},
 	liveFeedPosts: function() {
-		return Posts.find({spaceId:Session.get('spaceId'), type:"liveFeed"},{sort: {submitted: -1}});
+		return Posts.find({type:"liveFeed"},{sort: {submitted: -1}});
 	},
 	newMessages: function() { // Check if server posts  > client posts (if reactive is on)
 
