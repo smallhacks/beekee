@@ -101,7 +101,7 @@ if(Meteor.isServer) {
 				lessons:false,
 				resources:true,
 				liveFeedComments:true,
-				permissions:{public:false, liveFeedAddPost:true}
+				permissions:{public:false, liveFeedAddPost:true, liveFeedAddCategory:false}
 			});
 
 			var spaceId = Spaces.insert(space);

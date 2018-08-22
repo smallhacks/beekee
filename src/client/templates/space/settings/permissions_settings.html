@@ -4,7 +4,7 @@
 		{{#if isBox}}
 			<a href="#" class="list-group-item list-group-item-action d-flex permissions-settings--public"><span>Public Space<p class="small text-secondary">Allows anyone to access the contents and interact within this Space without needing an Access Code.</p></span><span class="ml-auto">{{#if space.permissions.public}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}</span></a>
 		{{/if}}
-  		<a href="#" class="list-group-item list-group-item-action d-flex permissions-settings--addCategories"><span>Users can add categories in Live Feed</span><span class="ml-auto">{{#if space.permissions.addCategories}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}</span></a>
+  		<a href="#" class="list-group-item list-group-item-action d-flex permissions-settings--liveFeedAddCategory"><span>Users can add categories in Live Feed</span><span class="ml-auto">{{#if space.permissions.liveFeedAddCategory}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}</span></a>
   		<a href="#" class="list-group-item list-group-item-action d-flex permissions-settings--liveFeedAddPost"><span>Users can add posts in Live Feed</span><span class="ml-auto">{{#if space.permissions.liveFeedAddPost}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}</span></a>
   	</div>
 </template>

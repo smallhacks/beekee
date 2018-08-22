@@ -24,12 +24,13 @@ if (Posts.find({type:"home"}) != 0) {
 console.log('Checking if categories without "type" attribute exist and updating if so');
 if (Categories.find({type:{$exists:false}}).count() > 0) {
 	console.log('There are categories without "type" attribute');
-	Categories.update({type:{$exists:false}},{$set:{"type":"liveFeed"}}, function(err) { // Before v1.2, categories was only available for liveFeed
+	Categories.update({type:{$exists:false}},{$set:{"type":"liveFeed"}}, function(err,res) { // Before v1.2, categories was only available for liveFeed
 		if (err) {
 			console.log('Error when updating categories without "type" attribute : '+error.message);
 		}
 		else {
 			console.log('All categories without "order" attribute have been updated.');
+			console.log(res);
 		}
 	});
 }
@@ -40,12 +41,13 @@ if (Categories.find({type:{$exists:false}}).count() > 0) {
 console.log('Checking if spaces without "permissions" attribute exist and updating if so');
 if (Spaces.find({"permissions":{$exists:false}}).count() > 0) {
 	console.log('There are spaces without "permissions" attribute');
-	Spaces.update({"permissions":{$exists:false}},{$set:{"permissions":{"public":false,"liveFeedAddPost":true}}}, function(err) {
+	Spaces.update({"permissions":{$exists:false}},{$set:{"permissions":{"public":false,"liveFeedAddPost":true,"liveFeedAddCategory":false}}}, function(err,res) {
 		if (err) {
 			console.log('Error when updating spaces without "permissions" attribute : '+error.message);
 		}
 		else {
 			console.log('All spaces without "permissions" attribute have been updated.');
+			console.log(res);
 		}
 	});
 } else {
@@ -53,12 +55,27 @@ if (Spaces.find({"permissions":{$exists:false}}).count() > 0) {
 	console.log('Checking if spaces without "permissions.liveFeedAddPost" attribute exist and updating if so');
 	if (Spaces.find({"permissions.liveFeedAddPost":{$exists:false}}).count() > 0) {
 		console.log('There are spaces without "permissions.liveFeedAddPost" attribute');
-		Spaces.update({"permissions.liveFeedAddPost":{$exists:false}},{$set:{"permissions":{"liveFeedAddPost":"own"}}}, function(err) {
+		Spaces.update({"permissions.liveFeedAddPost":{$exists:false}},{$set:{"permissions.liveFeedAddPost":"own"}}, function(err,res) {
 			if (err) {
 				console.log('Error when updating spaces without "permissions.liveFeedAddPost" attribute : '+error.message);
 			}
 			else {
 				console.log('All spaces without "permissions.liveFeedAddPost" attribute have been updated.');
+				console.log(res);
+			}
+		});
+	}
+	//Check if spaces have permissions.liveFeedAddCategory attributes
+	console.log('Checking if spaces without "permissions.liveFeedAddCategory" attribute exist and updating if so');
+	if (Spaces.find({"permissions.liveFeedAddCategory":{$exists:false}}).count() > 0) {
+		console.log('There are spaces without "permissions.liveFeedAddCategory" attribute');
+		Spaces.update({"permissions.liveFeedAddCategory":{$exists:false}},{$set:{"permissions.liveFeedAddCategory":false}}, function(err,res) {
+			if (err) {
+				console.log('Error when updating spaces without "permissions.liveFeedAddCategory" attribute : '+error.message);
+			}
+			else {
+				console.log('All spaces without "permissions.liveFeedAddCategory" attribute have been updated:');
+				console.log(res);
 			}
 		});
 	}
