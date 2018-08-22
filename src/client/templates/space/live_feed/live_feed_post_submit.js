@@ -164,8 +164,8 @@ Template.liveFeedPostSubmit.helpers({
 		if (Session.get('liveFeedCategory') == option)
 			return 'selected'
 	},
-	permissionAddCategories: function(template) {
-		if (this.space.permissions.addCategories || Roles.userIsInRole(Meteor.userId(), ['admin']) || Meteor.userId() == this.space.userId)
+	liveFeedAddCategory: function(template) {
+		if (this.space.permissions.liveFeedAddCategory || Roles.userIsInRole(Meteor.userId(), ['admin']) || Meteor.userId() == this.space.userId)
 			return true
 		else
 			return false
@@ -175,5 +175,5 @@ Template.liveFeedPostSubmit.helpers({
      		spaceId: this.space._id,
       		type: "liveFeed"
     	}
-  	}
+  	},
 });
