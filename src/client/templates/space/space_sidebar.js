@@ -140,7 +140,7 @@ Template.spaceSidebar.helpers({
 		return this.space.resources
 	},
 	ownSpace: function() {
-		if (Meteor.userId() == Template.parentData(2).space.userId || Roles.userIsInRole(Meteor.userId(), ['admin']))
+		if (Meteor.userId() == Template.parentData(1).space.userId || Roles.userIsInRole(Meteor.userId(), ['admin']))
 			return true
 		else
 			return false

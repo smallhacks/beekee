@@ -23,7 +23,8 @@ Template.adminCreateAccount.onRendered(function () {
                 email: true
             },
             name: {
-                required: true
+                required: true,
+                maxlength: 15
             },
             password: {
                 required: true,
