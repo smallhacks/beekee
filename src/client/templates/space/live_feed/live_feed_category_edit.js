@@ -38,6 +38,10 @@ Template.liveFeedCategoryEdit.events({
 			$('#editCategoryName').val('');
 			Session.set('numChars', 0); // Count the number of characters
 		}
+		else {
+			$('#liveFeedCategoryEdit').modal('hide');
+			Session.set('liveFeedCategoryToEdit',null);
+		}
 	},
 	'click .live-feed-category-edit--button-submit': function(e) {
 		e.preventDefault();

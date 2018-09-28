@@ -37,6 +37,10 @@ Template.resourcesCategoryEdit.events({
 			$('#editCategoryName').val('');
 			Session.set('numChars', 0); // Count the number of characters
 		}
+		else {
+			$('#resourcesCategoryEdit').modal('hide');
+			Session.set('resourcesCategoryToEdit',null);	
+		}
 	},
 	'click .resources-category-edit--button-submit': function(e) {
 		e.preventDefault();
