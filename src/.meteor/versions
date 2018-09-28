@@ -20,6 +20,7 @@ callback-hook@1.0.4
 cfs:graphicsmagick@0.0.18
 cfs:http-methods@0.0.32
 check@1.1.0
+chrismbeckett:toastr@2.1.2_1
 chuangbo:cookie@1.1.0
 coffeescript@1.0.11
 copleykj:jquery-autosize@1.17.8
