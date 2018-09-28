@@ -18,12 +18,14 @@ Template.spaceSidebar.events({
 	'click .space-sidebar--live-feed-category-edit': function(e) {
 		e.preventDefault();
 		var categoryName = $(e.target).data("category");
+		Session.set('numChars', categoryName.length); // Count the number of characters
 		Session.set('liveFeedCategoryToEdit',categoryName);
 		$('#liveFeedCategoryEdit').modal('show');
 	},
 	'click .space-sidebar--resources-category-edit': function(e) {
 		e.preventDefault();
 		var categoryName = $(e.target).data("category");
+		Session.set('numChars', categoryName.length); // Count the number of characters
 		Session.set('resourcesCategoryToEdit',categoryName);
 		$('#resourcesCategoryEdit').modal('show');
 	},

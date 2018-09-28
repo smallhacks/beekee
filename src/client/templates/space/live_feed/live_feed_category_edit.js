@@ -2,7 +2,7 @@ Template.liveFeedCategoryEdit.onRendered(function() {
 
 	$(".live-feed-category-edit--form").validate({
         rules: {
-            categoryName: {
+            editCategoryName: {
                 required: true,
                 minlength: 1,
                 maxlength: 20
@@ -10,7 +10,7 @@ Template.liveFeedCategoryEdit.onRendered(function() {
         }
     }); 
 
-    Session.set('numChars', 0); // Count the number of characters
+    Session.set('numChars', $('#editCategoryName').val().length); // Count the number of characters
 });
 
 
@@ -24,7 +24,7 @@ Template.liveFeedCategoryEdit.events({
 		var currentCategoryName = Session.get('liveFeedCategoryToEdit');
 		var categoryType = 'liveFeed';
 
-		var newCategoryName = $(e.target).find('[name=categoryName]').val();
+		var newCategoryName = $(e.target).find('[name=editCategoryName]').val();
 		if (currentCategoryName != newCategoryName) {
 
 			Meteor.call('categoryEdit', spaceId, categoryType, currentCategoryName, newCategoryName, function(error) {
@@ -35,7 +35,7 @@ Template.liveFeedCategoryEdit.events({
 					Session.set('liveFeedCategoryToEdit',null);
 				}
 			});
-			$('#categoryName').val('');
+			$('#editCategoryName').val('');
 			Session.set('numChars', 0); // Count the number of characters
 		}
 	},
@@ -59,8 +59,8 @@ Template.liveFeedCategoryEdit.events({
 			}
 		});
 	},
-	'input #categoryName': function(){
-    	Session.set('numChars', $('#categoryName').val().length);
+	'input #editCategoryName': function(){
+    	Session.set('numChars', $('#editCategoryName').val().length);
   	}
 });
 
