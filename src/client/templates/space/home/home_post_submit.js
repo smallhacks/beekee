@@ -1,4 +1,4 @@
-Template.lessonsPostSubmit.onCreated(function() {
+Template.homePostSubmit.onCreated(function() {
 
 	toastr.options = {
 	  	"positionClass": "toast-bottom-center",
