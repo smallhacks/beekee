@@ -1,6 +1,8 @@
 
 ![Beekee logo](http://www.beekee.ch/images/beekee_logo_black.png)
 
+[This Beekee branch contains a special version that is made to run alongside Moodle]
+
 Beekee is a simple open-source platform to support face-to-face collaboration.
 
 With Beekee, you can:

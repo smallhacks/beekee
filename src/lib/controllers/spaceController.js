@@ -1,51 +1,23 @@
 SpaceController = RouteController.extend({
 
 	onBeforeAction: function () {
+
 		var spaceId = this.params._id;
-		if (Spaces.findOne(spaceId)) {
-			if (!Session.get(spaceId)) {
-				if (Meteor.userId()) {
-					var adminName = Meteor.user().profile.name;
-					if (!Authors.findOne({spaceId:spaceId,name:adminName})) {
-						Meteor.call('authorInsert', adminName, spaceId, function(error) {
-							if (error) {
-								console.log(error);
-							}
-							else {
-								Session.setPersistent(spaceId, {author: adminName}); // Persistent to browser refresh
-							}
-						});
-					}
-					else {
-						Session.setPersistent(spaceId, {author: adminName}); // Persistent to browser refresh
-					}
-				} else
-					Router.go('spaceUsersFirstConnection', {_id: spaceId});
-			}
-			else {
-				if (Meteor.userId()) {
-					var adminName = Meteor.user().profile.name;
-					if (!Authors.findOne({spaceId:spaceId,name:adminName})) {
-						Meteor.call('authorInsert', adminName, spaceId, function(error) {
-							if (error) {
-								console.log(error);
-							}
-							else {
-								Session.setPersistent(spaceId, {author: adminName}); // Persistent to browser refresh
-							}
-						});
-					}
-					else {
-						Session.setPersistent(spaceId, {author: adminName}); // Persistent to browser refresh
-					}
-				}	
-			}
-		}
-		else {
-			Router.go('notFound');
-		}
-		
-		this.next();
+		if (!Spaces.findOne(spaceId)) {
+			var space = {
+				title: this.params._id,
+				_id: this.params._id
+			};
+
+			Meteor.call('spaceInsert', space, function(error, result) {
+				if(error)
+					alert(TAPi18n.__('error-message')+error.message);
+				else {
+					this.next();
+				}
+			});
+		} else
+			this.next();		
 	},
 
 	waitOn: function () { 
@@ -61,7 +33,12 @@ SpaceController = RouteController.extend({
 	},
 
 	data: function () {
+		var isAdmin = false;
+		if (this.params.isadmin == "oSXfn6qej4bAwYpWn")
+			isAdmin = true;
 		return {
+			user: this.params.userUsername,
+			isAdmin: isAdmin,
 			space: Spaces.findOne(this.params._id),
 			posts: Posts.find({spaceId:this.params._id}),
 			last: this.params.last

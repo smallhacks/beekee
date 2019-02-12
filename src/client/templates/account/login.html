@@ -3,7 +3,7 @@
 	<div class="container">
   		<div class="row justify-content-center mt-5">
   			<div class="col-12 col-lg-5">
-  				<h4 class="text-center mb-4">{{_ 'login--page-title'}}</h4>
+  				<h4 class="text-center mb-4">Admin login</h4>
 				<div class="card text-center">
 					<div class="card-body">
 						<form id="login--form" name="login--form">
@@ -29,15 +29,5 @@
 				</div>
 			</div>
   		</div>
-  		<div class="row justify-content-center mt-5 text-center">
-  			<div class="col-12 col-lg-6 text-center">
-  				<h6>{{_ 'login--register'}}</h6>
-  				{{#if isBox}}
-					{{_ 'login--register-contact-admin'}}
-				{{else}}
-					<a href="{{pathFor 'register'}}"> {{_ 'login--register-link'}}</a>
-				{{/if}}		
-			</div>
-		</div>
 	</div>
 </template>

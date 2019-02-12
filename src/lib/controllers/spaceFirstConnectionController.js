@@ -15,6 +15,7 @@ SpaceFirstConnectionController = RouteController.extend({
 	data: function () {
 		return { 
 			space: Spaces.findOne(this.params._id),
+			spaceId: this.params._id,
 			firstConnection: this.params.firstConnection
 		}
 	},

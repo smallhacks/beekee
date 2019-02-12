@@ -42,8 +42,8 @@ Meteor.methods({
 	},
 	'adminSetNewPassword': function(adminId, userId, newPassword) { // Admin can forcibly change the password for a user
 		if (Roles.userIsInRole(adminId, 'admin')) {
-			console.log("bien admin");
-			Accounts.setPassword(userId, newPassword);
+			console.log(Accounts.setPassword(userId, newPassword));
+			
 		}
 	},
 	'createAccount': function(email, password, profile) {

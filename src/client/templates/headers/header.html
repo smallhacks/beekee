@@ -1,0 +1,29 @@
+<template name="header">	
+	<nav class="bg-dark text-white" style="z-index:500;height:52px;line-height:52px;">
+		<div class="container h-100">
+			<div class="row justify-content-center h-100">
+				<div class="col-4 col-lg-3" style="">
+					<a class="menu-item d-none d-sm-none d-lg-inline h-100" data-id="1" href="http://box.beekee.ch">
+						<img style="height: 35px; padding: 0px 10px 5px 0;" alt="logo" src="/img/logo_header.png">
+					</a>
+					<a role="button" id="sidebarCollapse" class="btn-icon d-inline d-lg-none">
+                    	<i class="fas fa-bars fa-lg d-inline"></i>
+                	</a>
+					<a href="http://box.beekee.ch/course/view.php?id={{courseId}}" class="btn-link back-header--button-back"><i class="fas fa-chevron-left fa-lg"></i><span> {{_ 'header--back'}}</span></a>
+				</div>
+				<div class="col-8 text-right">
+					<a href="#" class="beekee-header--change-author text-white px-3 mr-4">
+						<i class="fa fa-user fa-fw"></i> 
+							<span>{{authorName}}</span>
+					</a>
+					{{#if admin}}
+					<a class="btn-icon" role="button" id="dropdownMenuLink" data-toggle="dropdown"><i class="fa fa-ellipsis-v fa-lg"></i></a>
+					<div class="dropdown-menu" style="line-height:1.5" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="{{pathFor 'settings' _id=this.space._id isadmin=adminCode userUsername=user}}"><i class="fas fa-cog"></i> {{_ 'space-header--settings'}}</a>
+					</div>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	</nav>
+</template>

@@ -5,11 +5,15 @@ Spaces.allow({
 	//update: function(userId, space) { return true},
 	//remove: function(userId, space) { return true},
 
-	insert: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); },
+	insert: function(userId, space) { return true; },
+	update: function(userId, space) { return true; },
+	remove: function(userId, space) { return true; }
 
-	update: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); },
+	// insert: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); },
 
-	remove: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); }
+	// update: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); },
+
+	// remove: function(userId, space) { return ownsDocument(userId, space) || isAdmin(userId); }
 });
 
 
@@ -69,7 +73,8 @@ if(Meteor.isServer) {
 		spaceInsert: function(spaceAttributes) {
 
 			check(spaceAttributes, {
-					title: String
+					title: String,
+					_id : String,
 			});
 
 			var nbOfCodes = Codes.find().count();
@@ -91,7 +96,7 @@ if(Meteor.isServer) {
 
 			var user = Meteor.user();
 			var space = _.extend(spaceAttributes, {
-				userId: user._id,
+				//userId: user._id,
 				spaceCode: code,
 				submitted: new Date(),
 				visible: true,

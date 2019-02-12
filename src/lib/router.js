@@ -49,7 +49,7 @@ var requireAdmin = function() {
 		}
 }
 
-Router.onBeforeAction(requireLogin, {only: 'settings'});
+// Router.onBeforeAction(requireLogin, {only: 'settings'});
 
 var pathsRequireAdmin;
 if (Meteor.settings.public.isBox === "true")
@@ -77,10 +77,10 @@ Router.route('/login', {
 	fastRender: true
 });
 
-Router.route('/register', {
-	name: 'register',
-	fastRender: true
-});
+// Router.route('/register', {
+// 	name: 'register',
+// 	fastRender: true
+// });
 
 Router.route('/update', {
 	name: 'update',
@@ -101,27 +101,27 @@ Router.route('/admin', {
 	controller: 'AdminController' 
 });
 
-Router.route('/', {
-	name: 'indexStudent',
-	controller: 'IndexStudentController'
-});
+// Router.route('/', {
+// 	name: 'indexStudent',
+// 	controller: 'IndexStudentController'
+// });
 
-Router.route('/teacher', {
-	name: 'indexTeacher',
-	controller: 'IndexTeacherController'
-});
+// Router.route('/teacher', {
+// 	name: 'indexTeacher',
+// 	controller: 'IndexTeacherController'
+// });
 
 Router.route('/lesson/:_id', {
 	name: 'lessonsFrame',
 	controller: 'LessonsFrameController'
 });
 
-Router.route('/space/:_id', {
+Router.route('/space/:_id/:userUsername/:isadmin?', {
 	name: 'space',
 	controller: 'SpaceController'
 });
 
-Router.route('/space/:_id/settings', {
+Router.route('/space/:_id/:userUsername/:isadmin?/settings', {
 	name: 'settings',
 	controller: 'SettingsController'
 });

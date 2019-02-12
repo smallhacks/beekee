@@ -7,7 +7,6 @@ Template.space.onCreated(function() {
 	else {
 		// Set locale according to browser
 		function getLang() {
-			console.log(navigator.languages[0]);
 		    return (
 		        navigator.languages && navigator.languages[0] ||
 		        navigator.language ||
@@ -118,9 +117,29 @@ Template.space.onCreated(function() {
 
 Template.space.onRendered(function () {
 
-$("body").tooltip({selector: '[data-toggle=tooltip]', trigger: 'hover'});
+	$("body").tooltip({selector: '[data-toggle=tooltip]', trigger: 'hover'});
 
     document.title = 'Beekee - '+this.data.space.title;
+
+    var spaceId = this.data.space._id;
+    var userName = this.data.user;
+
+	if (userName == "guest") {
+		if (!Session.get(spaceId)) {
+			$('#guestUsername').modal('show');
+		}
+	} else {
+		if (!Authors.findOne({spaceId:spaceId,name:userName})) {
+			Meteor.call('authorInsert', userName, spaceId, function(error) {
+				if(error)
+					alert(TAPi18n.__('error-message')+error.message);
+				else {
+					Session.setPersistent(spaceId, {author: userName}); // Persistent to browser refresh
+				} 
+			});
+		} else
+		Session.set(this.data.space._id, {author: userName});
+	}
 
 
    // $("#sidebar").mCustomScrollbar({

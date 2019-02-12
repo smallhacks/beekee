@@ -41,7 +41,7 @@ Template.login.events({
 		if (email && password) {
 			Meteor.loginWithPassword(email.trim(), password, function(err) {
 				if(!err)
-					Router.go('indexTeacher');
+					Router.go('admin');
 				else    
 					Session.set('errorMessage', err.reason);
 			});

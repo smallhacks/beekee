@@ -17,7 +17,7 @@
 					<a class="dropdown-item text-danger live-feed-post--delete" href="#">{{_ 'post--delete'}}</a>
 				</div>
 			{{/if}}
-			<h6 class="card-title">{{author}}<small class="text-muted ml-1">• {{livestamp submitted}}</small></h6>
+			<h6 class="card-title">{{author}}<!-- <small class="text-muted ml-1">• {{livestamp submitted}}</small> --></h6>
 			<p class="card-text">{{#autolink}}{{body}}{{/autolink}}</p>
 			{{#if this.fileId}}
 				{{#unless image}}
@@ -52,7 +52,7 @@
 					<a href="#" class="float-right text-secondary" data-toggle="modal" data-target="#live-feed-post--delete-comment-{{this.id}}">x</a>
 					{{> liveFeedDeleteComment}}
 				{{/if}}
-				<div class="small">{{this.author}} • {{livestamp this.submitted}}</div>
+				<div class="small">{{this.author}}<!--  • {{livestamp this.submitted}} --></div>
 				<div class="mt-1">{{#autolink}}{{this.text}}{{/autolink}}</div>
 				{{#if likeAlreadyComment}}
 					<div class="mt-2 small">
@@ -73,8 +73,10 @@
 				{{/if}}
 			</div>
 		{{/each}}
-		<div class="form-group mb-0">
-			<textarea class="form-control live-feed-post--add-comment-textarea" id="comment" rows="1" placeholder="{{_ 'live-feed-post--add-comment'}}"></textarea>
-		</div>
+		{{#if addComment}}
+			<div class="form-group mb-0">
+				<textarea class="form-control live-feed-post--add-comment-textarea" id="comment" rows="1" placeholder="{{_ 'live-feed-post--add-comment'}}"></textarea>
+			</div>
+		{{/if}}
 	</div>
 </template>

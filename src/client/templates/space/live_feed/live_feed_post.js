@@ -98,16 +98,24 @@ Template.liveFeedPost.events({
 
 Template.liveFeedPost.helpers({
 
+	addComment: function() {
+		return Template.parentData(1).space.permissions.liveFeedAddPost || Template.parentData(1).space.userId === Meteor.userId() || Roles.userIsInRole(Meteor.userId(), ['admin']) === true;
+	},
 	ownPost:function() {
-		if (Session.get(Template.parentData().space._id).author === this.author || Template.parentData().space.userId === Meteor.userId() || Roles.userIsInRole(Meteor.userId(), ['admin']) === true)
+		if (Session.get(Template.parentData().space._id))
+			if (Session.get(Template.parentData().space._id).author === this.author)
+				return true
+		else if (Template.parentData().isAdmin)
 			return true
 		else
 			return false
 	},
 	ownComment: function() {
-		if (Session.get(Template.parentData(2).space._id).author === this.author || Template.parentData(2).space.userId === Meteor.userId() || Roles.userIsInRole(Meteor.userId(), ['admin']) === true) {
+		if (Session.get(Template.parentData(2).space._id))
+			if (Session.get(Template.parentData(2).space._id).author === this.author)
+				return true
+		else if (Template.parentData(2).isAdmin)
 			return true
-		}
 		else
 			return false
 	},
@@ -127,9 +135,12 @@ Template.liveFeedPost.helpers({
 			return this.likes.length-1;
 	},
 	likeAlready: function() { // Check if user already like the post
-		var author = Session.get(Template.parentData(1).space._id).author; 
-		if ($.inArray(author,this.likes) != -1)
-			return true
+		if (Session.get(Template.parentData(1).space._id)) {
+			var author = Session.get(Template.parentData(1).space._id).author; 
+			if ($.inArray(author,this.likes) != -1)
+				return true
+		}
+		else return false
 	},
 	othersLikes: function() {
 		if (this.likes)

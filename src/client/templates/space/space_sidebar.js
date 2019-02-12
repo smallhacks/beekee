@@ -91,12 +91,12 @@ Template.spaceSidebar.helpers({
 	'selectedMenuItem': function(menuItemId) {
 		return menuItemId == Session.get('menuItem');
 	},
-	'selectedMenuItemBg': function(menuItemId) {
-		if (menuItemId == Session.get('menuItem'))
+	'selectedShowAllBg': function(menuItemId) {
+		if (Session.get('liveFeedCategory') == "" && Session.get('author') == "")
 			return "menu-item--selected"	
 	},
-	'selectedMenuItemTxt': function(menuItemId) {
-		if (menuItemId == Session.get('menuItem'))
+	'selectedShowAllTxt': function(menuItemId) {
+		if (Session.get('liveFeedCategory') == "" && Session.get('author') == "")
 			return "font-weight-bold selected"
 		else
 			return "font-weight-light"
@@ -131,15 +131,6 @@ Template.spaceSidebar.helpers({
 	},
 	authors: function() {
 		return Authors.find({}, {sort: {name: 1}});
-	},
-	liveFeed: function() {
-		return this.space.liveFeed
-	},
-	lessons: function() {
-		return this.space.lessons
-	},
-	resources: function() {
-		return this.space.resources
 	},
 	ownSpace: function() {
 		if (Meteor.userId() == Template.parentData(1).space.userId || Roles.userIsInRole(Meteor.userId(), ['admin']))

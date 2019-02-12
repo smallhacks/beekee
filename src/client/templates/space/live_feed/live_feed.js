@@ -35,11 +35,13 @@ Template.liveFeed.events({
 
 		if (Session.get('author') !== "") {
 			var author = Session.get('author');
-			Session.set('postsServerNonReactive', Authors.findOne({name:author}).nRefs);
+			if (Authors.findOne({name:author}))
+				Session.set('postsServerNonReactive', Authors.findOne({name:author}).nRefs);
 		}
 		else if (Session.get('liveFeedCategory') !== "") {
 			var category = Session.get('liveFeedCategory');
-			Session.set('postsServerNonReactive', Categories.findOne({name:category}).nRefs);
+			if (Categories.findOne({name:category}))
+				Session.set('postsServerNonReactive', Categories.findOne({name:category}).nRefs);
 		}
 		else {
 			Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count);
@@ -78,11 +80,13 @@ Template.liveFeed.helpers({
 
 		if (Session.get('author') !== "") {
 			var author = Session.get('author');
-			postsReactiveCount = Authors.findOne({name:author}).nRefs;  
+			if (Authors.findOne({name:author}))
+				postsReactiveCount = Authors.findOne({name:author}).nRefs;  
 		}
 		else if (Session.get('liveFeedCategory') !== "") {
 			var category = Session.get('liveFeedCategory');
-			postsReactiveCount = Categories.findOne({name:category}).nRefs;  
+			if (Categories.findOne({name:category}))
+				postsReactiveCount = Categories.findOne({name:category}).nRefs;  
 		}
 		else {
 			postsReactiveCount = LiveFeedCounts.findOne().count;
@@ -106,11 +110,13 @@ Template.liveFeed.helpers({
 
 		if (Session.get('author') !== "") {
 			var author = Session.get('author');
-			serverPosts = Authors.findOne({name:author}).nRefs;
+			if (Authors.findOne({name:author}))
+				serverPosts = Authors.findOne({name:author}).nRefs;
 		}
 		else if (Session.get('liveFeedCategory') !== "") {
 			var category = Session.get('liveFeedCategory');
-			serverPosts = Categories.findOne({name:category}).nRefs;
+			if (Categories.findOne({name:category}))
+				serverPosts = Categories.findOne({name:category}).nRefs;
 		}
 		else
 			serverPosts = LiveFeedCounts.findOne().count;
@@ -144,11 +150,13 @@ liveFeedResetPostInterval = function() { // Reset interval of post subscription
 liveFeedResetPostsServerNonReactive = function() { 
 		if (Session.get('author') !== "") {
 			var author = Session.get('author');
-			Session.set('postsServerNonReactive', Authors.findOne({name:author}).nRefs);
+			if (Authors.findOne({name:author}))
+				Session.set('postsServerNonReactive', Authors.findOne({name:author}).nRefs);
 		}
 		else if (Session.get('liveFeedCategory') !== "") {
 			var category = Session.get('liveFeedCategory');
-			Session.set('postsServerNonReactive', Categories.findOne({name:category}).nRefs);
+			if (Categories.findOne({name:category}))
+				Session.set('postsServerNonReactive', Categories.findOne({name:category}).nRefs);
 		}
 		else
 			Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count);
