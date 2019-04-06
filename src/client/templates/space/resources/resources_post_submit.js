@@ -7,6 +7,10 @@ Template.resourcesPostSubmit.onCreated(function() {
 			delete Session.keys["fileExt"]; // Clear fileExt session
 
 	imageExtensions = ["jpg","jpeg","png","gif"];
+
+	toastr.options = {
+	  	"positionClass": "toast-bottom-center",
+	}
 });
 
 
@@ -76,6 +80,7 @@ Template.resourcesPostSubmit.events({
 				delete Session.keys["fileExt"]; // Clear fileId session
 				delete Session.keys["filePath"]; // Clear fileExt session
 				$('#resourcesPostSubmit').modal('hide');
+				toastr.success("",TAPi18n.__('resources-post-submit--confirm-toast'));
 			};
 		});
 	},

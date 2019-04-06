@@ -1,3 +1,11 @@
+Template.homePostSubmit.onCreated(function() {
+
+	toastr.options = {
+	  	"positionClass": "toast-bottom-center",
+	}
+});
+
+
 Template.homePostSubmit.events({
 
 	'submit form': function(e, template) {
@@ -16,6 +24,7 @@ Template.homePostSubmit.events({
 				tinymce.activeEditor.setContent(''); // Remove textarea content
 				$(e.target).find('[name=title]').val('');
 				$('#homePostSubmit').modal('hide');
+				toastr.success("",TAPi18n.__('home-post-submit--confirm-toast'));
 			};
 		});
 	},

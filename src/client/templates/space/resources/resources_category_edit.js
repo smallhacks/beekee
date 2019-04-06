@@ -2,15 +2,14 @@ Template.resourcesCategoryEdit.onRendered(function() {
 
 	$(".resources-category-edit--form").validate({
         rules: {
-            categoryName: {
+            editCategoryName: {
                 required: true,
                 minlength: 1,
                 maxlength: 20
             }
         }
     }); 
-
-    Session.set('numChars', 0); // Count the number of characters
+    Session.set('numChars', $('#editCategoryName').val().length); // Count the number of characters
 });
 
 
@@ -24,7 +23,7 @@ Template.resourcesCategoryEdit.events({
 		var currentCategoryName = Session.get('resourcesCategoryToEdit');
 		var categoryType = 'resource';
 
-		var newCategoryName = $(e.target).find('[name=categoryName]').val();
+		var newCategoryName = $(e.target).find('[name=editCategoryName]').val();
 		if (currentCategoryName != newCategoryName) {
 
 			Meteor.call('categoryEdit', spaceId, categoryType, currentCategoryName, newCategoryName, function(error) {
@@ -35,8 +34,12 @@ Template.resourcesCategoryEdit.events({
 					Session.set('resourcesCategoryToEdit',null);
 				}
 			});
-			$('#categoryName').val('');
+			$('#editCategoryName').val('');
 			Session.set('numChars', 0); // Count the number of characters
+		}
+		else {
+			$('#resourcesCategoryEdit').modal('hide');
+			Session.set('resourcesCategoryToEdit',null);	
 		}
 	},
 	'click .resources-category-edit--button-submit': function(e) {
@@ -59,8 +62,8 @@ Template.resourcesCategoryEdit.events({
 			}
 		});
 	},
-	'input #categoryName': function(){
-    	Session.set('numChars', $('#categoryName').val().length);
+	'input #editCategoryName': function(){
+    	Session.set('numChars', $('#editCategoryName').val().length);
   	}
 });
 

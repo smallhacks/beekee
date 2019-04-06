@@ -7,6 +7,10 @@ Template.lessonsPostSubmit.onCreated(function() {
 			delete Session.keys["fileExt"]; // Clear fileExt session
 
 	imageExtensions = ["jpg","jpeg","png","gif"];
+
+	toastr.options = {
+	  	"positionClass": "toast-bottom-center",
+	}
 });
 
 
@@ -85,6 +89,7 @@ Template.lessonsPostSubmit.events({
 
 				$('.lessons-post-submit--button-submit').prop('disabled', true);
 				$('#lessonsPostSubmit').modal('hide');
+				toastr.success("",TAPi18n.__('lessons-post-submit--confirm-toast'));
 			};
 		});
 	},
