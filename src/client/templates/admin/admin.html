@@ -96,7 +96,7 @@
 										<td>{{userCreatedAt}}</td>
 										<td>{{#if this.status.lastLogin.date}}{{livestamp this.status.lastLogin.date}}{{/if}}</td>
 										<td>
-											<a href="#" class="admin--user-change-password small">{{_ 'admin--users-change-password'}}</a>
+											<a href="#" data-userid="{{_id}}" class="admin--user-change-password small">{{_ 'admin--users-change-password'}}</a>
 													{{#unless admin}}
 												<a href="#" class="ml-3 small admin--user-delete text-danger">{{_ 'admin--users-delete'}}</a>
 													{{/unless}}
