@@ -24,8 +24,17 @@ sidebar.css
     background-color: white;
 }
 
+.menu-item:hover > i {
+        color: #8cc544;
+
+}
+
 .menu-item--selected {
     background-color: white;
+}
+
+.menu-item--selected .menu-item > i {
+    color: #8cc544;
 }
 
 @media (max-width: 991.98px) { 

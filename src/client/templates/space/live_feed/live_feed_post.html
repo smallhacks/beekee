@@ -1,5 +1,5 @@
 <template name="liveFeedPost">
-	<div class="card rounded-0" style="border-radius: 0.25rem 0.25rem 0 0 !important;">
+	<div class="card rounded-0 mb-5" style="border-radius: 0.25rem 0.25rem 0 0 !important;">
 		{{#if this.fileId}}
 			{{#if image}}
 				<div class="life-feed-post--image-wrapper">
@@ -48,8 +48,7 @@
 				{{/if}}
 			{{/if}}
 		</div>
-	</div>
-	<div class="border border-top-0 rounded-bottom mb-4 p-2 bg-light small">
+	<div class="rounded-bottom p-2 bg-light small">
 		{{#each comments}}
 			<div class="border-bottom mb-2 p-1">
 				{{#if ownComment}}
@@ -80,5 +79,6 @@
 		<div class="form-group mb-0">
 			<textarea class="form-control live-feed-post--add-comment-textarea" id="comment" rows="1" placeholder="{{_ 'live-feed-post--add-comment'}}"></textarea>
 		</div>
-	</div>
+	</div>	</div>
+
 </template>

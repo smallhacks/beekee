@@ -2,6 +2,7 @@
 custom.css
 */
 
+
 /* ----- Global ----- */
 
 html {
@@ -9,7 +10,12 @@ html {
 }
 
 body {
-	background-color: #fafafa;
+	font-family: Raleway;
+    background-image: url(https://scienscope.unige.ch/bioscope/wp-content/uploads/sites/8/2017/03/bg_bioscope.png);
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+	background-color: ;
 	overflow: auto;
 	height: 100% !important;
 }
@@ -24,7 +30,7 @@ a, button {
 }
 
 .bg-beekee {
-	background-color: #ffff66;
+	/*background-color: #8bc544;*/
 }
 
 .btn-label {position: relative;left: -12px;display: inline-block;padding: 6px 12px;background: rgba(0,0,0,0.15);border-radius: 3px 0 0 3px;}
@@ -72,6 +78,11 @@ a, button {
 
 .min-h-100 {
 	min-height: 100% !important;
+}
+
+.card {
+	border: none !important;
+	box-shadow: 0 30px 60px -12px rgba(50,50,93,.25), 0 18px 36px -18px rgba(0,0,0,.3), 0 -12px 36px -8px rgba(0,0,0,.025);
 }
 
 .card-header {
@@ -133,16 +144,24 @@ and (max-device-width : 568px) {*/
 /* ----- Sidebar ----- */
 
 .space-sidebar--menu-collapse[aria-expanded="false"] .fa:before {  
-  content: "\f0d8";
+	content: "\f0d7";
 }
 
 .space-sidebar--menu-collapse[aria-expanded="true"] .fa:before {
-  content: "\f0d7";
+	content: "\f0d8";
 }
 
 .space-sidebar--filter-category > :nth-child(3) { display:none; }
 
 .space-sidebar--filter-category:hover > :nth-child(3) { display:inline; }
+
+
+/* ----- Live Map ----- */
+.live-map--google-maps {
+	width: 100%;
+	height: 100%;
+	box-shadow: 0 30px 60px -12px rgba(50,50,93,.25), 0 18px 36px -18px rgba(0,0,0,.3), 0 -12px 36px -8px rgba(0,0,0,.025);
+}
 
 
 /* ----- Post item ----- */
@@ -187,11 +206,11 @@ and (max-device-width : 568px) {*/
 /* ----- File upload ----- */
 
 .file-upload--button {
-	padding: 5px 20px;
-	cursor: pointer;
-	border: solid 1px #007bff;
-	border-radius:5px;
-	color: #007bff;
+    padding: 5px 20px;
+    cursor: pointer;
+    border: solid 1px #007bff;
+    border-radius: 600px;
+    color: #007bff;
 }
 
 .file-upload--button:hover {
@@ -208,6 +227,6 @@ and (max-device-width : 568px) {*/
 	cursor: pointer;
 }
 
-.file-upload--input-file-icon:hover {
+.file-upload--input-file-icon:hover > i{
 	color: grey;
 }*/

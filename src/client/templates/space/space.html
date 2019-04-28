@@ -3,32 +3,32 @@
         <nav id="sidebar" class="align-middle">{{> spaceSidebar}}</nav>
         {{> spaceHeader}}    
         <div class="content container h-100" style="margin-top:-52px;padding-top:52px;">
-        	<div class="row justify-content-center min-h-100">
+            <div class="row justify-content-center min-h-100">
                 <div class="d-none d-sm-none d-lg-block col-3 mt-4 sidebar-sticky">
-        		  {{> spaceSidebar}}
+                  {{> spaceSidebar}}
                 </div>
-            	<div class="col-sm-12 col-lg-8 bg-white border-left border-right min-h-100 pt-4 pl-4 pr-4">
-            		{{#if menuItem 1}}
-            			{{> home}}
-            		{{/if}}
-            		{{#if menuItem 2}}
-            			{{> liveFeed}}
-        			{{/if}}
+                <div class="col-sm-12 col-lg-8 min-h-100 pt-4 pl-4 pr-4">
+                    {{#if menuItem 1}}
+                        {{> home}}
+                    {{/if}}
+                    {{#if menuItem 2}}
+                        {{> liveFeed}}
+                    {{/if}}
                     {{#if menuItem 5}}
                         {{> liveMap}}
                     {{/if}}
                     {{#if menuItem 6}}
                         {{> liveGallery}}
                     {{/if}}
-        			{{#if menuItem 3}}
-            			{{> lessons}}
-            		{{/if}}
-            		{{#if menuItem 4}}
-            			{{> resources}}
-            		{{/if}}
-            	</div>
-          	</div>
+                    {{#if menuItem 3}}
+                        {{> lessons}}
+                    {{/if}}
+                    {{#if menuItem 4}}
+                        {{> resources}}
+                    {{/if}}
+                </div>
+            </div>
         </div>
      </div>
-    <div class="overlay"></div> 
+    <div class="overlay"></div>
 </template>
