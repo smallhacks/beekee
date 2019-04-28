@@ -98,8 +98,8 @@ Template.liveFeedPost.events({
 
 Template.liveFeedPost.helpers({
 
-	ownPost:function() {
-		if (Session.get(Template.parentData().space._id).author === this.author || Template.parentData().space.userId === Meteor.userId() || Roles.userIsInRole(Meteor.userId(), ['admin']) === true)
+	admin:function() {
+		if (Template.parentData().space.userId === Meteor.userId() || Roles.userIsInRole(Meteor.userId(), ['admin']) === true)
 			return true
 		else
 			return false

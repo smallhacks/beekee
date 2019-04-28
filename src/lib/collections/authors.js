@@ -13,8 +13,8 @@ Authors.allow({
 
 Meteor.methods({
 
-	authorInsert: function(name, spaceId) {
-		Authors.insert({name: name, spaceId: spaceId, nRefs: 0});
+	authorInsert: function(name, email, spaceId) {
+		Authors.insert({name: name, email: email, spaceId: spaceId, nRefs: 0});
 	},
 	authorEdit: function(spaceId, oldName, newName) {
 		var author = Authors.findOne({name: oldName, spaceId: spaceId});

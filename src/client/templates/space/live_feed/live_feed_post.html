@@ -10,7 +10,7 @@
 			{{/if}}
 		{{/if}}
 		<div class="card-body">
-			{{#if ownPost}}
+			{{#if admin}}
 				<i class="fa fa-ellipsis-v fa-fw float-right btn-icon" id="dropdownMenuLink" data-toggle="dropdown"></i> 
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					<a class="dropdown-item live-feed-post--edit" href="#">{{_ 'post--edit'}}</a>
@@ -28,7 +28,11 @@
 				{{/unless}}
 			{{/if}}
 			{{#if category}}
-				<div class="small text-secondary float-right"><i class="fas fa-tag"></i> {{category}}</div>
+				<div class="small text-secondary float-right ml-3"><i class="fas fa-tag"></i> {{category}}</div>
+			{{/if}}
+			{{#if latitude}}
+			<div class="small text-secondary float-right">
+				<a href="https://www.google.com/maps/search/?api=1&query={{latitude}},{{longitude}}"><i class="fa fa-map-marker-alt"></i> Position</a></div>
 			{{/if}}
 			{{#if likeAlready}}
 				<a href="#" class="btn-link-black live-feed-post--remove-like text-primary"><i class="fas fa-thumbs-up"></i></a>

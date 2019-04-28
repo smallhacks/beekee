@@ -143,6 +143,8 @@
 	"space-users--user-exist":"The user %s already exists. Connect with this name ?",
 	"space-sidebar--home":"Home",
 	"space-sidebar--live-feed":"Live feed",
+	"space-sidebar--live-map":"Live map",
+	"space-sidebar--live-gallery":"Gallery",
 	"space-sidebar--categories":"CATEGORIES",
 	"space-sidebar--add-category":"Add a category",
 	"space-sidebar--authors":"AUTHORS",

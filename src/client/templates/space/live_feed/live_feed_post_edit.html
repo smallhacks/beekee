@@ -9,6 +9,9 @@
 					</button>
 			  	</div>
 			<div class="modal-body">
+				{{#unless fileUploaded}}
+          			{{>fileUpload formData=formData autoStart=true}}
+				{{/unless}}
 				{{#if fileUploaded}}
 					{{#if image}}
 						<div class="mt-2 mb-4 text-center">
@@ -25,18 +28,8 @@
 			        <div class="input-group-prepend">
 			          <label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-tag"></i></label>
 			        </div>
-			        <select class="custom-select" name="categorySelect" id="categorySelect">
-			          <option val="" disabled selected>{{_ 'post-submit--select-category'}}</option>
-			          <option val="">{{_ 'post-submit--no-category'}}</option>
-			          {{#each categories}}
-			            <option selected="{{selectedCategory}}" name="{{name}}">{{name}}</option>
-			          {{/each}}
-			          </select>
 			        </div>
 				</form>
-				{{#unless fileUploaded}}
-          			{{>fileUpload formData=formData autoStart=true}}
-				{{/unless}}
 				{{#if fileUploaded}}
 					{{#unless image}}
 						<div class="p-2">

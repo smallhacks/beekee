@@ -56,6 +56,10 @@ Template.space.onCreated(function() {
 			case "4":
 				//subscription = Meteor.subscribe('posts', {spaceId:Session.get('spaceId'),type:"resource"});
 				break;
+			case "5":	
+				break;
+			case "6":
+				break;
 		}
 	});
 

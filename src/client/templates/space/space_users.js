@@ -31,7 +31,7 @@ Template.spaceUsers.events({
 					return;
 			}
 			else {
-				Meteor.call('authorInsert', authorName, template.data.space._id, function(error) {
+				Meteor.call('authorInsert', authorName, null, template.data.space._id, function(error) {
 					if(error)
 						alert(TAPi18n.__('error-message')+error.message);
 					else {

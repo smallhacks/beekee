@@ -57,3 +57,5 @@ teamon:tinymce
 tomi:upload-jquery@=2.2.3
 tomi:upload-server
 chrismbeckett:toastr
+dburles:google-maps
+claudiojulio:blueimp-gallery@=2.16.0

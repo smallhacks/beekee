@@ -1,17 +1,14 @@
 <template name="fileUpload">
-	<form method="POST" enctype="multipart/form-data">
+	<form method="POST" enctype="multipart/form-data" class="text-center mb-3">
 		{{#unless infoLabel}}
-			<label class="">
+			<label class="file-upload--button">
 				<input type="file" accept="image/*" class="file-upload--input-file jqUploadclass" data-form-data='{{ submitData }}'>
-					<span class="file-upload--input-file-icon"><i class="fas fa-image fa-lg"></i></span>
-			</label>
-			<label class="">
-				<input type="file" accept="*/*" class="file-upload--input-file jqUploadclass" data-form-data='{{ submitData }}'>
-					<span class="file-upload--input-file-icon ml-2"><i class="fas fa-paperclip fa-lg"></i></span>
+					<span class="file-upload--input-file-icon text-center" style="font-size:30px;"><i class="fas fa-camera" style="border: solid 3px;border-radius: 30px;padding: 10px;background-color: #007bff;color: white;"></i></span><br>
+			<span>Ajouter une photo</span>
 			</label>
 		{{/unless}}
 		{{#with infoLabel}} 	
-			<div class="progress">
+			<div class="progress mt-3 mb-4">
  	  			<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ progress }}" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
 		{{/with}}

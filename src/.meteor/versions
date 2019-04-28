@@ -22,9 +22,11 @@ cfs:http-methods@0.0.32
 check@1.1.0
 chrismbeckett:toastr@2.1.2_1
 chuangbo:cookie@1.1.0
+claudiojulio:blueimp-gallery@2.16.0
 coffeescript@1.0.11
 copleykj:jquery-autosize@1.17.8
 copleykj:livestamp@1.1.7
+dburles:google-maps@1.1.5
 dburles:mongo-collection-instances@0.3.4
 ddp@1.2.2
 ddp-client@1.2.1

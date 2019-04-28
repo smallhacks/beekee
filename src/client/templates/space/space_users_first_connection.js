@@ -3,7 +3,9 @@ Template.spaceUsersFirstConnection.events({
 	'submit form': function(event, template) {
 		event.preventDefault();
 
-		var authorName = $('#space-users--input').val().trim();
+		var authorName = $('#space-users--author-name').val().trim();
+		var email = $('#space-users--email').val();
+		console.log("adresse mail : "+email);
 
 		if (authorName != "") {
 			if (Authors.findOne({name:authorName})) {
@@ -15,7 +17,7 @@ Template.spaceUsersFirstConnection.events({
 					return;
 			}
 			else {
-				Meteor.call('authorInsert', authorName, template.data.space._id, function(error) {
+				Meteor.call('authorInsert', authorName, email, template.data.space._id, function(error) {
 					if(error)
 						alert(TAPi18n.__('error-message')+error.message);
 					else {

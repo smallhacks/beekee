@@ -6,6 +6,8 @@ Template.liveFeedPostSubmit.onCreated(function() {
 		if (Session.get("fileExt"))
 			delete Session.keys["fileExt"]; // Clear fileExt session
 
+		Session.set("body","");
+
 	imageExtensions = ["jpg","jpeg","png","gif"];
 });
 
@@ -32,59 +34,29 @@ Template.liveFeedPostSubmit.onRendered(function() {
 	if (Template.parentData(2))
 		if (!Session.get(Template.parentData(2).space._id))
 			Session.set(Template.parentData(2).space._id, {author: 'Invité'});
+
+	// Initialize Google Maps mini map when modal is showed
+	$('#liveFeedPostMiniMap').on('shown.bs.modal', function (e) {
+		GoogleMaps.load({key:'AIzaSyB5jOArX4Iwin0qRYpnvnYJ3EwrYQO8OP4'});
+
+		// Add default marker
+		GoogleMaps.ready('miniMap', function(map) {
+    		minimap = map.instance;
+  				marker = new google.maps.Marker({
+		      	position: new google.maps.LatLng(46.2055549, 6.1445332),
+		      	draggable: true,
+		      	map: map.instance
+		    });
+		});
+	});
 });
 
 
 Template.liveFeedPostSubmit.events({
 
-	'submit #live-feed-post-submit--form': function(e, template) {
-		 e.preventDefault();
-
-		//$(".post-submit--button-spinner").show(); // Show a spiner while sending
-		//$(".post-submit--button-icon").hide();
-		//$(".post-submit--button-text").hide();
-
-		var author = Session.get(this.space._id).author;  
-		var body = $(e.target).find('[name=body]').val();
-		var spaceId = template.data.space._id;
-		var fileId = Session.get("fileId");
-		var fileName = Session.get("fileName");
-		var fileExt = Session.get("fileExt");
-		var filePath = Session.get("filePath");
-		//var filePath = escape(Session.get("filePath"));
-
-		//var tags = $(e.target).find('[name=tags]').val().toLowerCase().replace(/ /g,'').split(',');
-		var category = $(e.target).find('[name=categorySelect]').val();
-
-		// TODO : check how imagesToDelete work
-		// var imagesToDelete = Session.get('imagesToDelete');
-		// imagesToDelete.forEach(function(imageId) {
-		// 		Images.remove(imageId);
-		// });
-
-		Meteor.call('postInsert', {author: author, body: body, spaceId: spaceId, type: "liveFeed", fileId: fileId, fileName: fileName, fileExt: fileExt, filePath: filePath, category: category}, function(error, postId) {
-			if (error){
-				alert(TAPi18n.__('error-message')+error.message);
-			} else {
-				$(e.target).find('[name=body]').val('');
-
-				if (Session.get('liveFeedCategory') == '') // Unless a category is filtered, change select to empty category
-					$(e.target).find('[name=categorySelect]').val(TAPi18n.__('post-submit--no-category'));
-
-				Session.set("fileId",null); // Clear fileId session
-				Session.set("fileName",null); // Clear fileId session
-				Session.set("fileExt",null); // Clear fileId session
-				Session.set("filePath",null); // Clear fileId session
-
-				delete Session.keys["fileId"]; // Clear fileId session
-				delete Session.keys["fileName"]; // Clear fileId session
-				delete Session.keys["fileExt"]; // Clear fileId session
-				delete Session.keys["filePath"]; // Clear fileExt session
-				liveFeedResetPostsServerNonReactive();
-
-				//$(".post-submit--button-spinner").hide(); // Show a spiner while sending
-			};
-		});
+	'click .live-feed-post-submit--show-mini-map': function(e) {
+		e.preventDefault();
+		$('#liveFeedPostMiniMap').modal('show');
 	},
 	'click .live-feed-post-submit--button-submit': function(e) {
 		e.preventDefault();

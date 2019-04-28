@@ -101,14 +101,14 @@ Template.admin.helpers({
 		return Session.get('beekeeVersion');
 	},
 	raspbianVersion: function() {
-		Meteor.call('getRaspbianVersion', function(error, result){
-			if (error) {
-				Session.set('raspbianVersion',error);
-			}
-			else {
-				Session.set('raspbianVersion',result);
-			}
-		});
+		// Meteor.call('getRaspbianVersion', function(error, result){
+		// 	if (error) {
+		// 		Session.set('raspbianVersion',error);
+		// 	}
+		// 	else {
+		// 		Session.set('raspbianVersion',result);
+		// 	}
+		// });
 		return Session.get('raspbianVersion');
 	},
 	boxSerial: function() {

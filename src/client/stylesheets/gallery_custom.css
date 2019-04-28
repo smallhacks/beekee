@@ -1,0 +1,21 @@
+.blueimp-gallery {
+	background: black !important;
+}
+
+.blueimp-gallery > .close, .blueimp-gallery > .next, .blueimp-gallery > .prev {
+	color:grey !important;
+}
+
+.blueimp-gallery > .title {
+	bottom: 40px !important;
+	top:auto !important;
+	display:block !important; /* Always show title */
+}
+
+.blueimp-gallery > .description {
+  position: absolute;
+  bottom: 0px !important;
+  left: 15px;
+  color: #fff;
+  display: block !important; /* Always show description */
+}

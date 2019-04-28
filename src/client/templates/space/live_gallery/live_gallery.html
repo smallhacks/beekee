@@ -1,0 +1,20 @@
+<template name="liveGallery">
+	<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+	    <div class="slides"></div>
+	    <h3 class="title"></h3>
+	    <p class="description"></p>
+	    <a class="prev">‹</a>
+	    <a class="next">›</a>
+	    <a class="close">×</a>
+	    <a class="play-pause"></a>
+	</div>
+	<div id="links">
+		<div class="container" style="box-sizing: border-box;display:flex;flex-wrap: wrap;padding: 5px; justify-content: center;">
+			{{#each images}}
+    			<a class="item" style="margin: 5px;" href="/upload{{filePath}}" data-description="{{body}}" title="{{author}}">
+					<img style="width:160px;height:160px;  object-fit: cover;" src="/upload{{filePath}}">
+				</a>
+    		{{/each}}
+		</div>
+	</div>
+</template>

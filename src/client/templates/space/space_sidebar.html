@@ -19,8 +19,8 @@
 			</li>
 		{{/if}}
 		{{#if selectedMenuItem 2}}
-			<a class="small pl-4 pt-3 text-secondary mb-1 space-sidebar--menu-collapse" data-toggle="collapse" aria-expanded="true" href=".categories-list"><i class="fas fa-tags"></i> {{_ 'space-sidebar--categories'}} <i class="fa ml-1" aria-hidden="true"></i></a>
-			<div class="collapse categories-list show w-100">
+			<a class="small pl-4 pt-3 text-secondary mb-1 space-sidebar--menu-collapse d-none" data-toggle="collapse" aria-expanded="true" href=".categories-list"><i class="fas fa-tags"></i> {{_ 'space-sidebar--categories'}} <i class="fa ml-1" aria-hidden="true"></i></a>
+			<div class="collapse categories-list show w-100 d-none">
 				{{#each liveFeedCategories}}
 					<li class="align-middle nav-item sidebar-item w-100 small">
 						<a class="align-bottom nav-link space-sidebar--filter-live-feed-category pl-1 py-1 text-nowrap text-dark filter-live-feed-category {{selectedLiveFeedCategory}}  pl-4 py-2 py-lg-2" data-category="{{name}}" href="#"><span class="align-bottom pl-1" data-category="{{name}}">{{name}}</span>
@@ -53,6 +53,18 @@
 				{{/each}}
 			</div>
 		{{/if}}
+			<li class="nav-item sidebar-item w-100 {{selectedMenuItemBg 5}}">
+				<a class="nav-link pl-1 text-nowrap text-dark menu-item {{selectedMenuItemTxt 5}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="5" href="#">
+					<i class="fa fa-map-marker-alt fa-fw"></i> 
+					<span class="pl-1">{{_ 'space-sidebar--live-map'}}</span>
+				</a>
+			</li>
+			<li class="nav-item sidebar-item w-100 {{selectedMenuItemBg 6}}">
+				<a class="nav-link pl-1 text-nowrap text-dark menu-item {{selectedMenuItemTxt 6}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="6" href="#">
+					<i class="fas fa-images fa-fw"></i> 
+					<span class="pl-1">{{_ 'space-sidebar--live-gallery'}}</span>
+				</a>
+			</li>
 		{{#if lessons}}						
 			<li class="nav-item sidebar-item w-100 {{selectedMenuItemBg 3}}">
 				<a class="nav-link pl-1 text-nowrap text-dark menu-item {{selectedMenuItemTxt 3}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="3" href="#">
@@ -64,7 +76,7 @@
 		{{#if resources}}	
 			<li class="nav-item sidebar-item w-100 {{selectedMenuItemBg 4}}">
 				<a class="nav-link pl-1 text-nowrap text-dark menu-item filter-resources-all {{selectedMenuItemTxt 4}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="4" href="#">
-					<i class="far fa-copy fa-fw"></i> 
+					<i class="fa fa-copy fa-fw"></i> 
 					<span class="pl-1">{{_ 'space-sidebar--resources'}}</span>
 				</a>
 			</li>

@@ -2,7 +2,6 @@
 custom.css
 */
 
-
 /* ----- Global ----- */
 
 html {
@@ -27,6 +26,9 @@ a, button {
 .bg-beekee {
 	background-color: #ffff66;
 }
+
+.btn-label {position: relative;left: -12px;display: inline-block;padding: 6px 12px;background: rgba(0,0,0,0.15);border-radius: 3px 0 0 3px;}
+.btn-labeled {padding-top: 0;padding-bottom: 0;}
 
 .btn-icon {
 	color:grey;
@@ -184,15 +186,28 @@ and (max-device-width : 568px) {*/
 
 /* ----- File upload ----- */
 
+.file-upload--button {
+	padding: 5px 20px;
+	cursor: pointer;
+	border: solid 1px #007bff;
+	border-radius:5px;
+	color: #007bff;
+}
+
+.file-upload--button:hover {
+	color:white;
+	background-color: #0062cc;
+}
+
 .file-upload--input-file {
 	position: fixed;
 	top: -1000px;
 }
 
-.file-upload--input-file-icon {
+/*.file-upload--input-file-icon {
 	cursor: pointer;
 }
 
 .file-upload--input-file-icon:hover {
 	color: grey;
-}
+}*/
