@@ -1,11 +1,5 @@
 Template.liveFeedPostMiniMap.onCreated(function() {
 
-	// Inizialize GoogleMaps mini map
-	//GoogleMaps.load({key:'AIzaSyB5jOArX4Iwin0qRYpnvnYJ3EwrYQO8OP4'});
-
- //   	GoogleMaps.ready('miniMap', function(map) {
- //    		minimap = map.instance
-	// });
 });
 
 Template.liveFeedPostMiniMap.onRendered(function() {

@@ -191,7 +191,7 @@ Template.liveMap.onCreated(function() {
 Template.liveMap.onRendered(function() {
 
   	// GoogleMaps initialization
-	GoogleMaps.load({key:'AIzaSyB5jOArX4Iwin0qRYpnvnYJ3EwrYQO8OP4'});
+	GoogleMaps.load({key:Meteor.settings.googlemapskey});
 });
 
 

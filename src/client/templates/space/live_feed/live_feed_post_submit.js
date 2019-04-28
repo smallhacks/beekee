@@ -37,7 +37,7 @@ Template.liveFeedPostSubmit.onRendered(function() {
 
 	// Initialize Google Maps mini map when modal is showed
 	$('#liveFeedPostMiniMap').on('shown.bs.modal', function (e) {
-		GoogleMaps.load({key:'AIzaSyB5jOArX4Iwin0qRYpnvnYJ3EwrYQO8OP4'});
+		GoogleMaps.load({key:Meteor.settings.googlemapskey});
 
 		// Add default marker
 		GoogleMaps.ready('miniMap', function(map) {
