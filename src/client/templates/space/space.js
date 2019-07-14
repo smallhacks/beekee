@@ -1,25 +1,28 @@
 Template.space.onCreated(function() {
 
-	//Set locale
-	var lang = null;
-	if (Session.get('lang')) // If locale is set by user
-		lang = Session.get('lang');
-	else {
-		// Set locale according to browser
-		function getLang() {
-			console.log(navigator.languages[0]);
-		    return (
-		        navigator.languages && navigator.languages[0] ||
-		        navigator.language ||
-		        navigator.browserLanguage ||
-		        navigator.userLanguage ||
-		        'en-US'
-		    );
-		}
-		lang = getLang();
-		Session.set('lang',lang);
-	}
-	
+	// Force french locale
+	Session.set('lang','fr-FR');
+
+	// Set locale
+	// var lang = null;
+	// if (Session.get('lang')) // If locale is set by user
+	// 	lang = Session.get('lang');
+	// else {
+	// 	// Set locale according to browser
+	// 	function getLang() {
+	// 		console.log(navigator.languages[0]);
+	// 	    return (
+	// 	        navigator.languages && navigator.languages[0] ||
+	// 	        navigator.language ||
+	// 	        navigator.browserLanguage ||
+	// 	        navigator.userLanguage ||
+	// 	        'en-US'
+	// 	    );
+	// 	}
+	// 	lang = getLang();
+	// 	Session.set('lang',lang);
+	// }
+
 	Deps.autorun(function() {
 
 		TAPi18n.setLanguage(Session.get('lang')); // Translation of app-specific texts
@@ -51,7 +54,7 @@ Template.space.onCreated(function() {
 				//subscription = Meteor.subscribe('posts', {spaceId:Session.get('spaceId'),type:"liveFeed"},{});
 				break;
 			case "3":
-				subscription = Meteor.subscribe('posts', {spaceId:Session.get('spaceId'),type:"lesson"});
+				//subscription = Meteor.subscribe('posts', {spaceId:Session.get('spaceId'),type:"lesson"});
 				break;
 			case "4":
 				//subscription = Meteor.subscribe('posts', {spaceId:Session.get('spaceId'),type:"resource"});

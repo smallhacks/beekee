@@ -1,0 +1,27 @@
+<template name="bioscopeLiveGallery">
+	<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+	    <div class="slides"></div>
+<!-- 	    <h3 class="title"></h3>
+ -->	    
+<!--  		<div class="test" style="position:absolute;z-index:1000;right:0;bottom:0;background-image: url('/img/background-slideshow.png');background-repeat: no-repeat;background-position: right 6% bottom 0px;background-attachment: fixed;width:100%;height:100%;pointer-events: none;"></div> -->
+
+ 		<p class="description bioscope"></p>
+	    <a class="prev">‹</a>
+	    <a class="next">›</a>
+	    <a class="close">×</a>
+	    <a class="play-pause"></a>
+	</div>
+	<div id="links">
+		<div class="container" style="box-sizing: border-box;display:flex;flex-wrap: wrap;padding: 5px; justify-content: center;">
+			{{#each images}}
+    			<a class="live-gallery--item" href="/upload{{filePath}}" data-postid={{_id}} data-likes="{{likes.length}}" data-submitted="{{submitted}}" data-description="{{body}}" data-author="{{author}}" data-locality="{{locality}}" title="{{_id}}">
+    				{{#if thumbPath}}
+						<img src="/upload{{thumbPath}}">
+					{{else}}
+						<img src="/upload{{filePath}}">
+					{{/if}}
+				</a>
+    		{{/each}}
+		</div>
+	</div>
+</template>

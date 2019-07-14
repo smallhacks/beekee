@@ -19,6 +19,7 @@ Template.liveFeedPostEdit.onRendered(function() {
 		Session.set("fileName",fileInfo.fileName);
 		Session.set("fileExt",fileInfo.fileExt);
 		Session.set("filePath",fileInfo.path);
+		Session.set("thumbPath",fileInfo.thumbPath);
 	}
 	
 	Deps.autorun(function() { // Autorun to reactively update subscription of file
@@ -68,7 +69,7 @@ Template.liveFeedPostEdit.events({
 			fileId = false;
 			fileExt = false;
 		}
-		_.extend(set, {fileId: fileId, fileName: fileName, fileExt: fileExt, filePath: filePath});
+		_.extend(set, {fileId: fileId, fileName: fileName, fileExt: fileExt, filePath: filePath, thumbPath: thumbPath});
 
 		Posts.update(currentPostId, {$set: set}, function(error) {
 			if (error) {

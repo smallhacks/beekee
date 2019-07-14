@@ -7,7 +7,7 @@ SpaceController = RouteController.extend({
 				if (Meteor.userId()) {
 					var adminName = Meteor.user().profile.name;
 					if (!Authors.findOne({spaceId:spaceId,name:adminName})) {
-						Meteor.call('authorInsert', adminName, spaceId, function(error) {
+						Meteor.call('authorInsert', adminName, "", spaceId, function(error) {
 							if (error) {
 								console.log(error);
 							}
@@ -26,7 +26,7 @@ SpaceController = RouteController.extend({
 				if (Meteor.userId()) {
 					var adminName = Meteor.user().profile.name;
 					if (!Authors.findOne({spaceId:spaceId,name:adminName})) {
-						Meteor.call('authorInsert', adminName, spaceId, function(error) {
+						Meteor.call('authorInsert', adminName, "", spaceId, function(error) {
 							if (error) {
 								console.log(error);
 							}
@@ -51,6 +51,7 @@ SpaceController = RouteController.extend({
 	waitOn: function () { 
 		return [
 			Meteor.subscribe("count-all-live-feed", this.params._id),
+			Meteor.subscribe("count-validated-live-feed", this.params._id),
 			Meteor.subscribe("count-all-pinned", this.params._id),
 			Meteor.subscribe("count-all-files", this.params._id),
 			Meteor.subscribe("count-all-images", this.params._id),

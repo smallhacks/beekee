@@ -1,5 +1,11 @@
 Template.liveFeedPostSubmit.onCreated(function() {
 
+	// reCAPTCHA initialization
+	reCAPTCHA.config({
+        publickey: Meteor.settings.public.recaptchapublickey,
+        hl: 'fr' // optional display language
+    });
+
 		if (Session.get("fileId"))
 			delete Session.keys["fileId"]; // Clear fileId session
 
@@ -23,11 +29,13 @@ Template.liveFeedPostSubmit.onRendered(function() {
 
 	Uploader.finished = function(index, fileInfo, templateContext) { // Triggered when file upload is finished
 	// TODO : don't upload file before submit post (or remove after if post isn't submitted)	
+	// It seems that this event is overriden by live_feed_post_edit.js
 		
 		Session.set("fileId",fileInfo.fileId);
 		Session.set("fileName",fileInfo.fileName);
 		Session.set("fileExt",fileInfo.fileExt);
 		Session.set("filePath",fileInfo.path);
+		Session.set("thumbPath",fileInfo.thumbPath);
 	}
 
 	// Set default author if not defined
@@ -36,18 +44,49 @@ Template.liveFeedPostSubmit.onRendered(function() {
 			Session.set(Template.parentData(2).space._id, {author: 'Invité'});
 
 	// Initialize Google Maps mini map when modal is showed
-	$('#liveFeedPostMiniMap').on('shown.bs.modal', function (e) {
-		GoogleMaps.load({key:Meteor.settings.public.googlemapskey});
+	GoogleMaps.load({key:Meteor.settings.public.googlemapskey});
 
-		// Add default marker
-		GoogleMaps.ready('miniMap', function(map) {
-    		minimap = map.instance;
-  				marker = new google.maps.Marker({
-		      	position: new google.maps.LatLng(46.2055549, 6.1445332),
-		      	draggable: true,
-		      	map: map.instance
-		    });
-		});
+	// Add default marker
+	GoogleMaps.ready('submitMiniMap', function(map) {
+
+		// var icon = {
+  //   		url: "/img/marker.png", // url
+  //   		scaledSize: new google.maps.Size(30, 40), // scaled size
+  //   		origin: new google.maps.Point(0,0), // origin
+  //   		anchor: new google.maps.Point(15, 40) // anchor
+		// };
+    	
+    	submitMiniMap = map.instance;
+
+    	var latlng = new google.maps.LatLng(46.205525, 6.144801);
+  		submitMiniMap.setCenter(latlng);
+    	
+  //   	if (typeof submitMiniMapMarker == 'undefined') {
+  // 			submitMiniMapMarker = new google.maps.Marker({
+		//  		position: new google.maps.LatLng(46.205525, 6.144801),
+		//       	draggable: true,
+		//       	map: map.instance,
+		//       	icon: icon
+		//    	});
+		// } else {
+		// 	// Reset marker and map position
+		// 	var latlng = new google.maps.LatLng(46.205525, 6.144801);
+  // 			submitMiniMap.setCenter(latlng);
+	 //  		submitMiniMapMarker.setMap(submitMiniMap);
+		// }
+	});
+
+	$('#liveFeedPostSubmitMiniMap').on('shown.bs.modal', function (e) {
+		var latlng = new google.maps.LatLng(46.205525, 6.144801);
+		submitMiniMap.setCenter(latlng);
+
+		// Reset the miniMarker position when modal is opened
+		// if (typeof submitMiniMapMarker != 'undefined') {
+		// 	var latlng = new google.maps.LatLng(46.205525, 6.144801);
+  // 			submitMiniMapMarker.setPosition(latlng);
+  // 			submitMiniMap.setCenter(latlng);
+  // 			submitMiniMapMarker.setMap(submitMiniMap);
+		// }
 	});
 });
 
@@ -56,7 +95,23 @@ Template.liveFeedPostSubmit.events({
 
 	'click .live-feed-post-submit--show-mini-map': function(e) {
 		e.preventDefault();
-		$('#liveFeedPostMiniMap').modal('show');
+
+		$('#liveFeedPostSubmitMiniMap').modal('show');
+
+
+		// reCAPTCHA
+     //    var captchaData = grecaptcha.getResponse();
+     //    Meteor.call('checkCaptcha', captchaData, function(error, result) {
+     //        // reset the captcha
+     //        grecaptcha.reset();
+
+     //        if (error) {
+     //            console.log('There was an error: ' + error.reason);
+     //        } else {
+     //        	if (result == true)
+					// $('#liveFeedPostSubmitMiniMap').modal('show');
+     //        }
+     //    });
 	},
 	'click .live-feed-post-submit--button-submit': function(e) {
 		e.preventDefault();

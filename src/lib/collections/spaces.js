@@ -101,7 +101,8 @@ if(Meteor.isServer) {
 				lessons:false,
 				resources:true,
 				liveFeedComments:true,
-				permissions:{public:false, liveFeedAddPost:true, liveFeedAddCategory:false}
+				mailNotification:false,
+				permissions:{needValidation:false, public:false, liveFeedAddPost:true, liveFeedAddCategory:false, switchUser:true}
 			});
 
 			var spaceId = Spaces.insert(space);
@@ -109,7 +110,8 @@ if(Meteor.isServer) {
 			Meteor.call('authorInsert', 'Invité', spaceId );
 
 			// Insert welcome post
-			Posts.insert({spaceId:spaceId, type:"home", order:0, submitted: Date.now(),title: "Welcome!", body:"<p><em>Spaces</em> in Beekee are ideal for real-time interactions using the <strong>Live Feed</strong>, hosting training content in <strong>Lessons</strong> (if enabled) and sharing files with your learners in <strong>Resources</strong>.</p>\n<p>This is the Home page of your space. Right now it is empty but feel free to edit (or delete) this post to start.</p>\n<p>----------------------</p>\n<p>Les <em>Espaces</em>&nbsp;dans Beekee sont le lieu id&eacute;al pour&nbsp;interagir en temps r&eacute;el en utilisant&nbsp;<strong>Direct</strong>,&nbsp;proposer du contenu d'apprentissage dans&nbsp;<strong>Le&ccedil;ons</strong> (si activ&eacute;) et partager des fichiers avec vos apprenants dans&nbsp;<strong>Ressources</strong>.</p>\n<p>Ceci est la page d'accueil de votre espace. Pour l'instant, elle est vide, mais sentez-vous libre de modifier (ou de supprimer) ce post pour d&eacute;buter.</p>"});
+			Posts.insert({spaceId:spaceId, type:"home", order:0, submitted: Date.now(),title: "Bienvenue !", body:"<p>Transmettez le code <b>"+code+"</b> pour que les gens vous rejoignent.</p>"});
+			//Posts.insert({spaceId:spaceId, type:"home", order:0, submitted: Date.now(),title: "Welcome!", body:"<p><em>Spaces</em> in Beekee are ideal for real-time interactions using the <strong>Live Feed</strong>, hosting training content in <strong>Lessons</strong> (if enabled) and sharing files with your learners in <strong>Resources</strong>.</p>\n<p>This is the Home page of your space. Right now it is empty but feel free to edit (or delete) this post to start.</p>\n<p>----------------------</p>\n<p>Les <em>Espaces</em>&nbsp;dans Beekee sont le lieu id&eacute;al pour&nbsp;interagir en temps r&eacute;el en utilisant&nbsp;<strong>Direct</strong>,&nbsp;proposer du contenu d'apprentissage dans&nbsp;<strong>Le&ccedil;ons</strong> (si activ&eacute;) et partager des fichiers avec vos apprenants dans&nbsp;<strong>Ressources</strong>.</p>\n<p>Ceci est la page d'accueil de votre espace. Pour l'instant, elle est vide, mais sentez-vous libre de modifier (ou de supprimer) ce post pour d&eacute;buter.</p>"});
 
 			return { _id: spaceId };
 		}

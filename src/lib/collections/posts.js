@@ -5,9 +5,9 @@ Posts = new Mongo.Collection('posts');
 Posts.allow({
 	insert: function() {return true;},
 
-	remove: function() {return true;},
+	remove: function(userId, post) {return ownsSpace(userId, post) || isAdmin(userId); },
 
-	update: function() {return true;}
+	update: function() {return true; }
 });
 
 if(Meteor.isClient) {
@@ -16,9 +16,12 @@ if(Meteor.isClient) {
 	FilesCounts = new Mongo.Collection("filesCounts");
 	ImagesCounts = new Mongo.Collection("imagesCounts");
 	LiveFeedCounts = new Mongo.Collection("liveFeedCounts");
+	LiveFeedValidatedCounts = new Mongo.Collection("liveFeedValidatedCounts");
 }
 
 if(Meteor.isServer) {
+
+
 
 	Posts.before.insert(function (userId, doc) {
 		// change modified date
@@ -50,8 +53,7 @@ if(Meteor.isServer) {
 	});
 
 
-	Posts.before.remove(function (userId, doc) { 
-
+	Posts.after.remove(function (userId, doc) {
 
 		// var deletionTime = Date.now();
 
@@ -73,6 +75,12 @@ if(Meteor.isServer) {
 		if (fileId) {
 			Files.remove({fileId:fileId});
 			Meteor.call('deleteFile',doc);
+		}
+
+		// Delete the thumb if exists
+		var thumbPath = doc.thumbPath;
+		if (thumbPath) {
+			Meteor.call('deleteThumb',thumbPath);
 		}
 
 		if (doc.type == 'home') { // Update post order
@@ -153,8 +161,13 @@ Meteor.methods({
 	postInsert: function(postAttributes) {
 		check(postAttributes.spaceId, String);
 
-		//if (Meteor.settings.public)
-			//var postFromCloud = !(Meteor.settings.public.isBox === "true"); // Set where post is submitted (box or cloud)
+		//var postFromCloud = !(Meteor.settings.public.isBox === "true"); // Set where post is submitted (box or cloud)
+
+		var space = Spaces.findOne(postAttributes.spaceId);
+
+		var published = true;
+		if (space.permissions.needValidation)
+			published = false;
 
 		item = Authors.findOne({spaceId: postAttributes.spaceId, name: postAttributes.author});
 		Authors.update(item, {$inc: {nRefs: 1}});
@@ -162,16 +175,34 @@ Meteor.methods({
 			authorId: Authors.findOne({spaceId: postAttributes.spaceId, name: postAttributes.author})._id,
 			submitted: Date.now(),
 			nb: Posts.find({spaceId: postAttributes.spaceId}).count() + 1,
-			pinned : false,
+			pinned: false,
+			published: published
 			// postFromCloud: postFromCloud // Workaround bug sync
 		});
 
-		var space = Spaces.findOne(postAttributes.spaceId);
+		// Get client IP address
+		if (Meteor.isServer)
+			post = _.extend(postAttributes, {clientIP: this.connection.clientAddress});
 
 		category = Categories.findOne({spaceId: postAttributes.spaceId, name: postAttributes.category}); // Increment category nRefs
 		Categories.update(category, {$inc: {nRefs: 1}});
 
-		post._id = Posts.insert(post);		
+		post._id = Posts.insert(post);
+
+		if (space.mailNotification == true) {
+
+			var spaceOwner = Meteor.users.findOne(space.userId);
+			var ownerMail = spaceOwner.emails[0].address;
+
+			Meteor.call('sendEmail', // Send an e-mail to user
+	            ownerMail,
+	            'vincent.widmer@beekee.ch',
+	            TAPi18n.__("post-submit--mail-notification-subject"),
+	            '<h3>Une nouvelle photo a été postée sur Beekee</h3><img style="width:150px" src="https://bioscope.beekee.ch/upload'+postAttributes.filePath+'" /><p><b>'+postAttributes.author+'</b></p><p>'+postAttributes.body+'</p>'
+	            //TAPi18n.__("post-submit--mail-notification-content",{author:postAttributes.author,url:"https://bioscope.beekee.ch/space/"+postAttributes.spaceId})
+	        );	
+	     }
+
 		return post._id;
 	}
 });

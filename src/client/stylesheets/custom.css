@@ -3,6 +3,39 @@ custom.css
 */
 
 
+/* ----- Fonts ----- */
+
+@font-face {
+  font-family: 'Raleway Regular';
+  src: url('/fonts/Raleway-Regular.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/Raleway-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/Raleway-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/Raleway-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/fonts/Raleway-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/Raleway-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'BundaySlab LightUp';
+  src: url('/fonts/BundaySlab-LightUp.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/BundaySlab-LightUp.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/BundaySlab-LightUp.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/BundaySlab-LightUp.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/fonts/BundaySlab-LightUp.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/BundaySlab-LightUp.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'BundaySlab Regular';
+  src: url('/fonts/Buntype-BundaySlab-RegularUp.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/Buntype-BundaySlab-RegularUp.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/Buntype-BundaySlab-RegularUp.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/Buntype-BundaySlab-RegularUp.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/fonts/Buntype-BundaySlab-RegularUp.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/Buntype-BundaySlab-RegularUp.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+
 /* ----- Global ----- */
 
 html {
@@ -10,10 +43,12 @@ html {
 }
 
 body {
-	font-family: Raleway;
-    background-image: url(https://scienscope.unige.ch/bioscope/wp-content/uploads/sites/8/2017/03/bg_bioscope.png);
-    background-repeat: no-repeat;
-    background-position: right top;
+	font-family: 'BundaySlab Regular', Raleway, 'Raleway Regular', sans-serif;
+/*	background-image: url(https://scienscope.unige.ch/bioscope/wp-content/uploads/sites/8/2017/03/bg_bioscope.png);
+*/  
+/*	background-image: url('/img/background.png');
+*/    background-repeat: no-repeat;
+    background-position: right 6% top 75px;
     background-attachment: fixed;
 	background-color: ;
 	overflow: auto;
@@ -22,6 +57,32 @@ body {
 
 a, button {
   outline: none;
+}
+
+a {
+	color: #a3e35e;
+}
+
+a:hover {
+	color: #689433;
+}
+
+.alert-warning {
+	color: #006f33;
+	background-color: #e7f5d8;
+    border-color: #d1efb1;
+}
+
+@media (max-width: 991.98px) { 
+	.container {
+		padding-right: 0;
+		padding-left:0;
+	}
+
+	.row {
+		margin-right: 0;
+    	margin-left: 0;
+	}
 }
 
 .wrapper {
@@ -37,8 +98,8 @@ a, button {
 .btn-labeled {padding-top: 0;padding-bottom: 0;}
 
 .btn-icon {
-	color:grey;
-	text-decoration: none;
+/*	color:grey;
+*/	text-decoration: none;
 	cursor: pointer;
 	padding:0.375rem 0.75rem;
 }
@@ -61,6 +122,26 @@ a, button {
 	text-decoration: none !important;
 }
 
+.btn-link-white {
+	color:white;
+	text-decoration: none !important;
+}
+
+.btn-link-white:hover {
+	color: grey;
+	text-decoration: none !important;
+}
+
+.btn-link-grey {
+	color:grey;
+	text-decoration: none !important;
+}
+
+.btn-link-grey:hover {
+	color: black;
+	text-decoration: none !important;
+}
+
 .btn-link-black {
 	color:black;
 	text-decoration: none !important;
@@ -69,11 +150,6 @@ a, button {
 .btn-link-black:hover {
 	color: grey;
 	text-decoration: none !important;
-}
-
-.badge-secondary-2 {
-	background-color: #a5a5a5;
-	color:white;
 }
 
 .min-h-100 {
@@ -144,11 +220,11 @@ and (max-device-width : 568px) {*/
 /* ----- Sidebar ----- */
 
 .space-sidebar--menu-collapse[aria-expanded="false"] .fa:before {  
-	content: "\f0d7";
+	content: "\f0d8";
 }
 
 .space-sidebar--menu-collapse[aria-expanded="true"] .fa:before {
-	content: "\f0d8";
+	content: "\f0d7";
 }
 
 .space-sidebar--filter-category > :nth-child(3) { display:none; }
@@ -156,11 +232,64 @@ and (max-device-width : 568px) {*/
 .space-sidebar--filter-category:hover > :nth-child(3) { display:inline; }
 
 
+/* ----- Live Feed Post Submit ----- */
+
+#live-feed-post-submit--form .card-img-top {
+	width:50%;
+}
+
+.live-feed-post-submit-mini-map--fixed-marker {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    width:30px;
+    margin-left:-15px;
+    margin-top:-40px;
+    pointer-events: none;
+  }
+
+
 /* ----- Live Map ----- */
 .live-map--google-maps {
 	width: 100%;
 	height: 100%;
 	box-shadow: 0 30px 60px -12px rgba(50,50,93,.25), 0 18px 36px -18px rgba(0,0,0,.3), 0 -12px 36px -8px rgba(0,0,0,.025);
+	margin-bottom:20px;
+}
+
+.bioscope-live-map--google-maps {
+	width: 100%;
+	height: 100%;
+}
+
+.gm-style-iw > button > img {
+	width:30px !important;
+	height:18px !important;
+	margin:0 !important;
+}
+
+
+/* ----- Live Gallery ----- */
+
+.live-gallery--item {
+	margin: 3px;
+}
+
+.live-gallery--item > img {
+	width:160px;
+	height:160px;
+	object-fit: cover;
+}
+
+@media (max-width: 991.98px) { 
+	.live-gallery--item > img {
+	width:90px;
+	height:90px;
+}
+}
+
+.live-gallery--like {
+	float:right;
 }
 
 
@@ -191,8 +320,17 @@ and (max-device-width : 568px) {*/
 	word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
+.post-item--unpublished > .life-feed-post--image-wrapper {
+	outline: 35px solid rgba(255, 255, 255, 0.9) !important;
+    outline-offset: -35px;
+}
+
 
 /* ----- Home post ----- */
+
+.home-post {
+	margin-top: 10px;
+}
 
 .home-post-submit--textarea {
 	height:100%;
@@ -208,14 +346,15 @@ and (max-device-width : 568px) {*/
 .file-upload--button {
     padding: 5px 20px;
     cursor: pointer;
-    border: solid 1px #007bff;
+    border: solid 1px #a3e35e;
     border-radius: 600px;
-    color: #007bff;
+    color: #a3e35e;
+    background-color:white;
 }
 
 .file-upload--button:hover {
 	color:white;
-	background-color: #0062cc;
+	background-color: #a3e35e;
 }
 
 .file-upload--input-file {

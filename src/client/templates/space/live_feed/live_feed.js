@@ -5,7 +5,14 @@ Template.liveFeed.onRendered(function() {
 	});
 
 	liveFeedResetFilters();
-	Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
+	if (Template.parentData(1).space.permissions && Template.parentData(1).space.userId != Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin']) != true) {
+		if (Template.parentData(1).space.permissions.needValidation) {
+			Session.set('postsServerNonReactive', LiveFeedValidatedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
+		} else
+			Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
+	} else
+		Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
+
 	liveFeedResetPostInterval();
 
 	this.autorun(function() { // Autorun to reactively update subscription (filtering + interval of loaded posts)
@@ -20,11 +27,62 @@ Template.liveFeed.onRendered(function() {
 			filters = {spaceId:Session.get('spaceId'), type:"liveFeed", category:Session.get('liveFeedCategory')};
 		}
 
+		// Filter posts if needValidation is set to true (posts are not filters if admin or teacher)
+		if (Template.parentData(1).space.permissions && Template.parentData(1).space.userId != Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin']) != true) {
+			//if (Template.parentData(1).space.permissions.needValidation) {
+				filters.published = true;
+			//}
+		}
+
  		// Interval of posts subscription : load every posts from "postsToSkip" (skip) to "postsLimit" (limit)
  		// By default, load the 10 last posts (skip : total posts - 10 / limit : 10)
  		// postsLimit (limit) is used to disable reactivity
 		subscription = Meteor.subscribe('posts', filters, postsToSkip, postsLimit);
 	});
+
+	// // Initialize Google Maps mini map when modal is showed
+	// GoogleMaps.load({key:Meteor.settings.public.googlemapskey});
+
+	// 	GoogleMaps.ready('miniMap', function(map) {
+	// 		console.log("defined");
+ //    	miniMap = map.instance;
+ //  			miniMapMarker = new google.maps.Marker({
+	// 	      position: new google.maps.LatLng(40, 40),
+	// 	      draggable: false,
+	// 	      map: miniMap
+	// 	   });
+	// });
+
+
+
+	// Initialize Google Maps mini map
+	// GoogleMaps.load({key:Meteor.settings.public.googlemapskey});
+
+	// GoogleMaps.ready('miniMap', function(map) {
+
+ //    	miniMap = map.instance;
+
+	// 	// Add first clicked post marker
+ //  		miniMapMarker = new google.maps.Marker({
+	// 	    position: new google.maps.LatLng(Session.get("postLocalization").latitude, Session.get("postLocalization").longitude),
+	// 	    draggable: false,
+	// 	    map: map.instance
+	// 	});
+		
+	// 	// Center the map on the marker
+	// 	var latlng = new google.maps.LatLng(Session.get("postLocalization").latitude, Session.get("postLocalization").longitude);
+ //  		miniMap.setCenter(latlng);
+
+ //  		// Add an event that is fired when a modal is shown
+ //  		// Set the new position of the marker
+	// 	$('#liveFeedPostMiniMap').on('show.bs.modal', function (e, template) {
+
+	// 		miniMapMarker.setPosition( new google.maps.LatLng(Session.get("postLocalization").latitude, Session.get("postLocalization").longitude) );
+			
+	// 		var latlngEvent = new google.maps.LatLng(Session.get("postLocalization").latitude, Session.get("postLocalization").longitude);
+ //  			miniMap.setCenter(latlngEvent);
+	// 	});
+	// });
 });
 
 
@@ -42,7 +100,14 @@ Template.liveFeed.events({
 			Session.set('postsServerNonReactive', Categories.findOne({name:category}).nRefs);
 		}
 		else {
-			Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count);
+
+	if (Template.parentData(1).space.permissions && Template.parentData(1).space.userId != Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin']) != true) {
+		if (Template.parentData(1).space.permissions.needValidation) {
+			Session.set('postsServerNonReactive', LiveFeedValidatedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
+		} else
+			Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
+	} else
+		Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
 		}
 
 		liveFeedResetPostsServerNonReactive();
@@ -78,15 +143,24 @@ Template.liveFeed.helpers({
 
 		if (Session.get('author') !== "") {
 			var author = Session.get('author');
-			postsReactiveCount = Authors.findOne({name:author}).nRefs;  
+			if (Authors.findOne({name:author}))
+				postsReactiveCount = Authors.findOne({name:author}).nRefs;  
 		}
 		else if (Session.get('liveFeedCategory') !== "") {
 			var category = Session.get('liveFeedCategory');
-			postsReactiveCount = Categories.findOne({name:category}).nRefs;  
+			if (Categories.findOne({name:category}))
+				postsReactiveCount = Categories.findOne({name:category}).nRefs;  
 		}
 		else {
+		if (Template.parentData(1).space.permissions && Template.parentData(1).space.userId != Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin']) != true) {
+			if (Template.parentData(1).space.permissions.needValidation) {
+				postsReactiveCount = LiveFeedValidatedCounts.findOne().count;
+			} else {
+				postsReactiveCount = LiveFeedCounts.findOne().count;
+			}
+		} else
 			postsReactiveCount = LiveFeedCounts.findOne().count;
-		}
+}
 
 		if (nbPosts < postsReactiveCount) {
 			// If there is no post on the client and one is published, the client will load it reactively.
@@ -106,14 +180,23 @@ Template.liveFeed.helpers({
 
 		if (Session.get('author') !== "") {
 			var author = Session.get('author');
-			serverPosts = Authors.findOne({name:author}).nRefs;
+			if (Authors.findOne({name:author}))
+				serverPosts = Authors.findOne({name:author}).nRefs;
 		}
 		else if (Session.get('liveFeedCategory') !== "") {
 			var category = Session.get('liveFeedCategory');
-			serverPosts = Categories.findOne({name:category}).nRefs;
+			if (Categories.findOne({name:category}))
+				serverPosts = Categories.findOne({name:category}).nRefs;
 		}
-		else
+		else {
+				if (Template.parentData(1).space.permissions && Template.parentData(1).space.userId != Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin']) != true) {
+		if (Template.parentData(1).space.permissions.needValidation) {
+			serverPosts = LiveFeedValidatedCounts.findOne().count;
+		} else
 			serverPosts = LiveFeedCounts.findOne().count;
+	} else
+			serverPosts = LiveFeedCounts.findOne().count;
+		}
 
 		var serverPostsDiff = serverPosts - Session.get('postsServerNonReactive'); // Check if there are new posts
 		if (serverPostsDiff == 0 && serverPosts > Session.get('postsLimit')) // No new post & posts to load
@@ -150,8 +233,18 @@ liveFeedResetPostsServerNonReactive = function() {
 			var category = Session.get('liveFeedCategory');
 			Session.set('postsServerNonReactive', Categories.findOne({name:category}).nRefs);
 		}
-		else
-			Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count);
+		else {
+			var space = Spaces.findOne(Session.get('spaceId'));
+	if (space.permissions && space.userId != Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin']) != true) {
+		if (space.permissions.needValidation) {
+			Session.set('postsServerNonReactive', LiveFeedValidatedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
+		} else
+			Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
+	} else
+		Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count); // Set a non-reactive counter of posts -> here = all server posts
+
+			//Session.set('postsServerNonReactive', LiveFeedCounts.findOne().count);
+		}
 
 		liveFeedResetPostInterval();
 	}

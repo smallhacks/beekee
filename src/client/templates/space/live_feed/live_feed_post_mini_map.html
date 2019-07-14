@@ -1,17 +1,15 @@
 <template name="liveFeedPostMiniMap">
-	<div class="modal fade" id="liveFeedPostMiniMap" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="liveFeedPostMiniMap" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 			 	<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Où avez-vous pris cette photo ?</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Position de la photo</h5>
 			  	</div>
 			<div class="modal-body" style="height:400px">
 				{{> googleMap name="miniMap" options=miniMapOptions}}
-				<p class="mt-2">Déplacez le curseur rouge pour ajuster la position.</p>
 			</div>
-			  	<div class="modal-footer mt-4">
-			  		<button type="button" class="btn btn-labeled btn-outline-primary mr-auto live-feed-post-submit--locate-me"><span class="btn-label"><i class="far fa-compass live-feed-post-submit--locate-me-icon" style="font-size:20px"></i><i class="fas fa-circle-notch fa-spin live-feed-post-submit--spinner d-none" style="font-size:20px"></i></span>Me localiser</button>
-					<button type="button" class="btn btn-primary live-feed-post-submit--form">{{_ 'space-users--submit-author'}}</button>
+			  	<div class="modal-footer">
+			  		<button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ 'modal--close'}}</button>
 			  	</div>
 			</div>
 	  	</div>

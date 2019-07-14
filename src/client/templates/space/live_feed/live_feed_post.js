@@ -40,12 +40,31 @@ Template.liveFeedPost.events({
 		$('#liveFeedPostEdit').modal({show:true,backdrop:'static'});
 
 	},
+	'click .live-feed-post--open-mini-map': function(e) {
+		e.preventDefault();
+
+		Session.set("postLocalization",{"latitude":this.latitude,"longitude":this.longitude});
+		
+		$('#liveFeedPostMiniMap').modal({show:true});
+	},
 	'click .live-feed-post--delete': function(e) {
 		e.preventDefault();
 		
 		var postId = this._id;
 		Session.set('postToDelete',postId);
 		$('#liveFeedPostDelete').modal('show');
+	},
+	'click .live-feed-post--publish': function(e) {
+		e.preventDefault();
+		
+		var postId = this._id;
+		Posts.update(postId, {$set: {published: true}});
+	},
+	'click .live-feed-post--unpublish': function(e) {
+		e.preventDefault();
+		
+		var postId = this._id;
+		Posts.update(postId, {$set: {published: false}});
 	},
 	'keypress .live-feed-post--add-comment-textarea': function (e, template) {
 		if (e.which === 13) {
@@ -103,6 +122,9 @@ Template.liveFeedPost.helpers({
 			return true
 		else
 			return false
+	},
+	needValidation:function() {
+		return Template.parentData().space.permissions.needValidation;
 	},
 	ownComment: function() {
 		if (Session.get(Template.parentData(2).space._id).author === this.author || Template.parentData(2).space.userId === Meteor.userId() || Roles.userIsInRole(Meteor.userId(), ['admin']) === true) {

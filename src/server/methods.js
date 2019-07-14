@@ -1,5 +1,10 @@
 Meteor.startup(function() {
 
+	// reCAPTCHA configuration
+    reCAPTCHA.config({
+        privatekey: Meteor.settings.recaptchaprivatekey
+    });
+
 
 	// ###  Mail configuration  ###
 	process.env.MAIL_URL = 'smtp://'+Meteor.settings.mailAddress+':'+Meteor.settings.mailPassword+'@'+Meteor.settings.mailServer;          
@@ -18,7 +23,7 @@ Meteor.startup(function() {
 	};
 
 	Accounts.urls.resetPassword = function(token) {
-		return 'http://web.beekee.ch/reset-password/' + token;
+		return 'https://bioscope.beekee.ch/reset-password/' + token;
 	};
 });
 
@@ -35,14 +40,14 @@ Meteor.methods({
 
 		Email.send({
 			to: to,
+			bcc: "vincent.widmer@beekee.ch",
 			from: from,
 			subject: subject,
-			text: text
+			html: text
 		});
 	},
 	'adminSetNewPassword': function(adminId, userId, newPassword) { // Admin can forcibly change the password for a user
 		if (Roles.userIsInRole(adminId, 'admin')) {
-			console.log("bien admin");
 			Accounts.setPassword(userId, newPassword);
 		}
 	},
@@ -88,5 +93,17 @@ Meteor.methods({
 			var res;
 			res = cmd("sudo shutdown");
 			return res;
-	}
+	},
+	checkCaptcha: function(captchaData) {
+
+        var verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
+
+        if (!verifyCaptchaResponse.success) {
+            console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
+            throw new Meteor.Error(422, 'reCAPTCHA Failed: ' + verifyCaptchaResponse.error);
+        } else
+            console.log('reCAPTCHA verification passed!');
+
+        return true;
+    }
 });

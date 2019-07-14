@@ -44,6 +44,13 @@ Meteor.startup(function () {
 			var fileExt = fileInfo.name.substr(fileInfo.name.lastIndexOf('.')+1).toLowerCase();
 			fileInfo.fileExt = fileExt;
 
+			var thumbPath = filename = fileInfo.path.replace(/(\.[\w\d_-]+)$/i, '_thumb$1');
+
+			//var thumbPath = "/"+fileInfo.spaceId+"/livefeed/"+fileInfo.fileName+"-thumb"+"."+fileInfo.fileExt;
+
+			// TODO get thumbPath from filePath to avoid errors based on duplicate files
+			fileInfo.thumbPath = thumbPath;
+
 			if (formFields.type == 'liveFeed' || formFields.type == 'resource') {
 				if (fileExt == "jpg" || fileExt == "jpeg" || fileExt == "png") {
 					// Resize and auto-orient uploaded images with GraphicMagicks
@@ -53,7 +60,10 @@ Meteor.startup(function () {
 							var errorMessage = "An error has occured."
 							Files.insert({_id: fileInfo.fileId, error:errorMessage});
 						} else {
-							Files.insert({_id: fileInfo.fileId, fileName:fileInfo.fileName, fileExt:fileExt, filePath: fileInfo.path});
+							Files.insert({_id: fileInfo.fileId, fileName:fileInfo.fileName, fileExt:fileExt, filePath: fileInfo.path, thumbPath:fileInfo.thumbPath});
+							// Create a thumb
+							console.log("creating a thumb... : "+fileInfo.thumbPath);
+							gm(Meteor.settings.uploadDir+fileInfo.path).resize('160','160','^').write(Meteor.settings.uploadDir+fileInfo.thumbPath,Meteor.bindEnvironment(function (error, result) {console.log("error ici : "+error);}));
 						}
 					}));
 				}

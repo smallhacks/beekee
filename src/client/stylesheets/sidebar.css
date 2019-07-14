@@ -34,16 +34,24 @@ sidebar.css
 }
 
 .menu-item--selected .menu-item > i {
-    color: #8cc544;
+    color: #a3e35e;
 }
 
 @media (max-width: 991.98px) { 
     .menu-item--selected {
-        background-color: #cccccc;
+        background-color: #8cc544;
     }
 
     .sidebar-item:hover {
-    background-color: #cccccc;
+        background-color: #cccccc;
+    }
+
+    .menu-item--selected .menu-item {
+        color: white !important;
+    }
+
+    .menu-item--selected .menu-item > i {
+        color: white;
     }
 }
 
@@ -95,6 +103,24 @@ sidebar.css
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
+}
+
+.space-sidebar--credits {
+    margin-top:200px;
+    font-size: 0.7em;
+    color: #b7b7b7;
+    border-top: dashed 1px #8bc5444f;
+    padding-top: 5px;
+    padding-left:15px;
+}
+
+.sidebar--badge {
+    font-family: Arial;
+    border-radius: 30px;
+    border: solid 1px #a3e35e;
+    padding: 0.3em;
+    color:#a3e35e;
+    font-size: 0.7em;
 }
 
 

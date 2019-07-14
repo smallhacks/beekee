@@ -46,8 +46,8 @@ Template.generalSettings.events({
 
 		var newName = prompt(TAPi18n.__('space-edit--rename-space-message')+" :", this.space.title);
 		if (newName && newName != currentSpaceName && newName !="") {
-			if (newName.length < 4 || newName.length > 19) {
-				alert("The name must be at least 3 characters and at most 20");
+			if (newName.length < 4 || newName.length > 35) {
+				alert("The name must be at least 3 characters and at most 36");
 			}
 			else {
 				var spaceProperties = {
@@ -132,6 +132,22 @@ Template.generalSettings.events({
 				if (error)
 					alert(TAPi18n.__('space-edit--sync-error-message'));
 			});
+		}
+	},
+	'click .permissions-settings--mail-notification': function(e) {
+		e.preventDefault();
+	
+		if (this.space.mailNotification) {
+			Spaces.update(this.space._id, {$set: {"mailNotification":false}}, function(error) {
+				if (error)
+					alert(TAPi18n.__('error-message')+error.message);
+			});
+		}
+		else {
+			Spaces.update(this.space._id, {$set: {"mailNotification":true}}, function(error) {
+				if (error)
+					alert(TAPi18n.__('error-message')+error.message);
+			});				
 		}
 	}
 }); 

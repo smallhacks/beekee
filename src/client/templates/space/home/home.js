@@ -36,6 +36,9 @@ Template.home.helpers({
 	homePosts: function() {
 		return Posts.find({type:"home"},{sort: {order: 1}});
 	},
+	homePostsEmpty: function() {
+		return Posts.find({type:"home"},{sort: {order: 1}}).count() == 0;
+	},
 	codePanel: function() {
 		return this.space.codePanel;
 	}

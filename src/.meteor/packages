@@ -59,3 +59,6 @@ tomi:upload-server
 chrismbeckett:toastr
 dburles:google-maps
 claudiojulio:blueimp-gallery@=2.16.0
+aldeed:geocoder
+altapp:recaptcha
+reywood:iron-router-ga

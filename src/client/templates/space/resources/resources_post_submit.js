@@ -32,6 +32,7 @@ Template.resourcesPostSubmit.onRendered(function() {
 		Session.set("filePath",fileInfo.path);
 	}
 
+
 	// Set default author if not defined
 	if (Template.parentData(2))
 		if (!Session.get(Template.parentData(2).space._id))

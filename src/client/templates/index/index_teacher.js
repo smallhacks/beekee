@@ -1,24 +1,27 @@
 Template.indexTeacher.onCreated(function() {
 
+
+	Session.set('lang','fr-FR');
+
 	//Set locale
-	var lang = null;
-	if (Session.get('lang')) // If locale is set by user
-		lang = Session.get('lang');
-	else {
-		// Set locale according to browser
-		function getLang() {
-			console.log(navigator.languages[0]);
-		    return (
-		        navigator.languages && navigator.languages[0] ||
-		        navigator.language ||
-		        navigator.browserLanguage ||
-		        navigator.userLanguage ||
-		        'en-US'
-		    );
-		}
-		lang = getLang();
-		Session.set('lang',lang);
-	}
+	// var lang = null;
+	// if (Session.get('lang')) // If locale is set by user
+	// 	lang = Session.get('lang');
+	// else {
+	// 	// Set locale according to browser
+	// 	function getLang() {
+	// 		console.log(navigator.languages[0]);
+	// 	    return (
+	// 	        navigator.languages && navigator.languages[0] ||
+	// 	        navigator.language ||
+	// 	        navigator.browserLanguage ||
+	// 	        navigator.userLanguage ||
+	// 	        'en-US'
+	// 	    );
+	// 	}
+	// 	lang = getLang();
+	// 	Session.set('lang',lang);
+	// }
 
 	Deps.autorun(function() {
 

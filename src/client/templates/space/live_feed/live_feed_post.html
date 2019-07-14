@@ -1,11 +1,18 @@
 <template name="liveFeedPost">
-	<div class="card rounded-0 mb-5" style="border-radius: 0.25rem 0.25rem 0 0 !important;">
+	<div class="card rounded-0 mb-5 {{#if needValidation}}{{#unless published}}post-item--unpublished{{/unless}}{{/if}}" style="border-radius: 0.25rem 0.25rem 0 0 !important;">
 		{{#if this.fileId}}
 			{{#if image}}
 				<div class="life-feed-post--image-wrapper">
 					<a class="life-feed-post--image-link" href="/upload{{filePath}}" target="_blank">
 						<img class="card-img-top" src="/upload{{filePath}}" alt="Card image cap" />
 					</a>
+					{{#if needValidation}}
+						{{#unless published}}
+							<div style="position:absolute;top:0;right:0;padding-right:45px;padding-top:25px;text-align:center"><span style="font-size:5em;color:white;" class="mt-5"><i class="far fa-eye-slash"></i></span></div>
+							<div style="position:absolute;top:0;left:0;right:0;text-align:center;padding-top:6px"><span style="font-size:1em;color:black;">Cette photo doit être <a href="#" class="live-feed-post--publish">publiée</a> par un administrateur avant d'être visible</span></div>
+
+						{{/unless}}
+					{{/if}}
 			</div>
 			{{/if}}
 		{{/if}}
@@ -15,6 +22,13 @@
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					<a class="dropdown-item live-feed-post--edit" href="#">{{_ 'post--edit'}}</a>
 					<a class="dropdown-item text-danger live-feed-post--delete" href="#">{{_ 'post--delete'}}</a>
+					{{#if needValidation}}
+						{{#if published}}
+							<a class="dropdown-item text-danger live-feed-post--unpublish" href="#">{{_ 'live-feed-post--unpublish'}}</a>
+						{{else}}
+							<a class="dropdown-item text-primary live-feed-post--publish" href="#">{{_ 'live-feed-post--publish'}}</a>
+						{{/if}}
+					{{/if}}
 				</div>
 			{{/if}}
 			<h6 class="card-title">{{author}}<small class="text-muted ml-1">• {{livestamp submitted}}</small></h6>
@@ -32,17 +46,19 @@
 			{{/if}}
 			{{#if latitude}}
 			<div class="small text-secondary float-right">
-				<a href="https://www.google.com/maps/search/?api=1&query={{latitude}},{{longitude}}"><i class="fa fa-map-marker-alt"></i> Position</a></div>
+				<i class="fa fa-map-marker-alt"></i> {{locality}}
+<!-- 				<a href="#" class="live-feed-post-2-open-mini-map" data-latitude="44"><i class="fa fa-map-marker-alt"></i> {{locality}}</a>
+ -->			</div>
 			{{/if}}
 			{{#if likeAlready}}
-				<a href="#" class="btn-link-black live-feed-post--remove-like text-primary"><i class="fas fa-thumbs-up"></i></a>
+				<a href="#" class="btn-link-grey live-feed-post--remove-like text-primary"><i class="fas fa-thumbs-up"></i></a>
 				{{#if othersLikes}}
 					<span class="small">{{_ 'live-feed-post--nb-likes-with-me' likesWithoutMe}}</span>
 				{{else}}
 					<span class="small">{{_ 'live-feed-post--like'}}</span>
 				{{/if}}
 			{{else}}
-				<a href="#" class="btn-link-black live-feed-post--add-like"><i class="far fa-thumbs-up"></i></a>
+				<a href="#" class="btn-link-grey live-feed-post--add-like"><i class="far fa-thumbs-up"></i></a>
 				{{#if likes}}
 					<span class="small">{{likes}} {{_ 'live-feed-post--nb-likes'}}</span>
 				{{/if}}

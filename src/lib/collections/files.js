@@ -25,6 +25,9 @@ if(Meteor.isServer) {
 				rimraf(uploadDir+"/"+post.spaceId+"/"+post.type+"/"+post.fileId, function (err) {console.log(err)});
 			else // Remove the file
     			fs.unlinkSync(uploadDir +"/"+post.filePath, function (err) {console.log(err)});
+  		},
+  		deleteThumb: function(thumbPath) {
+  			fs.unlinkSync(uploadDir +"/"+thumbPath, function (err) {console.log(err)});
   		}
 	})
 }

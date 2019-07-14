@@ -7,15 +7,36 @@
 }
 
 .blueimp-gallery > .title {
-	bottom: 40px !important;
-	top:auto !important;
-	display:block !important; /* Always show title */
+	  position: absolute;
+  bottom: 0px !important;
+  color: #fff;
+  display: block !important; /* Always show description */
+  padding:15px;
+  background: rgba(95, 95, 95, 0.8);
+  margin-bottom: 0;
+  width: 100%;
+  top:auto;
+  left:auto;
 }
 
 .blueimp-gallery > .description {
-  position: absolute;
+	  position: absolute;
   bottom: 0px !important;
-  left: 15px;
   color: #fff;
   display: block !important; /* Always show description */
+  padding:15px;
+  background:black;
+/*  background: rgba(95, 95, 95, 0.8);
+*/  margin-bottom: 0;
+  width: 100%;
+}
+
+.blueimp-gallery > .description.bioscope {
+	font-size: 2em;
+}
+
+
+.blueimp-gallery > .play-pause {
+  margin-bottom: 20px;
+  margin-right: 70px;
 }

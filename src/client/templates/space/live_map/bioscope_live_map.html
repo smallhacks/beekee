@@ -1,0 +1,62 @@
+<template name="bioscopeLiveMap">
+	<div class="bioscope-live-map--google-maps">
+		{{> googleMap name="liveMap" options=liveMapOptions}}
+		<div class="alert alert-light live-map--overlay" style="background-color: rgba(0,0,0,.5);;display:none;position: absolute; margin-left: 15px;margin-top: 15px;font-size:1.5em;z-index: 99;color:white" role="alert"><b>{{nbImages}}</b> photos postées par <b>{{nbAuthors}}</b> contributeurs depuis le 3 juin
+		</div>
+		<div class="live-map--overlay-hand" style="z-index:98;position:absolute;width:100%;height:100%;pointer-events: none">
+<div id="particle"></div>
+<img id="hand" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MTIuMDAyIDUxMi4wMDIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMi4wMDIgNTEyLjAwMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiNGMEMwODc7IiBkPSJNNDg0LjAxOSwxNjcuNzNIMzUzLjEwM3YtOC44MzZjMC0xNC42MjYtMTEuODU3LTI2LjQ4My0yNi40ODMtMjYuNDgzaC01Ny4yMjIgIGMtMTkuNjMsMC0zOC43MDEsNi41NDMtNTQuMTk3LDE4LjU5NWwtMzQuNjI2LDI2LjkzMmMtNi4xOTgsNC44MjEtMTMuODI2LDcuNDM4LTIxLjY3OCw3LjQzOGgtNTIuOTY3djE4NS4zODhoMzEuNzM3ICBjMTMuMTI0LDAsMjYuMjI4LDEuMDg0LDM5LjE3NCwzLjI0MWwxNC4wNjUsMi4zNDNjMTIuOTU3LDIuMTU4LDI2LjA3LDMuMjQzLDM5LjIwNiwzLjI0M2g4NC42ODQgIGMxNC4zNCwwLDI3LjE5NC0xMC43MzksMjcuOTQ1LTI1LjA1OWMwLjgtMTUuMjczLTExLjM0OC0yNy45MDYtMjYuNDQ1LTI3LjkwNmgxNi4xNTZjMTQuMzQsMCwyNy4xOTQtMTAuNzM5LDI3Ljk0NS0yNS4wNTkgIGMwLjgtMTUuMjczLTExLjM0OC0yNy45MDYtMjYuNDQ1LTI3LjkwNmgxNy42NTVjMTQuMzQsMCwyNy4xOTQtMTAuNzM5LDI3Ljk0NS0yNS4wNTljMC44LTE1LjI3My0xMS4zNDgtMjcuOTA2LTI2LjQ0NS0yNy45MDYgIGgxMzIuNDE0YzE1LjA5NiwwLDI3LjI0My0xMi42MzEsMjYuNDQ1LTI3LjkwM0M1MTEuMjE0LDE3OC40Nyw0OTguMzYsMTY3LjczLDQ4NC4wMTksMTY3LjczeiIvPgo8cmVjdCB4PSIxMDUuOTMxIiB5PSIxODUuMzgxIiBzdHlsZT0iZmlsbDojRTZBRjc4OyIgd2lkdGg9IjE3LjY1NSIgaGVpZ2h0PSIxODUuMzc5Ii8+CjxwYXRoIHN0eWxlPSJmaWxsOiNBMEQyRjA7IiBkPSJNOTcuMTAzLDM3OS41ODNIOC44MjhjLTQuODc1LDAtOC44MjgtMy45NTMtOC44MjgtOC44MjhWMTg1LjM3NmMwLTQuODc1LDMuOTUzLTguODI4LDguODI4LTguODI4ICBoODguMjc2YzQuODc1LDAsOC44MjgsMy45NTMsOC44MjgsOC44Mjh2MTg1LjM3OUMxMDUuOTMxLDM3NS42MzEsMTAxLjk3OCwzNzkuNTgzLDk3LjEwMywzNzkuNTgzeiIvPgo8Y2lyY2xlIHN0eWxlPSJmaWxsOiNFRkYyRkE7IiBjeD0iNTIuOTY2IiBjeT0iMzM1LjQ1IiByPSIxNy42NTUiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
+</div>
+
+
+	</div>
+<style>
+	
+
+
+#particle {
+	animation: 3s boop infinite;
+	animation-delay: 1s;
+	position: absolute;
+	top: calc( 61% + 25px );
+	left: calc( 85% - 125px );
+	transform: translate(-50%,-50%) rotateZ(-120deg);
+	background: radial-gradient( rgba(255,255,255,1), rgba(255,255,255,0)  );
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	padding: 20px;
+	border: 20px solid rgba(0,0,0,.5);
+}
+
+#hand {
+	animation: 1.5s ImTooLazyToTapThisShitMyself infinite alternate;
+
+	width: 40vh;
+	transform: translate(-50%,-50%) rotateZ(-120deg) rotateY(10deg);
+	position: absolute;
+	top: 75%;
+	left: 85%;
+}
+
+@keyframes ImTooLazyToTapThisShitMyself{
+	0%,10%,20%,30%,40%,50%,60%,70%,80% {
+		transform: translate(-50%,-50%) rotateZ(-120deg) rotateY(0deg);
+	}
+		100% {
+		transform: translate(-50%,-50%) rotateZ(-120deg) rotateY(35deg);
+	}
+}
+
+@keyframes boop {
+	from {
+		opacity: 1;
+		transform: translate(-50%,-50%) scale(0);
+	}
+	to {
+		opacity: 0;
+		transform: translate(-50%,-50%) scale(1);
+	}
+}
+</style>
+</template>

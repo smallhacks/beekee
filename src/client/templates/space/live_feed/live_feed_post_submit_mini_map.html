@@ -1,0 +1,19 @@
+<template name="liveFeedPostSubmitMiniMap">
+	<div class="modal fade" id="liveFeedPostSubmitMiniMap" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			 	<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Où avez-vous pris cette photo ?</h5>
+			  	</div>
+			<div class="modal-body" style="height:400px">
+				{{> googleMap name="submitMiniMap" options=submitMiniMapOptions}}
+				<img src="/img/marker.png" class="live-feed-post-submit-mini-map--fixed-marker" />
+			</div>
+			  	<div class="modal-footer">
+			  		<button type="button" class="btn btn-outline-primary mr-auto live-feed-post-submit--locate-me"><i class="far fa-compass live-feed-post-submit--locate-me-icon"></i><i class="fas fa-circle-notch fa-spin live-feed-post-submit--spinner d-none"></i> Me localiser</button>
+					<button type="button" class="btn btn-primary live-feed-post-submit--form">{{_ 'space-users--submit-author'}}</button>
+			  	</div>
+			</div>
+	  	</div>
+	</div>
+</template>
