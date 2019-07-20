@@ -7,7 +7,9 @@
 		</div>
 	{{/if}}
 	<h5 class="">{{_ 'lessons--title'}}</h5>
-	<div class="text-secondary small mb-4">{{_ 'lessons--subtitle'}}</div>
+	{{#if ownSpace}}
+		<div class="text-secondary small mb-4">{{_ 'lessons--subtitle'}}</div>
+	{{/if}}
 	{{#each lessonsPosts}}
 		{{> lessonsPost}}
 	{{/each}}

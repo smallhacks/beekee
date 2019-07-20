@@ -1,5 +1,5 @@
 <template name="fileUpload">
-	<form method="POST" enctype="multipart/form-data">
+	<form method="POST" enctype="multipart/form-data" style="padding-left:15px">
 		{{#unless infoLabel}}
 			<label class="">
 				<input type="file" accept="image/*" class="file-upload--input-file jqUploadclass" data-form-data='{{ submitData }}'>

@@ -1,6 +1,15 @@
 <template name="privacy">
 	<div class="privacy">
-		<div class="page-title">{{_ 'privacy--page-title'}}</div>
-		{{{_ 'privacy--content'}}}
+		{{> backHeader}}
+		<div class="container">
+			<div class="row justify-content-center">
+    			<div class="col-sm-12 col-lg-8 pt-4 pl-4 pr-4 pb-3 text-center">
+    				<h1 class="mb-5">{{_ 'privacy--page-title'}}</h1>
+    				<div class="text-justify">
+						{{{_ 'privacy--content'}}}
+					</div>
+    			</div>
+    		</div>
+    	</div>
 	</div>
 </template>

@@ -3,6 +3,19 @@ custom.css
 */
 
 
+/* ----- Fonts ----- */
+
+@font-face {
+  font-family: 'Raleway Regular';
+  src: url('/fonts/Raleway-Regular.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/Raleway-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/Raleway-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/Raleway-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/fonts/Raleway-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/Raleway-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+
 /* ----- Global ----- */
 
 html {
@@ -11,6 +24,7 @@ html {
 
 body {
 	background-color: #fafafa;
+	font-family: Raleway, 'Raleway Regular', sans-serif;
 	overflow: auto;
 	height: 100% !important;
 }
@@ -19,13 +33,47 @@ a, button {
   outline: none;
 }
 
+a {
+	color: #1da1f2;
+}
+
+a.link-white {
+	color:white;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+a.link-white:hover {
+	color:#0056b3;
+}
+
+h6 {
+	font-weight: bold;
+}
+
 .wrapper {
 	overflow-y: scroll;
     overflow: -moz-scrollbars-vertical; 
 }
 
 .bg-beekee {
-	background-color: #ffff66;
+	background-color: rgb(66, 164, 224);
+}
+
+.text-primary {
+	color: rgb(66, 164, 224) !important;
+}
+
+.btn-outline-primary {
+	border: solid 2px rgb(66, 164, 224) !important;
+	border-radius: 20px;
+	color: rgb(66, 164, 224) !important;
+}
+
+.btn-outline-primary:hover {
+	background-color: rgb(66, 164, 224) !important;
+	border-color: rgb(66, 164, 224) !important;
+	color: white !important;
 }
 
 .btn-icon {
@@ -72,6 +120,11 @@ a, button {
 	min-height: 100% !important;
 }
 
+.card {
+	border: solid 1px #efefef;
+	box-shadow: 0 30px 10px -32px rgba(50,50,93,.08), 0 18px 36px -18px rgba(0,0,0,.05), 0 -12px 36px -8px rgba(0,0,0,.0015);
+}
+
 .card-header {
 	padding: 0.5rem 1.25rem !important;
 	font-weight: 500 !important;
@@ -102,6 +155,15 @@ a, button {
 
 }
 
+@media (max-width: 991.98px) { 
+	.row {
+/*		margin-left:0px;
+		margin-right:0px;
+				padding-left:0px;
+		padding-right:0px;*/
+	}
+}
+
 input.error {
  	background-color:rgb(255, 231, 231);
  }
@@ -128,19 +190,11 @@ and (max-device-width : 568px) {*/
 }
 
 
-/* ----- Sidebar ----- */
+/* ----- Index Student ----- */
 
-.space-sidebar--menu-collapse[aria-expanded="false"] .fa:before {  
-  content: "\f0d8";
+.index-student {
+	background-color: #1da1f2;
 }
-
-.space-sidebar--menu-collapse[aria-expanded="true"] .fa:before {
-  content: "\f0d7";
-}
-
-.space-sidebar--filter-category > :nth-child(3) { display:none; }
-
-.space-sidebar--filter-category:hover > :nth-child(3) { display:inline; }
 
 
 /* ----- Post item ----- */
@@ -182,6 +236,20 @@ and (max-device-width : 568px) {*/
 }
 
 
+/* ----- Live Feed Post Submit ----- */
+
+.live-feed-post-submit {
+	border:solid 1px rgb(204, 232, 255);
+	padding:10px;
+	border-radius: 0.25rem 0.25rem 0.25rem 0.25rem !important;
+	background:#f2f9ff;
+}
+
+#live-feed-post-submit--form .card-img-top {
+	width:50%;
+}
+
+
 /* ----- File upload ----- */
 
 .file-upload--input-file {
@@ -190,6 +258,7 @@ and (max-device-width : 568px) {*/
 }
 
 .file-upload--input-file-icon {
+	color: rgb(66, 164, 224);
 	cursor: pointer;
 }
 

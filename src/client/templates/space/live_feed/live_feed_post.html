@@ -1,12 +1,12 @@
 <template name="liveFeedPost">
-	<div class="card rounded-0" style="border-radius: 0.25rem 0.25rem 0 0 !important;">
+	<div class="card rounded-0 mb-5" style="border-radius: 0.25rem 0.25rem 0 0 !important;">
 		{{#if this.fileId}}
 			{{#if image}}
 				<div class="life-feed-post--image-wrapper">
 					<a class="life-feed-post--image-link" href="/upload{{filePath}}" target="_blank">
 						<img class="card-img-top" src="/upload{{filePath}}" alt="Card image cap" />
 					</a>
-			</div>
+				</div>
 			{{/if}}
 		{{/if}}
 		<div class="card-body">
@@ -28,24 +28,29 @@
 				{{/unless}}
 			{{/if}}
 			{{#if category}}
-				<div class="small text-secondary float-right"><i class="fas fa-tag"></i> {{category}}</div>
+				<div class="small text-secondary float-right ml-3"><i class="fas fa-tag"></i> {{category}}</div>
+			{{/if}}
+			{{#if latitude}}
+			<div class="small text-secondary float-right">
+				<i class="fa fa-map-marker-alt"></i> {{locality}}
+<!-- 				<a href="#" class="live-feed-post-2-open-mini-map" data-latitude="44"><i class="fa fa-map-marker-alt"></i> {{locality}}</a>
+ -->			</div>
 			{{/if}}
 			{{#if likeAlready}}
-				<a href="#" class="btn-link-black live-feed-post--remove-like text-primary"><i class="fas fa-thumbs-up"></i></a>
+				<a href="#" class="btn-link-grey live-feed-post--remove-like text-primary"><i class="fas fa-thumbs-up"></i></a>
 				{{#if othersLikes}}
 					<span class="small">{{_ 'live-feed-post--nb-likes-with-me' likesWithoutMe}}</span>
 				{{else}}
 					<span class="small">{{_ 'live-feed-post--like'}}</span>
 				{{/if}}
 			{{else}}
-				<a href="#" class="btn-link-black live-feed-post--add-like"><i class="far fa-thumbs-up"></i></a>
+				<a href="#" class="btn-link-grey live-feed-post--add-like"><i class="far fa-thumbs-up"></i></a>
 				{{#if likes}}
 					<span class="small">{{likes}} {{_ 'live-feed-post--nb-likes'}}</span>
 				{{/if}}
 			{{/if}}
 		</div>
-	</div>
-	<div class="border border-top-0 rounded-bottom mb-4 p-2 bg-light small">
+	<div class="rounded-bottom p-2 small" style="background:#f2f9ff">
 		{{#each comments}}
 			<div class="border-bottom mb-2 p-1">
 				{{#if ownComment}}
@@ -56,7 +61,7 @@
 				<div class="mt-1">{{#autolink}}{{this.text}}{{/autolink}}</div>
 				{{#if likeAlreadyComment}}
 					<div class="mt-2 small">
-						<a href="#" class="btn-link-black live-feed-post--comment-remove-like text-primary" data-postid="{{../_id}}"><i class="fas fa-thumbs-up" data-postid="{{../_id}}"></i></a>
+						<a href="#" class="live-feed-post--comment-remove-like text-primary" data-postid="{{../_id}}"><i class="fas fa-thumbs-up" data-postid="{{../_id}}"></i></a>
 						{{#if othersLikesComment}}
 							<span>{{_ 'live-feed-post--nb-likes-with-me' likesWithoutMeComment}}</span>
 						{{else}}
@@ -65,7 +70,7 @@
 					</div>
 				{{else}}
 					<div class="mt-2 small">
-						<a href="#" class="btn-link-black live-feed-post--comment-add-like" data-postid="{{../_id}}"><i class="far fa-thumbs-up" data-postid="{{../_id}}"></i></a>
+						<a href="#" class="live-feed-post--comment-add-like" data-postid="{{../_id}}"><i class="far fa-thumbs-up" data-postid="{{../_id}}"></i></a>
 						{{#if likesComment}}
 							<span>{{likesComment}}</span>
 						{{/if}}
@@ -76,5 +81,6 @@
 		<div class="form-group mb-0">
 			<textarea class="form-control live-feed-post--add-comment-textarea" id="comment" rows="1" placeholder="{{_ 'live-feed-post--add-comment'}}"></textarea>
 		</div>
-	</div>
+	</div>	</div>
+
 </template>

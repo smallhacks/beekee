@@ -1,15 +1,15 @@
 <template name="indexTeacherHeader">	
-	<nav class="bg-dark text-white" style="z-index:500;height:52px;line-height:52px;">
+	<nav class="bg-white" style="z-index:500;height:52px;line-height:52px;border-bottom:solid 1px #efefef;">
 		<div class="container h-100">
 			<div class="row justify-content-center h-100">
 				<div class="col-4 col-lg-3" style="">
                 	<a class="menu-item d-none d-sm-none d-lg-inline h-100" data-id="1" href="#">
-						<img style="height: 35px; padding: 0px 10px 5px 0;" alt="logo" src="/img/logo_header.png">
+						<img style="height: 55px; padding: 0px 10px 5px 0;" alt="logo" src="/img/logo_black.svg">
 					</a>
 					<span class="d-none d-sm-none d-lg-inline">{{space.title}}</span>
 				</div>
 				<div class="col-8 text-right">
-					<a href="{{pathFor 'userSettings'}}" class="text-white px-3 mr-4">
+					<a href="{{pathFor 'userSettings'}}" class="px-3 mr-4">
 						<i class="fa fa-user fa-fw"></i> 
 						<span>{{adminName}}</span>
 					</a>

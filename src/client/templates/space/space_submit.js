@@ -20,7 +20,8 @@ Template.spaceSubmit.events({
 		 e.preventDefault();
 
 		var space = {
-			title: $('#spaceName').val().trim()
+			title: $('#spaceName').val().trim(),
+			lang: Session.get('lang')
 		};
 
 		Meteor.call('spaceInsert', space, function(error, result) {
