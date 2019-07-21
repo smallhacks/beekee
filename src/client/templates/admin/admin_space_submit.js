@@ -5,7 +5,7 @@ Template.adminSpaceSubmit.onRendered(function () {
             "spaceName": {
                 required: true,
                 minlength: 3,
-                maxlength: 20
+                maxlength: 35
             }
         }
     }); 

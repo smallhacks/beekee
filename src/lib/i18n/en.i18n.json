@@ -214,6 +214,7 @@
 	"home-post-submit--placeholder":"Title of the section",
 	"home-post-submit--confirm-toast":"The new section has been added.",
 	"modal--close":"Close",
+	"modal--cancel":"Cancel",
 	"modal--delete":"Delete",
 	"modal--submit":"Submit",
 	"modal--save":"Save changes",

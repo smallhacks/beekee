@@ -210,6 +210,7 @@
 	"home-post-delete--title":"Supprimer cette section",
 	"home-post-delete--confirm":"Supprimer cette section ?",
 	"modal--close":"Fermer",
+	"modal--cancel":"Annuler",
 	"modal--delete":"Supprimer",
 	"modal--save":"Sauver les changements",
 	"modal--submit":"Soumettre",

@@ -166,6 +166,10 @@ Meteor.methods({
 			// postFromCloud: postFromCloud // Workaround bug sync
 		});
 
+		// Get client IP address
+		if (Meteor.isServer)
+			post = _.extend(postAttributes, {clientIP: this.connection.clientAddress});
+
 		var space = Spaces.findOne(postAttributes.spaceId);
 
 		category = Categories.findOne({spaceId: postAttributes.spaceId, name: postAttributes.category}); // Increment category nRefs

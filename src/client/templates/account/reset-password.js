@@ -1,3 +1,10 @@
+Template.resetPassword.onRendered(function () {
+
+    // Enable autofocus
+    $('#password').focus();
+});
+
+
 Template.resetPassword.events({
     
     'submit form': function(e) {

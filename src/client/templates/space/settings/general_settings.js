@@ -46,8 +46,8 @@ Template.generalSettings.events({
 
 		var newName = prompt(TAPi18n.__('space-edit--rename-space-message')+" :", this.space.title);
 		if (newName && newName != currentSpaceName && newName !="") {
-			if (newName.length < 4 || newName.length > 19) {
-				alert("The name must be at least 3 characters and at most 20");
+			if (newName.length < 4 || newName.length > 35) {
+				alert("The name must be at least 3 characters and at most 35");
 			}
 			else {
 				var spaceProperties = {
