@@ -3,17 +3,15 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete comment</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{_ 'live-feed-delete-comment--title'}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        Delete this comment?
-      </div>
+      <div class="modal-body">{{_ 'live-feed-delete-comment--subtitle'}}</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger live-feed--delete-comment--confirm">Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ 'modal--close'}}</button>
+        <button type="button" class="btn btn-danger live-feed--delete-comment--confirm">{{_ 'modal--delete'}}</button>
       </div>
     </div>
   </div>

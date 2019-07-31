@@ -69,7 +69,8 @@ if(Meteor.isServer) {
 		spaceInsert: function(spaceAttributes) {
 
 			check(spaceAttributes, {
-					title: String
+					title: String,
+					lang: String
 			});
 
 			var nbOfCodes = Codes.find().count();
@@ -109,7 +110,10 @@ if(Meteor.isServer) {
 			Meteor.call('authorInsert', 'Invité', spaceId );
 
 			// Insert welcome post
-			Posts.insert({spaceId:spaceId, type:"home", order:0, submitted: Date.now(),title: "Welcome!", body:"<p><em>Spaces</em> in Beekee are ideal for real-time interactions using the <strong>Live Feed</strong>, hosting training content in <strong>Lessons</strong> (if enabled) and sharing files with your learners in <strong>Resources</strong>.</p>\n<p>This is the Home page of your space. Right now it is empty but feel free to edit (or delete) this post to start.</p>\n<p>----------------------</p>\n<p>Les <em>Espaces</em>&nbsp;dans Beekee sont le lieu id&eacute;al pour&nbsp;interagir en temps r&eacute;el en utilisant&nbsp;<strong>Direct</strong>,&nbsp;proposer du contenu d'apprentissage dans&nbsp;<strong>Le&ccedil;ons</strong> (si activ&eacute;) et partager des fichiers avec vos apprenants dans&nbsp;<strong>Ressources</strong>.</p>\n<p>Ceci est la page d'accueil de votre espace. Pour l'instant, elle est vide, mais sentez-vous libre de modifier (ou de supprimer) ce post pour d&eacute;buter.</p>"});
+			if (spaceAttributes.lang == "fr-FR" || spaceAttributes.lang == "fr")
+				Posts.insert({spaceId:spaceId, type:"home", order:0, submitted: Date.now(),title: "Bienvenue dans votre nouvel espace Beekee Live !", body:"<p>Beekee Live est l'outil idéal pour soutenir les interactions en temps réel, pour partager des photos ou des fichiers avec vos étudiants.</p>\n<p>Ce message est visible par vos étudiants : sentez-vous libre de le modifier (ou de le supprimer) pour communiquer avec eux.</p>"});
+			else
+				Posts.insert({spaceId:spaceId, type:"home", order:0, submitted: Date.now(),title: "Welcome to your new Beekee Live space!", body:"<p>Beekee Live is ideal for real-time interactions and to share pictures or files with your learners.</p>\n<p>This message will be visibile for everyone: feel free to edit (or delete ) it according to your needs.</p>"});
 
 			return { _id: spaceId };
 		}

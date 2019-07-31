@@ -9,7 +9,7 @@ Template.spaceSidebar.events({
 		var menuItemId = $(e.currentTarget).attr("data-id");
 		Session.set('menuItem',menuItemId);
 
-		if (menuItemId != "2" && menuItemId != "4") { // Dismiss sidebar unless menuItem is not "Live feed"
+		if (menuItemId != "1" && menuItemId != "2" && menuItemId != "4") { // Dismiss sidebar unless menuItem is not "Live feed"
 			$('#sidebar').removeClass('active');
 	        $('.overlay').removeClass('active');
 	        $('.collapse.in').removeClass('in');
@@ -103,21 +103,21 @@ Template.spaceSidebar.helpers({
 	},
 	'selectedLiveFeedCategory': function(){
 		if (this.name == Session.get('liveFeedCategory'))
-			return "font-weight-bold menu-item--selected selected"
+			return "menu-item--selected selected"
 		else
-			return "font-weight-light"
+			return ""
 	},
 	'selectedResourcesCategory': function(){
 		if (this.name == Session.get('resourcesCategory'))
-			return "font-weight-bold menu-item--selected selected"
+			return "menu-item--selected selected"
 		else
-			return "font-weight-light"
+			return ""
 	},
 	'selectedAuthor': function(){
 		if (this.name == Session.get('author'))
-			return "font-weight-bold menu-item--selected selected"
+			return "menu-item--selected selected"
 		else
-			return "font-weight-light"
+			return ""
 	},
 	liveFeedCount: function() {
 		var liveFeedCount = LiveFeedCounts.findOne();

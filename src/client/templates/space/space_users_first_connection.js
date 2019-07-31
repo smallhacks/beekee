@@ -1,9 +1,16 @@
+Template.spaceUsersFirstConnection.onRendered(function () {
+
+    // Enable autofocus
+	$('#space-users-first-connection--author-name').focus();
+});
+
+
 Template.spaceUsersFirstConnection.events({
 	
 	'submit form': function(event, template) {
 		event.preventDefault();
 
-		var authorName = $('#space-users--input').val().trim();
+		var authorName = $('#space-users-first-connection--author-name').val().trim();
 
 		if (authorName != "") {
 			if (Authors.findOne({name:authorName})) {

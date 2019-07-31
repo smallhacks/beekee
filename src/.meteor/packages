@@ -57,3 +57,4 @@ teamon:tinymce
 tomi:upload-jquery@=2.2.3
 tomi:upload-server
 chrismbeckett:toastr
+reywood:iron-router-ga

@@ -1,101 +1,104 @@
 <template name="spaceSidebar">
 	<div class="bg-beekee pt-5 d-lg-none">
-		<img style="height: 50px;" class="pl-3 pb-3 mt-3" alt="logo" src="/img/logo_sidebar.png">
+		<img style="height: 80px;" class="pl-2 pb-2 mt-3" alt="logo" src="/img/logo_white.svg">
+		<div class="pl-2 pb-2 small">{{space.title}}</div>
 	</div>
 	<ul class="sidebar nav flex-column align-items-start justify-content-between">
-		<li class="nav-item sidebar-item w-100 {{selectedMenuItemBg 1}}">
-			<a class="nav-link pl-1 text-nowrap text-dark menu-item {{selectedMenuItemTxt 1}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="1" href="#">
+		<li class="nav-item sidebar-item {{selectedMenuItemBg 1}}">
+			<a class="nav-link pl-1 filter-live-feed-all text-nowrap menu-item {{selectedMenuItemTxt 1}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="1" href="#">
 				<i class="fa fa-home fa-fw"></i> 
 				<span class="pl-1">{{_ 'space-sidebar--home'}}</span>
+				<span class="badge badge-secondary-2 ml-2">{{liveFeedCount}}</span>
 			</a> 
 		</li> 	
-		{{#if liveFeed}}						
-			<li class="nav-item sidebar-item w-100 {{selectedMenuItemBg 2}}">
-				<a class="nav-link pl-1 text-nowrap text-dark menu-item filter-live-feed-all {{selectedMenuItemTxt 2}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="2" href="#">
-					<i class="fa fa-bolt fa-fw"></i> 
-					<span class="pl-1">{{_ 'space-sidebar--live-feed'}}</span>
-					<span class="badge badge-secondary-2 ml-2">{{liveFeedCount}}</span>
-				</a>
-			</li>
-		{{/if}}
-		{{#if selectedMenuItem 2}}
-			<a class="small pl-4 pt-3 text-secondary mb-1 space-sidebar--menu-collapse" data-toggle="collapse" aria-expanded="true" href=".categories-list"><i class="fas fa-tags"></i> {{_ 'space-sidebar--categories'}} <i class="fa ml-1" aria-hidden="true"></i></a>
+		{{#if selectedMenuItem 1}}
+		<div class="sidebar--submenu">
+			<a class="pl-2 mt-2 d-block mb-1 space-sidebar--menu-collapse" data-toggle="collapse" aria-expanded="true" href=".categories-list">{{_ 'space-sidebar--categories'}} <i class="fa ml-1" aria-hidden="true"></i></a>
 			<div class="collapse categories-list show w-100">
 				{{#each liveFeedCategories}}
-					<li class="align-middle nav-item sidebar-item w-100 small">
-						<a class="align-bottom nav-link space-sidebar--filter-live-feed-category pl-1 py-1 text-nowrap text-dark filter-live-feed-category {{selectedLiveFeedCategory}}  pl-4 py-2 py-lg-2" data-category="{{name}}" href="#"><span class="align-bottom pl-1" data-category="{{name}}">{{name}}</span>
+					<li class="align-middle nav-item sidebar-item w-100">
+						<a class="align-bottom nav-link space-sidebar--filter-live-feed-category text-nowrap filter-live-feed-category {{selectedLiveFeedCategory}} pl-2 py-2 py-lg-1" data-category="{{name}}" href="#"><span class="align-bottom pl-1" data-category="{{name}}">{{name}}</span>
 							<span class="align-baseline text-secondary small ml-1" data-category="{{name}}">{{nRefs}}</span>
 							{{#if ownSpace}}
-								<a class="align-middle space-sidebar--live-feed-category-edit small ml-2" data-category="{{name}}">
+								<a class="align-middle space-sidebar--live-feed-category-edit ml-2" data-category="{{name}}">
 									<i class="align-middle fas fa-pencil-alt" data-category="{{name}}"></i>
 								</a>
 							{{/if}}
 						</a>
 					</li>
 				{{/each}}
-				<div class="pl-3 ml-2 mt-1">
+				<div class="pl-2 ml-2 mt-1">
 					{{#if liveFeedAddCategory}}
-						<a href="#" class="small pt-1 pl-1 font-weight-light" data-toggle="modal" data-target="#liveFeedCategorySubmit">
-							<span class="pl-1"><i class="fas fa-plus"></i> {{_ 'space-sidebar--add-category'}}</span>
+						<a href="#" class="small pt-1 pl-1 sidebar--add" data-toggle="modal" data-target="#liveFeedCategorySubmit">
+							<span class=""><i class="fas fa-plus"></i> {{_ 'space-sidebar--add-category'}}</span>
 						</a>
 					{{/if}}
 				</div>
 			</div>
-			<a class="small pl-4 pt-3 text-secondary mb-1 space-sidebar--menu-collapse" data-toggle="collapse" aria-expanded="false" href=".authors-list"><i class="fas fa-users"></i> {{_ 'space-sidebar--authors'}} <i class="fa ml-1" aria-hidden="true"></i></a>
+			<a class="pl-2 mt-3 d-block mb-1 space-sidebar--menu-collapse" data-toggle="collapse" aria-expanded="false" href=".authors-list">{{_ 'space-sidebar--authors'}} <i class="fa ml-1" aria-hidden="true"></i></a>
 			<div class="collapse authors-list w-100">
 				{{#each authors}}
-				<li class="align-middle nav-item sidebar-item w-100 small w-100">
-					<a class="align-bottom nav-link text-nowrap text-dark filter-author {{selectedAuthor}} pl-4 py-2 py-lg-2" data-author="{{name}}" href="#">
-						<span class="pl-1" data-author="{{name}}">{{name}}</span>
-						<span class="align-baseline text-secondary small ml-1" data-author="{{name}}">{{nRefs}}</span>
+				<li class="align-middle nav-item sidebar-item w-100">
+					<a class="align-bottom nav-link text-nowrap filter-author {{selectedAuthor}} pl-2 py-2 py-lg-1" data-author="{{name}}" href="#">
+						<span class="" data-author="{{name}}">{{name}}</span>
+						<span class="align-baseline text-secondary ml-1" data-author="{{name}}">{{nRefs}}</span>
 					</a>
 				</li>
 				{{/each}}
 			</div>
+		</div>
 		{{/if}}
 		{{#if lessons}}						
-			<li class="nav-item sidebar-item w-100 {{selectedMenuItemBg 3}}">
-				<a class="nav-link pl-1 text-nowrap text-dark menu-item {{selectedMenuItemTxt 3}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="3" href="#">
+			<li class="nav-item sidebar-item {{selectedMenuItemBg 3}} mt-2">
+				<a class="nav-link pl-1 text-nowrap menu-item {{selectedMenuItemTxt 3}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="3" href="#">
 					<i class="fa fa-chalkboard-teacher fa-fw"></i> 
 					<span class="pl-1">{{_ 'space-sidebar--lessons'}}</span>
 				</a>
 			</li>
 		{{/if}}
 		{{#if resources}}	
-			<li class="nav-item sidebar-item w-100 {{selectedMenuItemBg 4}}">
-				<a class="nav-link pl-1 text-nowrap text-dark menu-item filter-resources-all {{selectedMenuItemTxt 4}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="4" href="#">
+			<li class="nav-item sidebar-item {{selectedMenuItemBg 4}} mt-2">
+				<a class="nav-link text-nowrap menu-item filter-resources-all {{selectedMenuItemTxt 4}} pl-3 pl-lg-0 py-3 py-lg-2" data-id="4" href="#">
 					<i class="far fa-copy fa-fw"></i> 
 					<span class="pl-1">{{_ 'space-sidebar--resources'}}</span>
 				</a>
 			</li>
 		{{/if}}			
 		{{#if selectedMenuItem 4}}
-		<a class="small pl-4 pt-3 text-secondary mb-1 space-sidebar--menu-collapse" data-toggle="collapse" aria-expanded="true" href=".categories-list"><i class="fas fa-tags"></i> {{_ 'space-sidebar--categories'}} <i class="fa ml-1" aria-hidden="true"></i></a>
-			<div class="collapse categories-list show w-100">
-				{{#each resourcesCategories}}
-					<li class="align-middle nav-item sidebar-item w-100 small">
-						<a class="align-bottom nav-link space-sidebar--filter-resources-category pl-1 py-1 text-nowrap text-dark filter-resources-category {{selectedResourcesCategory}}  pl-4 py-2 py-lg-2" data-category="{{name}}" href="#"><span class="align-bottom pl-1" data-category="{{name}}">{{name}}</span>
-							<span class="align-baseline text-secondary small ml-1" data-category="{{name}}">{{nRefs}}</span>
-							{{#if ownSpace}}
-								<a class="align-middle space-sidebar--resources-category-edit small ml-2" data-category="{{name}}">
-									<i class="align-middle fas fa-pencil-alt" data-category="{{name}}"></i>
-								</a>
-							{{/if}}
-						</a>
-					</li>
-				{{/each}}
-				<div class="pl-3 ml-2 mt-1">
-					{{#if ownSpace}}
-						<a href="#" class="small pt-1 pl-1 font-weight-light" data-toggle="modal" data-target="#resourcesCategorySubmit">
-							<span class="pl-1"><i class="fas fa-plus"></i> {{_ 'space-sidebar--add-category'}}</span>
-						</a>
-					{{/if}}
+		<div class="sidebar--submenu">
+			<a class="pl-2 mt-2 d-block mb-1 space-sidebar--menu-collapse" data-toggle="collapse" aria-expanded="true" href=".categories-list">{{_ 'space-sidebar--categories'}} <i class="fa ml-1" aria-hidden="true"></i></a>
+				<div class="collapse categories-list show w-100">
+					{{#each resourcesCategories}}
+						<li class="align-middle nav-item sidebar-item w-100">
+							<a class="align-bottom nav-link space-sidebar--filter-resources-category text-nowrap text-dark filter-resources-category {{selectedResourcesCategory}} pl-2 py-2 py-lg-1" data-category="{{name}}" href="#"><span class="align-bottom pl-1" data-category="{{name}}">{{name}}</span>
+								<span class="align-baseline text-secondary small ml-1" data-category="{{name}}">{{nRefs}}</span>
+								{{#if ownSpace}}
+									<a class="align-middle space-sidebar--resources-category-edit ml-2" data-category="{{name}}">
+										<i class="align-middle fas fa-pencil-alt" data-category="{{name}}"></i>
+									</a>
+								{{/if}}
+							</a>
+						</li>
+					{{/each}}
+					<div class="pl-2 ml-2 mt-1">
+						{{#if ownSpace}}
+							<a href="#" class="small pt-1 pl-1 sidebar--add" data-toggle="modal" data-target="#resourcesCategorySubmit">
+								<span class=""><i class="fas fa-plus"></i> {{_ 'space-sidebar--add-category'}}</span>
+							</a>
+						{{/if}}
+					</div>
 				</div>
 			</div>	
 		{{/if}}
 	</ul>
-		<select id="langSelect" class="mt-5 custom-select custom-select-sm border-0 ml-3 ml-lg-0 pl-lg-0 mb-2" style="width:auto; background-color: #fafafa;">
-			<option value="en" {{langIsSelected 'en'}}>English</option>
-			<option value="fr-FR" {{langIsSelected 'fr-FR'}}>Français</option>
-		</select>
+	<div class="space-sidebar--credits pl-3 pl-lg-0">
+		<a href="{{pathFor 'indexTeacher'}}">{{_ 'space-sidebar--create-own-space-1'}}</a> {{_ 'space-sidebar--create-own-space-2'}}<br>
+		<a href="{{pathFor 'privacy'}}">{{_ 'space-sidebar--privacy'}}</a><br>
+		<a href="http://www.beekee.ch">{{_ 'space-sidebar--about-us'}}</a>
+	</div>
+
+	<select id="langSelect" class="mt-1 custom-select custom-select-sm border-0 ml-3 ml-lg-0 pl-2 pl-lg-0 mb-2" style="width:auto; background-color: #fafafa;">
+		<option value="en" {{langIsSelected 'en'}}>English</option>
+		<option value="fr-FR" {{langIsSelected 'fr-FR'}}>Français</option>
+	</select>
 </template>

@@ -1,19 +1,15 @@
 <template name="homePost">
-	<div class="card mb-4">
-		<div class="card-header d-flex">{{title}}
-			{{#if ownSpace}}
-				<span class="align-baseline ml-auto" id="dropdownMenuLink" data-toggle="dropdown"><i class="fa fa-ellipsis-v fa-fw btn-icon align-baseline"></i></span>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					<a class="dropdown-item home-post--order-up" href="#"><i class="fas fa-arrow-up"></i> {{_ 'home-post--order-up'}}</a>
-					<a class="dropdown-item home-post--order-down" href="#"><i class="fas fa-arrow-down"></i> {{_ 'home-post--order-down'}}</a>
-
-					<a class="dropdown-item home-post--edit" href="#">{{_ 'post--edit'}}</a>
-					<a class="dropdown-item text-danger home-post--delete" href="#">{{_ 'post--delete'}}</a>
-				</div>
-			{{/if}}
-		</div>
-		<div class="card-body">
-			<p class="card-text home-post--text">{{{body}}}</p>
-		</div>
+	<div class="home-post alert alert-info">
+			<div class="d-flex">
+				<b>{{title}}</b>
+				{{#if ownSpace}}
+					<span class="align-baseline ml-auto" id="dropdownMenuLink" data-toggle="dropdown"><i class="fa fa-ellipsis-v fa-fw btn-icon align-baseline"></i></span>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item home-post--edit" href="#">{{_ 'post--edit'}}</a>
+						<a class="dropdown-item text-danger home-post--delete" href="#">{{_ 'post--delete'}}</a>
+					</div>
+				{{/if}}	
+			</div>
+		{{{body}}}
 	</div>
 </template>

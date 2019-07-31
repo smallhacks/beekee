@@ -1,46 +1,55 @@
 <template name="liveFeedPostSubmit">
-	<div class="card mb-5 bg-light">
-		<div class="card-body">
+	<div class="live-feed-post-submit mb-4 mt-4">
+		<div>
 			<form name="live-feed-post-submit--form" id="live-feed-post-submit--form">
 				{{#if fileUploaded}}
 					{{#unless fileUploaded.error}}
 						{{#if image}}
 							<div class="mt-2 mb-4 text-center">
-								<img class="card-img-top" src="/upload{{filePath}}" alt="" />
+								<img class="card-img-top" src="/upload{{filePath}}" alt="" /><br>
 			 					<a href="#" class="post-submit--button-delete-image"><i class="fa fa-trash" aria-hidden="true"></i> {{_ 'post-submit--delete-image'}}</a>
 			 				</div>
 		 				{{/if}}
 		 			{{/unless}}
 				{{/if}}
-				<div class="form-group">
-					<textarea rows="1" name="body" id="body" class="form-control post-submit--textarea" placeholder="{{_ 'post-submit--body-placeholder'}}" aria-label="{{_ 'post-submit--body-placeholder'}}"></textarea>
-				</div>
-				<div class="form-group d-none d-lg-block float-right mb-0">
-					<button class="btn btn-outline-secondary bg-primary text-white border-0 live-feed-post-submit--button-submit" type="button">{{_ 'modal--submit'}}</button>
-				</div>	
-				<div class="form-group float-lg-right mb-lg-2 mr-4">
-					<div class="input-group float-lg-right mb-lg-2 mr-4">
-						<div class="input-group-prepend">
-					    	<label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-tag"></i></label>
-					  	</div>
-						<select class="custom-select" name="categorySelect" id="categorySelect">
-		    				<option val="" disabled selected>{{_ 'post-submit--select-category'}}</option>
-		    	      		<option val="">{{_ 'post-submit--no-category'}}</option>
-		    				{{#each categories}}
-		      					<option {{selectedOption name}}>{{name}}</option>
-		      				{{/each}}
-		      				{{#if liveFeedAddCategory}}
-		      					<option style="color:red" value="add-category">{{_ 'live-feed-post-submit--add-category'}}</option>
-		      				{{/if}}
-						</select>
+				<div class="row mb-2">
+					<div class="col-10">
+						<textarea rows="1" name="body" id="body" class="form-control post-submit--textarea" placeholder="{{_ 'post-submit--body-placeholder'}}" aria-label="{{_ 'post-submit--body-placeholder'}}"></textarea>
+					</div>
+					<div class="col-2 d-none d-lg-inline-block  mb-0" style="margin-left:-15px;">
+						<button class="btn btn-outline-primary live-feed-post-submit--button-submit" style="" type="button">{{_ 'modal--submit'}}</button>
+					</div>	
+					<div class="col-2 text-left d-lg-none" style="margin-left:-15px;">
+						<button class="btn btn-outline-primary live-feed-post-submit--button-submit" style="" type="button"><i class="fas fa-paper-plane"></i></button>
 					</div>	
 				</div>
-	  			<div class="form-group d-lg-none float-right mb-0">
-					<button class="btn btn-outline-secondary bg-primary text-white border-0 live-feed-post-submit--button-submit" type="button">{{_ 'modal--submit'}}</button>
-				</div>				  
-				{{#unless fileUploaded}}
-          			{{>fileUpload formData=formData autoStart=true}}
-				{{/unless}}
+				<div class="row">
+					<div class="col-4 col-lg-5">			  
+						{{#unless fileUploaded}}
+		          			{{>fileUpload formData=formData autoStart=true}}
+						{{/unless}}
+					</div>
+					<div class="col-8 col-lg-5">
+						<div class="input-group" style="">
+							<div class="input-group-prepend">
+						    	<label class="input-group-text" for="inputGroupSelect01" style="background:none !important;"><i class="fas fa-tag"></i></label>
+						  	</div>
+							<select class="custom-select" style="height:30px;font-size:0.75em;" name="categorySelect" id="categorySelect">
+			    				<option val="" disabled selected>{{_ 'post-submit--select-category'}}</option>
+			    	      		<option val="">{{_ 'post-submit--no-category'}}</option>
+			    				{{#each categories}}
+			      					<option {{selectedOption name}}>{{name}}</option>
+			      				{{/each}}
+			      				{{#if liveFeedAddCategory}}
+			      					<option style="color:red" value="add-category">{{_ 'live-feed-post-submit--add-category'}}</option>
+			      				{{/if}}
+							</select>
+						</div>	
+					</div>
+		  			<div class="form-group d-none d-lg-none float-right mb-0">
+						<button class="btn btn-outline-secondary bg-primary text-white border-0 live-feed-post-submit--button-submit" type="button">{{_ 'modal--submit'}}</button>
+					</div>	
+				</div>
 				{{#if fileUploaded}}
 					{{#if fileUploaded.error}}
           				<div class=""><span class="text-danger">{{fileUploaded.error}}</span> (<a href="#" class="live-feed-post-submit--retry">retry</a>)</div>

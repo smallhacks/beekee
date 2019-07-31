@@ -3,22 +3,22 @@ Meteor.startup(function() {
 
 	// ###  Mail configuration  ###
 	process.env.MAIL_URL = 'smtp://'+Meteor.settings.mailAddress+':'+Meteor.settings.mailPassword+'@'+Meteor.settings.mailServer;          
-	Accounts.emailTemplates.from = "beekee.ch <vincent.widmer@beekee.ch>";
+	Accounts.emailTemplates.from = "Beekee Live <vincent.widmer@beekee.ch>";
 
 	// Reset Password mail configuration
 	Accounts.emailTemplates.resetPassword.text = function (user, url) {
- 		return "Hi, \n\n You recently requested to reset your password for your Beekee account.\n\n Click the link below to reset it. : \n"
+ 		return "Hi, \n\n You recently requested to reset your password for your Beekee Live account.\n\n Click the link below to reset it. : \n"
 		+ url
 		+ "\n\n If you did not requested a password reset, please ignore this email."
 		+ "\n\n Thanks,"
-		+ "\n\n Beekee Team";
+		+ "\n\n Beekee Live Team";
 	};
 	Accounts.emailTemplates.resetPassword.subject = function () {
- 		return "Reset your Beekee password";
+ 		return "Reset your Beekee Live password";
 	};
 
 	Accounts.urls.resetPassword = function(token) {
-		return 'http://web.beekee.ch/reset-password/' + token;
+		return 'http://live.beekee.ch/reset-password/' + token;
 	};
 });
 
@@ -37,7 +37,7 @@ Meteor.methods({
 			to: to,
 			from: from,
 			subject: subject,
-			text: text
+			html: text
 		});
 	},
 	'adminSetNewPassword': function(adminId, userId, newPassword) { // Admin can forcibly change the password for a user

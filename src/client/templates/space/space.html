@@ -7,15 +7,9 @@
                 <div class="d-none d-sm-none d-lg-block col-3 mt-4 sidebar-sticky">
         		  {{> spaceSidebar}}
                 </div>
-            	<div class="col-sm-12 col-lg-8 bg-white border-left border-right min-h-100 pt-4 pl-4 pr-4">
+            	<div class="col-sm-12 col-lg-8 min-h-100 pt-4 pl--lg-4 pr-lg-4">
             		{{#if menuItem 1}}
             			{{> home}}
-            		{{/if}}
-            		{{#if menuItem 2}}
-            			{{> liveFeed}}
-        			{{/if}}
-        			{{#if menuItem 3}}
-            			{{> lessons}}
             		{{/if}}
             		{{#if menuItem 4}}
             			{{> resources}}
