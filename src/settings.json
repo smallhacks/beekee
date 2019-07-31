@@ -1,14 +1,14 @@
 {
-	"serial":"SERIALTEST",
-	"uploadDir":"/Users/Vince/Desktop/Beekee_uploads/.uploads",
-	"updateDir":"/Users/Vince/Desktop/",
+	"serial":"",
+	"uploadDir":"",
+	"updateDir":"",
 	"syncServerIP": "",
-	"adminPassword": "admin",
-	"mailAddress": "",
-	"mailPassword": "",
-	"mailServer": "",
+	"adminPassword": "",
+	"mailAddress":"",
+	"mailPassword":"",
+	"mailServer":"",
 	"public" : {
-		"isBox": "true",
+		"isBox": "false",
 		 "prefix": "XX",
 		 "ga": {
 			"id": ""
