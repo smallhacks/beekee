@@ -76,6 +76,11 @@ a.menu-item--selected {
         border-radius:0px;
         background-color: #cccccc;
     }
+    .sidebar--submenu {
+        border-left:none;
+        margin-left:15px;
+        padding-left:4px;
+    }
 }
 
 #sidebar.active {
