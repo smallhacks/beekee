@@ -1,9 +1,9 @@
 
 ![Beekee logo](http://www.beekee.ch/images/beekee_logo_black.png)
 
-Beekee is a simple open-source platform to support face-to-face collaboration.
+Beekee Live is a simple open-source platform to support face-to-face collaboration.
 
-With Beekee, you can:
+With Beekee Live, you can:
 * Make your learners active by allowing them to express themselves answering short questions, posting photos or sharing files;
 * Make your learners interactive by allowing them to react to their peers contributions by commenting, modifying or building upon them;
 * Distribute your course materials, documents or instructions to learners.
@@ -14,9 +14,9 @@ The Beekee box doesn’t need an internet connection to operate. It generates it
 See more at [www.beekee.ch](http://www.beekee.ch)<br>
 
 # Who we are
-We are a team of makers and researchers with skills in pedagogy, educational technology, software development, UX, and 3D printing. Beekee is a project held by the TECFA unit from the University of Geneva.
+We are a team of makers and researchers with skills in pedagogy, educational technology, software development, UX, and 3D printing. Beekee Live is a project held by the TECFA unit from the University of Geneva.
 
-# Make your own Beekee box
+# Make your own Beekee Box
 
 ## Print your box
 Got a 3D printer ? Print your own Beekee box for Raspberry Pi 3 B, we have put the model on Thingiverse (https://www.thingiverse.com/thing:2874892)!
