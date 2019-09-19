@@ -55,6 +55,6 @@ konecty:autolinker
 alexwine:bootstrap-4
 teamon:tinymce
 tomi:upload-jquery@=2.2.3
-tomi:upload-server
 chrismbeckett:toastr
 reywood:iron-router-ga
+smallhacks:upload-server-custom

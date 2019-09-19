@@ -138,7 +138,7 @@ Template.liveFeedPostEdit.helpers({
 			return false;
 	},
 	filePath:function() {
-		return escape(Session.get("filePath"));
+		return encodeURI(Session.get("filePath"));
 	},
 	file: function() {
 		if (Session.get("fileExt") && $.inArray(Session.get("fileExt"), imageExtensions) == -1 )

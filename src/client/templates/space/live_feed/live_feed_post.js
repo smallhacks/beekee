@@ -116,7 +116,7 @@ Template.liveFeedPost.helpers({
 			return this.fileId
 	},
 	filePath: function() {
-		return escape(this.filePath);
+		return encodeURI(this.filePath);
 	},
 	likes: function() {
 		if (this.likes)

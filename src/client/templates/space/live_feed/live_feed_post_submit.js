@@ -51,7 +51,6 @@ Template.liveFeedPostSubmit.events({
 		var fileName = Session.get("fileName");
 		var fileExt = Session.get("fileExt");
 		var filePath = Session.get("filePath");
-		//var filePath = escape(Session.get("filePath"));
 
 		//var tags = $(e.target).find('[name=tags]').val().toLowerCase().replace(/ /g,'').split(',');
 		var category = $(e.target).find('[name=categorySelect]').val();
@@ -151,7 +150,7 @@ Template.liveFeedPostSubmit.helpers({
 			return true;
 	},
 	filePath:function() {
-		return escape(Session.get("filePath"));
+		return encodeURI(Session.get("filePath"));
 	},
 	image: function() {
 		if (Session.get("fileExt") && $.inArray(Session.get("fileExt"), imageExtensions) != -1 )
