@@ -1,5 +1,7 @@
 
-![Beekee logo](http://www.beekee.ch/images/beekee_logo_black.png)
+![Beekee logo](https://www.beekee.ch/images/beekee_logo_black.png)
+
+[www.beekee.ch](https://live.beekee.ch)<br>
 
 Beekee Live is a simple open-source platform to support face-to-face collaboration.
 
@@ -11,7 +13,7 @@ With Beekee Live, you can:
 It has been also conceived to run on a Raspberry Pi that can be used in remote locations, we call this the **Beekee box**.<br>
 The Beekee box doesn’t need an internet connection to operate. It generates its own WiFi network to which learners can connect to.
 
-See more at [www.beekee.ch](http://www.beekee.ch)<br>
+See more at [www.beekee.ch](https://www.beekee.ch)<br>
 
 # Who we are
 We are a team of makers and researchers with skills in pedagogy, educational technology, software development, UX, and 3D printing. Beekee Live is a project held by the TECFA unit from the University of Geneva.
