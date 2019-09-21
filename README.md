@@ -1,7 +1,7 @@
 
 ![Beekee logo](https://www.beekee.ch/images/beekee_logo_black.png)
 
-![Beekee Live](https://live.beekee.ch) is a simple open-source platform to support face-to-face collaboration.
+[Beekee Live](https://live.beekee.ch) is a simple open-source platform to support face-to-face collaboration.
 
 With Beekee Live, you can:
 * Make your learners active by allowing them to express themselves answering short questions, posting photos or sharing files;
