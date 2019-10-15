@@ -49,6 +49,6 @@ Template.resourcesPost.helpers({
 			return this.fileId
 	},
 	filePath: function() {
-		return escape(this.filePath);
+		return encodeURI(this.filePath);
 	}
 });

@@ -158,6 +158,9 @@ Template.home.helpers({
 		else if (serverPostsDiff > 0) {
 			return (serverPosts - serverPostsDiff > Session.get('postsLimit')) // There are new posts, so we remove them from the count
 		}
+	},
+	noFilter: function() { // Check if posts are filtered
+		return (Session.get('liveFeedCategory') == "" && Session.get('author') == "")
 	}
 });
 
