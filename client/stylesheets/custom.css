@@ -1,0 +1,273 @@
+/* 
+custom.css
+*/
+
+
+/* ----- Fonts ----- */
+
+@font-face {
+  font-family: 'Raleway Regular';
+  src: url('/fonts/Raleway-Regular.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/Raleway-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/Raleway-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/Raleway-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/fonts/Raleway-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/Raleway-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+	font-family: "Raleway Light";
+	src: url('./fonts/Raleway-Light.ttf');
+}
+
+
+/* ----- Global ----- */
+
+html {
+    height:100% !important;
+}
+
+body {
+	background-color: #fafafa;
+	font-family: Raleway, 'Raleway Light', sans-serif;
+	overflow: auto;
+	height: 100% !important;
+}
+
+a, button {
+  outline: none;
+}
+
+a {
+	color: #1da1f2;
+}
+
+a.link-white {
+	color:white;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+a.link-white:hover {
+	color:#0056b3;
+}
+
+h6 {
+	font-weight: bold;
+}
+
+.wrapper {
+	overflow-y: scroll;
+    overflow: -moz-scrollbars-vertical; 
+}
+
+.bg-beekee {
+	background-color: rgb(66, 164, 224);
+}
+
+.text-primary {
+	color: rgb(66, 164, 224) !important;
+}
+
+.btn-outline-primary {
+	border: solid 2px rgb(66, 164, 224) !important;
+	border-radius: 20px;
+	color: rgb(66, 164, 224) !important;
+}
+
+.btn-outline-primary:hover {
+	background-color: rgb(66, 164, 224) !important;
+	border-color: rgb(66, 164, 224) !important;
+	color: white !important;
+}
+
+.btn-icon {
+	color:grey;
+	text-decoration: none;
+	cursor: pointer;
+	padding:0.375rem 0.75rem;
+}
+
+.btn-icon:hover > i {
+	color: grey;
+}
+
+.btn-icon:hover {
+	color: black;
+}
+
+.btn-link {
+	color:white;
+	text-decoration: none !important;
+}
+
+.btn-link:hover {
+	color: grey;
+	text-decoration: none !important;
+}
+
+.btn-link-black {
+	color:black;
+	text-decoration: none !important;
+}
+
+.btn-link-black:hover {
+	color: grey;
+	text-decoration: none !important;
+}
+
+.badge-secondary-2 {
+	background-color: #a5a5a5;
+	color:white;
+}
+
+.min-h-100 {
+	min-height: 100% !important;
+}
+
+.card {
+	border: solid 1px #efefef;
+	box-shadow: 0 30px 10px -32px rgba(50,50,93,.08), 0 18px 36px -18px rgba(0,0,0,.05), 0 -12px 36px -8px rgba(0,0,0,.0015);
+}
+
+.card-header {
+	padding: 0.5rem 1.25rem !important;
+	font-weight: 500 !important;
+	background-color: white;
+}
+
+.card-text {
+	white-space: pre-line;
+}
+
+.strikethrough:after {
+  position: absolute;
+  content: "/";
+  color: red;
+  font-weight: 500;
+  font-size: 1.5em;
+  left: 12px;
+  top: -3px;
+}
+
+.strikethrough:after {
+  position: absolute;
+  content: "\\";
+  color: red;
+  font-weight: 500;
+  font-size: 1.5em;
+  left: 10px;
+  top: -3px;
+
+}
+
+@media (max-width: 991.98px) { 
+	.row {
+/*		margin-left:0px;
+		margin-right:0px;
+				padding-left:0px;
+		padding-right:0px;*/
+	}
+}
+
+input.error {
+ 	background-color:rgb(255, 231, 231);
+ }
+
+.error {
+	color: red;
+}
+
+ /* iPhone 4, 4S, 5, 5S */
+/*@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) {*/
+@media (max-width: 320px) {
+	.truncate-text {
+		text-overflow: ellipsis;
+		display: inline-block;
+		max-width: 25%;
+		text-align: left;
+		white-space: nowrap;
+		overflow: hidden;
+		vertical-align: top;
+		font-size: 0.8em;
+	}
+}
+
+
+/* ----- Index Student ----- */
+
+.index-student {
+	background-color: #1da1f2;
+}
+
+
+/* ----- Post item ----- */
+
+.post-item--add-comment-textarea {
+	height: 15px;
+	width: 100%;
+	padding: 6px;
+	border: solid 1px #ececec;
+	resize: none;
+	vertical-align: middle;
+	font-size: 1em;
+	overflow: hidden;
+	word-wrap: break-word;
+	resize: none;
+}
+
+.post-item--text {
+	width: auto;
+	font-size: 0.95em;
+	line-height: 1.3em;
+	white-space: pre;  /*render line breaks */
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+
+/* ----- Home post ----- */
+
+.home-post-submit--textarea {
+	height:100%;
+}
+
+.home-post--text img {
+	max-width:100%;
+}
+
+
+/* ----- Live Feed Post Submit ----- */
+
+.live-feed-post-submit {
+	border:solid 1px rgb(204, 232, 255);
+	padding:10px;
+	border-radius: 0.25rem 0.25rem 0.25rem 0.25rem !important;
+	background:#f2f9ff;
+}
+
+#live-feed-post-submit--form .card-img-top {
+	width:50%;
+}
+
+
+/* ----- File upload ----- */
+
+.file-upload--input-file {
+	position: fixed;
+	top: -1000px;
+}
+
+.file-upload--input-file-icon {
+	color: rgb(66, 164, 224);
+	cursor: pointer;
+}
+
+.file-upload--input-file-icon:hover {
+	color: grey;
+}

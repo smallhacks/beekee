@@ -1,0 +1,20 @@
+<head>
+	<title>Beekee Live</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=0, width=device-width, height=device-height"/>
+	<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+	<link rel="apple-touch-startup-image" href="/img/apple-touch-startup-image-640x920.png">
+	<meta name="google-site-verification" content="{{google_site_verification}}" />
+	<link rel="stylesheet" href="/fonts/font-awesome/css/fontawesome-all.min.css">
+	<link rel="stylesheet" href="/fonts/ionicons/css/ionicons.min.css">
+</head>
+<body>
+	{{# if isBox}}
+		<!-- If the app is running on a Beekee Box, add a home button -->
+		<a id="beekeebox-home" href="http://beekee.box" style="display:block;padding:7px;background-color:white;border-width: 0 1px 1px 1px;border-style: solid;border-color:#d6dce8; border-radius:0 0 5px 5px;position:fixed;top:0;left:50%;transform: translate(-50%, 0);z-index:5000;box-shadow:0 3px 5px 1px rgba(35, 35, 193, 0.08)">
+			<i class="fas fa-home"></i>
+		</a>
+	{{/if}}
+</body>

@@ -1,0 +1,58 @@
+<template name="liveFeedPostEdit">
+	<div class="modal fade" id="liveFeedPostEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			 	<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">{{_ 'live-feed-post-edit--title'}}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				 		<span aria-hidden="true">&times;</span>
+					</button>
+			  	</div>
+			<div class="modal-body">
+				{{#if fileUploaded}}
+					{{#if image}}
+						<div class="mt-2 mb-4 text-center">
+							<img class="card-img-top" src="/upload{{filePath}}" alt="" />
+							<a href="#" class="post-edit--button-delete-file"><i class="fa fa-trash" aria-hidden="true"></i> {{_ 'post-submit--delete-image'}}</a>
+						</div>
+					{{/if}}
+				{{/if}}
+				<form name="live-feed-post-edit--form" id="live-feed-post-edit--form">
+					<div class="form-group">
+						<textarea name="body" id="body" class="form-control live-feed-post-edit--textarea" placeholder="" aria-label="" aria-describedby="basic-addon2">{{post.body}}</textarea>
+					</div>
+			      <div class="input-group mb-3">
+			        <div class="input-group-prepend">
+			          <label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-tag"></i></label>
+			        </div>
+			        <select class="custom-select" name="categorySelect" id="categorySelect">
+			          <option val="" disabled selected>{{_ 'post-submit--select-category'}}</option>
+			          <option val="">{{_ 'post-submit--no-category'}}</option>
+			          {{#each categories}}
+			            <option selected="{{selectedCategory}}" name="{{name}}">{{name}}</option>
+			          {{/each}}
+			          </select>
+			        </div>
+				</form>
+				{{#unless fileUploaded}}
+          			{{>fileUpload formData=formData autoStart=true}}
+				{{/unless}}
+				{{#if fileUploaded}}
+					{{#unless image}}
+						<div class="p-2">
+							<i class="fa fa-file-o" aria-hidden="true"></i> {{fileUploaded.fileName}}.{{fileUploaded.fileExt}}
+							<a href="#" class="post-edit--button-delete-file">
+								<i class="fa fa-trash" aria-hidden="true"></i>
+							</a>
+						</div>
+					{{/unless}}
+				{{/if}}
+			  	</div>
+			  	<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">{{_ 'modal--close'}}</button>
+					<button type="button" class="btn btn-primary live-feed-post-edit--submit">{{_ 'modal--save'}}</button>
+			  	</div>
+			</div>
+	  	</div>
+	</div>
+</template>

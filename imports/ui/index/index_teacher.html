@@ -1,0 +1,50 @@
+<template name="indexTeacher">
+	{{> indexTeacherHeader}}
+	<div class="container">
+  		<div class="row justify-content-center mt-5">
+  			<div class="col-12 col-lg-5 text-center">
+				<h5 class="mb-3">{{_ 'index-teacher--spaces-title'}}</h5>
+				{{#if ownSpaces.count}}
+					<div class="list-group">
+						{{#each ownSpaces}}
+						  	<a href="{{pathFor 'space'}}" class="list-group-item list-group-item-action d-flex"><span>{{title}}</span><span class="ml-auto">{{spaceCode}}</span></a>
+						{{/each}}
+					</div>
+				{{else}}
+					<p class="text-center">{{_ 'index-teacher--no-space'}}</p>
+				{{/if}}
+			</div>
+		</div>	
+		<div class="row justify-content-center mt-4 bt-5 text-center">
+  			<div class="col-12 col-lg-6 text-center">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#spaceSubmit"><i class="fa fa-plus"></i> {{_ 'index-teacher--button-submit-space'}}</button>
+			</div>
+		</div>
+		{{#if publicSpaces.count}}
+			<div class="row justify-content-center mt-5 mb-5 text-center">
+  				<div class="col-12 col-lg-5 text-center">
+					<div class="index-teacher--visited-spaces">
+			 			<h5 class="mb-3">{{_ 'index-student--public-spaces-title'}}</h5>
+			 			<div class="list-group w-100">
+			 				{{#each publicSpaces}}
+								<a href="{{pathFor 'space' _id=this._id}}" class="list-group-item list-group-item-action d-flex"><span>{{title}}</span></a>
+							{{/each}}
+						</div>
+					</div>
+				</div>
+  			</div>
+  		{{/if}}
+		<div class="row justify-content-center mt-5">
+			<div class="col-5 col-lg-2 text-center">
+<!-- 				<select id="langSelect" class="custom-select custom-select-sm border-0" style="width:auto; background-color: #fafafa;">
+				  <option value="en" {{langIsSelected 'en'}}>English</option>
+				  <option value="fr" {{langIsSelected 'fr'}}>Français</option>
+				</select> -->
+			</div>
+  		</div>
+	</div>
+	{{> spaceSubmit}}
+	<div class="text-center mt-3" style="color:#e0e0e0;">
+		<p><a href="{{pathFor 'privacy' _id=this._id}}" style="font-weight:normal;text-decoration: none;">{{_ 'index-student--privacy'}}</a> <!-- | <a href="https://www.beekee.ch" style="font-weight:normal;text-decoration: none;">{{_ 'index-student-2-about-us'}}</a> --></p>
+	</div>
+</template>
