@@ -12,6 +12,7 @@ It has been also conceived to run on a Raspberry Pi that can be used in remote l
 The Beekee box doesn’t need an internet connection to operate. It generates its own WiFi network to which learners can connect to.
 
 See more at [www.beekee.ch](https://www.beekee.ch)<br>
+Beekee Live is distributed under GNU GPL 3.0 License.
 
 # Who we are
 We are a team of makers and researchers with skills in pedagogy, educational technology, software development, UX, and 3D printing. Beekee Live is a project held by the TECFA unit from the University of Geneva.
