@@ -1,4 +1,4 @@
-// Copyright 2016-2021 VINCENT WIDMER
+// Copyright 2016-2020 UNIVERSITY OF GENEVA (GENEVA, SWITZERLAND)
 
 // This file is part of Beekee Live.
     
